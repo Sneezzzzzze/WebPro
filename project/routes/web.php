@@ -43,3 +43,7 @@ Route::post('/login', function () {
 
     mysqli_close($conn);
 });
+
+Route::get('/register', function () {
+    return view('authen/register');
+});

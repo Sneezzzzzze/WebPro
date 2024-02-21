@@ -36,9 +36,9 @@
             margin-bottom: 20px;
         }
 
-        .btn-primary {
-            width: 7vw;
-            height: 5vh;
+        .btn {
+            width: 150px;
+            height: auto;
         }
 
         span {
@@ -68,7 +68,9 @@
                     </div>
                     <span class="d-flex justify-content-center gap-2">
                         <button type="submit" class="btn btn-primary" name="submit">Login</button>
-                        <button type="button" class="btn btn-secondary">Create account</button>
+                        <a href="/register">
+                            <button type="button" class="btn btn-secondary">Create account</button>
+                        </a>
                     </span>
                 </form>
             </div>
