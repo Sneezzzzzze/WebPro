@@ -7,8 +7,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>test test test</h1>
-        <button class="btn">test</button>
+        <h1>success</h1>
     </div>
 </body>
 </html>

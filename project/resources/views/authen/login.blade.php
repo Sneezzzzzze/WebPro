@@ -58,21 +58,23 @@
                     </svg>
                 </div>
                 <h4 class="card-title text-center mb-4">Login</h4>
-                <form action="">
+                <form method="POST" action="">
+                    @csrf
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email" required>
+                        <input type="email" class="form-control" placeholder="Email" name="email" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Password" required>
+                        <input type="password" class="form-control" placeholder="Password" name="password" required>
                     </div>
                     <span class="d-flex justify-content-center gap-2">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary" name="submit">Login</button>
                         <button type="button" class="btn btn-secondary">Create account</button>
                     </span>
                 </form>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
