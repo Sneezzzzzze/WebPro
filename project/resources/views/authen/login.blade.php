@@ -57,19 +57,19 @@
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                     </svg>
                 </div>
-                <h4 class="card-title text-center mb-4">Login</h4>
+                <h4 class="card-title text-center mb-4">เข้าสู่ระบบ</h4>
                 <form method="POST" action="">
                     @csrf
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                        <input type="email" class="form-control" placeholder="อีเมล" name="email" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                        <input type="password" class="form-control" placeholder="รหัสผ่าน" name="password" required>
                     </div>
                     <span class="d-flex justify-content-center gap-2">
-                        <button type="submit" class="btn btn-primary" name="submit">Login</button>
+                        <button type="submit" class="btn btn-primary" name="submit">เข้าสู่ระบบ</button>
                         <a href="/register">
-                            <button type="button" class="btn btn-secondary">Create account</button>
+                            <button type="button" class="btn btn-secondary">สมัครสมาชิก</button>
                         </a>
                     </span>
                 </form>
