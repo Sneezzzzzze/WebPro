@@ -27,3 +27,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', function () {
     return view('authen/register');
 });
+
+Route::get('/menu', function () {
+    return view('food_page/food_menu');
+});
