@@ -11,22 +11,21 @@
             background: #5C5470;
         }
 
+        .container-fluid {
+            height: 100vh;
+        }
+
         .card {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             width: 400px;
             height: 440px;
-            margin: 0 auto;
-            margin-top: 220px;
+            margin: auto;
             border-radius: 10%;
             backdrop-filter: blur(15px);
             background-color: rgba(255, 255, 255, 0.5);
         }
 
         .card-body {
-            margin-top: 35px;
+            margin: 10%;
         }
 
         .icon {
@@ -37,15 +36,18 @@
         }
 
         .btn {
-            width: 300px;
+            width: 150px;
             height: auto;
-            margin-top: 20px;
+        }
+
+        span {
+            margin-top: 30px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid d-flex justify-content-center align-items-center">
         <div class="card">
             <div class="card-body">
                 <div class="icon">
@@ -58,12 +60,17 @@
                 <form method="POST" action="">
                     @csrf
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="ผู้บัญชีผู้ใช้งาน" name="ีusername" required>
+                        <input type="email" class="form-control" placeholder="username" name="username" required>
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" placeholder="รหัสผ่าน" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="submit">เข้าสู่ระบบ</button>
+                    <span class="d-flex justify-content-center gap-2">
+                        <button type="submit" class="btn btn-primary" name="submit">เข้าสู่ระบบ</button>
+                        <a href="/register">
+                            <button type="button" class="btn btn-secondary">สมัครสมาชิก</button>
+                        </a>
+                    </span>
                 </form>
             </div>
         </div>
