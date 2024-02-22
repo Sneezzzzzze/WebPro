@@ -47,3 +47,7 @@ Route::post('/login', function () {
 Route::get('/register', function () {
     return view('authen/register');
 });
+
+Route::get('/manager-management', function () {
+    return view('management/manager');
+});
