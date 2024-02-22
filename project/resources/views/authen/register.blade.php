@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         body {
@@ -17,7 +17,7 @@
             justify-content: center;
             align-items: center;
             width: 400px;
-            height: 440px;
+            height: 480px;
             margin: 0 auto;
             margin-top: 220px;
             border-radius: 10%;
@@ -26,7 +26,7 @@
         }
 
         .card-body {
-            margin-top: 35px;
+            margin-top: 15px;
         }
 
         .icon {
@@ -54,21 +54,31 @@
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                     </svg>
                 </div>
-                <h4 class="card-title text-center mb-4">เข้าสู่ระบบ</h4>
-                <form method="POST" action="">
-                    @csrf
+                <h4 class="card-title text-center mb-4">สมัครสมาชิก</h4>
+                <form method="" action="">
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="ผู้บัญชีผู้ใช้งาน" name="ีusername" required>
+                        <input type="email" class="form-control" placeholder="ใส่อีเมล" name="email" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="รหัสผ่าน" name="password" required>
+                        <input type="password" class="form-control" placeholder="ใส่รหัสผ่าน" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="submit">เข้าสู่ระบบ</button>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" placeholder="ยืนยันรหัสผ่าน" name="confirm-password" required>
+                    </div>
+                    <div class="position">
+                        <select class="form-select form-select-md" aria-label="Small select example" name="position" id="pos">
+                            <option selected>เลือกตำแหน่ง</option>
+                            <option value="chef">เชฟ</option>
+                            <option value="waiter">พนักงานเสิร์ฟอาหาร</option>
+                            <option value="chef">ผู้จัดการร้าน</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" name="submit">สมัครสมาชิก</button>
                 </form>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

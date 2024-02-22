@@ -22,5 +22,8 @@ Route::get('/login', function () {
     return view('authen/login');
 });
 
-
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/register', function () {
+    return view('authen/register');
+});
