@@ -36,12 +36,9 @@
         }
 
         .btn {
-            width: 150px;
+            margin-top: 15px;
+            width: 100%;
             height: auto;
-        }
-
-        span {
-            margin-top: 30px;
         }
     </style>
 </head>
@@ -60,17 +57,12 @@
                 <form method="POST" action="">
                     @csrf
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="username" name="username" required>
+                        <input type="email" class="form-control" placeholder="บัญชีผู้ใช้งาน" name="username" required>
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" placeholder="รหัสผ่าน" name="password" required>
                     </div>
-                    <span class="d-flex justify-content-center gap-2">
-                        <button type="submit" class="btn btn-primary" name="submit">เข้าสู่ระบบ</button>
-                        <a href="/register">
-                            <button type="button" class="btn btn-secondary">สมัครสมาชิก</button>
-                        </a>
-                    </span>
+                    <button type="submit" class="btn btn-primary" name="submit">เข้าสู่ระบบ</button>
                 </form>
             </div>
         </div>
