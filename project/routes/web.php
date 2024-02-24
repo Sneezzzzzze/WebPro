@@ -14,9 +14,9 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('test');
-});
+// Route::get('/', function () {
+//     return view('test');
+// });
 
 Route::get('/login', function () {
     return view('authen/login');
@@ -31,3 +31,4 @@ Route::get('/register', function () {
 Route::get('/menu', function () {
     return view('food_page/food_menu');
 });
+
