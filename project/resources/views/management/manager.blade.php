@@ -12,12 +12,13 @@
         .container {
             margin: 0;
             padding: 0;
+            background-color: #FEDD9E;
         }
 
         .nav-bar {
             display: grid;
             grid-template-columns: auto auto;
-            background-color: orange;
+            background-color: #FFA071;
             width: 100vw;
             height: auto;
             padding: 10px;
@@ -27,16 +28,18 @@
             display: flex;
             justify-content: right;
         }
-        .logo, .menu-bar {
+
+        .logo,
+        .menu-bar {
             padding-left: 100px;
             padding-right: 100px;
         }
 
-        .menu-bar > span {
+        .menu-bar>span {
             padding-right: 20px;
         }
 
-        .logo > span {
+        .logo>span {
             padding-left: 20px;
         }
 
@@ -47,6 +50,53 @@
 
         a:hover {
             opacity: 0.7;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: repeat(2, 6fr);
+            margin: 20px
+        }
+        .grid-left {
+            margin-left: 110px;
+        }
+
+        .grid-right {
+            display: flex;
+            justify-content: right;
+        }
+
+        .btn-success {
+            background-color: #BFEA7C;
+            color: black;
+        }
+
+        .filter {
+            width: 200px;
+            height: 42px;
+            text-align: left;
+            position: relative;
+        }
+
+        .filter::after {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        #delete-outline {
+            border: none;
+            background-color: transparent;
+        }
+
+        #delete-outline:focus {
+            border: none;
+            outline: none;
+        }
+
+        .input-group {
+            width: 350px;
         }
     </style>
 </head>
@@ -83,6 +133,32 @@
                         </svg>
                     </a>
                 </span>
+            </div>
+        </div>
+
+        <div class="header">
+            <div class="grid-left">
+                <button class="btn btn-success">เพิ่มเมนู</button>
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle filter" data-bs-toggle="dropdown" aria-expanded="false">
+                    ประเภท
+                </button>
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle filter" data-bs-toggle="dropdown" aria-expanded="false">
+                    หมวดหมู่
+                </button>
+            </div>
+            <div class="grid-right">
+                <form action="" method="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Search-tab" id="s-tab" placeholder="ค้นหารายการอาหาร" aria-label="ค้นหารายการอาหาร" aria-describedby="addon-wrapping">
+                        <span class="input-group-text" id="addon-wrapping">
+                            <button onclick="" id="delete-outline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
