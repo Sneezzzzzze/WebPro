@@ -17,7 +17,7 @@
         .nav-bar {
             display: grid;
             grid-template-columns: auto auto;
-            background-color: red;
+            background-color: orange;
             width: 100vw;
             height: auto;
             padding: 10px;
@@ -68,6 +68,12 @@
             <div class="menu-bar">
                 <span>
                     <a href="#">ตรวจสอบยอดขาย</a>
+                </span>
+                <span>
+                    <a href="#">แผนผังร้านอาหาร</a>
+                </span>
+                <span>
+                    <a href="#">ข้อมูลอาหาร</a>
                 </span>
                 <span>
                     <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
