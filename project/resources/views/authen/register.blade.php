@@ -57,7 +57,7 @@
                 <h4 class="card-title text-center mb-4">สมัครสมาชิก</h4>
                 <form method="" action="">
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="ใส่อีเมล" name="username" required>
+                        <input type="email" class="form-control" placeholder="ใส่อีเมล" name="email" required>
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" placeholder="ใส่รหัสผ่าน" name="password" required>

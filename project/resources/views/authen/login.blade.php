@@ -11,21 +11,22 @@
             background: #5C5470;
         }
 
-        .container-fluid {
-            height: 100vh;
-        }
-
         .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             width: 400px;
             height: 440px;
-            margin: auto;
+            margin: 0 auto;
+            margin-top: 220px;
             border-radius: 10%;
             backdrop-filter: blur(15px);
             background-color: rgba(255, 255, 255, 0.5);
         }
 
         .card-body {
-            margin: 10%;
+            margin-top: 35px;
         }
 
         .icon {
@@ -36,15 +37,15 @@
         }
 
         .btn {
-            margin-top: 15px;
-            width: 100%;
+            width: 300px;
             height: auto;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="container">
         <div class="card">
             <div class="card-body">
                 <div class="icon">
@@ -57,7 +58,7 @@
                 <form method="POST" action="">
                     @csrf
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="บัญชีผู้ใช้งาน" name="username" required>
+                        <input type="text" class="form-control" placeholder="ผู้บัญชีผู้ใช้งาน" name="ีusername" required>
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" placeholder="รหัสผ่าน" name="password" required>

@@ -9,16 +9,17 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
-
-        $user = DB::table('user')->where('email', $email)->first();
-        $password = DB::table('user')->where('password', $password)->first();
+        $usrname = "manager";
+        $password = "manager";
         
+        $user = DB::table('user')->where('username', $usrname)->first();
+        $password = DB::table('user')->where('password', $password)->first();
+        $show = DB::table('user')->select('username', 'password')->get();
         if ($user && $password) {
             return "Login success";
         } else {
-            return "Login failed";
+            return $show;
         }
+        // return DB::table('user')->select('username', 'password')->get();
     }
 }
