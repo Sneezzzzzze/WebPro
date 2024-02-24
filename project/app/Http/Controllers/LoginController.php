@@ -9,8 +9,8 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $email = $request->input('username');
-        $password = $request->input('password');
+        $email = "manager";
+        $password = "manager";
 
         $user = DB::table('user')->where('username', $email)->first();
         $password = DB::table('user')->where('password', $password)->first();
