@@ -12,13 +12,13 @@
         .container {
             margin: 0;
             padding: 0;
-            background-color: #FEDD9E;
+            background-color: white;
         }
 
         .nav-bar {
             display: grid;
             grid-template-columns: auto auto;
-            background-color: #FFA071;
+            background-color: #C97926;
             width: 100vw;
             height: auto;
             padding: 10px;
@@ -57,8 +57,9 @@
             grid-template-columns: repeat(2, 6fr);
             margin: 20px
         }
+
         .grid-left {
-            margin-left: 110px;
+            margin-left: 50px;
         }
 
         .grid-right {
@@ -97,6 +98,17 @@
 
         .input-group {
             width: 350px;
+        }
+
+        .food-table {
+            margin-left: 70px;
+        }
+
+        td {
+            margin: auto;
+            width: 30%;
+            text-align: left;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -141,9 +153,6 @@
                 <form method="POST">
                     <button class="btn btn-success" name="add" id="add">เพิ่มเมนู</button>
                     <button type="button" class="btn btn-outline-secondary dropdown-toggle filter" data-bs-toggle="dropdown" aria-expanded="false">
-                        ประเภท
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary dropdown-toggle filter" data-bs-toggle="dropdown" aria-expanded="false">
                         หมวดหมู่
                     </button>
                 </form>
@@ -162,6 +171,72 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="food-table">
+            <table class="table table-hover">
+                <tr>
+                    <th>ชื่ออาหาร</th>
+                    <th>หมวดหมู่</th>
+                    <th>ราคา (บาท)</th>
+                    <th>แก้ไข/ลบ</th>
+                </tr>
+                <!-- <tr>
+                    <td>ฮะเก๋า</td>
+                    <td>ติ่มซำ</td>
+                    <td>50</td>
+                    <td>
+                        <button type="button" class="btn btn-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
+                                <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
+                                <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                            </svg>
+                        </button>
+                    </td>
+                </tr> -->
+
+                <?php
+                class MyDB extends SQLite3
+                {
+                    function __construct()
+                    {
+                        $this->open("Restaurant.db");
+                    }
+                }
+
+                $sql = "SELECT Name, Category, Price
+                        FROM Food;";
+                $result = $db->query($sql);
+
+                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                    echo '<tr>';
+                    echo '<td>' . $row['Name'] . '</td>';
+                    echo '<td>' . $row['Category'] . '</td>';
+                    echo '<td>' . $row['Price'] . '</td>';
+                    echo '<td>';
+                    echo '<button type="button" class="btn btn-warning">';
+                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">';
+                    echo '<path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />';
+                    echo '<path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />';
+                    echo '</svg>';
+                    echo '</button>';
+                    echo '<button type="button" class="btn btn-danger">';
+                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">';
+                    echo '<path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />';
+                    echo '</svg>';
+                    echo '</button>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+
+                $db->close();
+                ?>
+            </table>
         </div>
     </div>
 </body>
