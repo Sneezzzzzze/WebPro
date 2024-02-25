@@ -138,13 +138,15 @@
 
         <div class="header">
             <div class="grid-left">
-                <button class="btn btn-success">เพิ่มเมนู</button>
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle filter" data-bs-toggle="dropdown" aria-expanded="false">
-                    ประเภท
-                </button>
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle filter" data-bs-toggle="dropdown" aria-expanded="false">
-                    หมวดหมู่
-                </button>
+                <form method="POST">
+                    <button class="btn btn-success" name="add" id="add">เพิ่มเมนู</button>
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle filter" data-bs-toggle="dropdown" aria-expanded="false">
+                        ประเภท
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle filter" data-bs-toggle="dropdown" aria-expanded="false">
+                        หมวดหมู่
+                    </button>
+                </form>
             </div>
             <div class="grid-right">
                 <form action="" method="">
