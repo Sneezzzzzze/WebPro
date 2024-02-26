@@ -69,14 +69,23 @@
             justify-content: right;
         }
 
+        .grid-left > form {
+            display: flex;
+            margin-left: 10px
+        }
+
+        .grid-left > form > select {
+            border-radius: 5px 0 0 5px;
+            width: 150px;
+        }
+
+        .grid-left > form > input {
+            border-radius: 0 5px 5px 0;
+        }
+
         .btn-success {
             background-color: #BFEA7C;
             color: black;
-        }
-
-        .grid-left>select {
-            margin-left: 10px;
-            width: 30%;
         }
 
         #delete-outline {
@@ -191,7 +200,7 @@
                         <option value="dimsum" <?php if(isset($_POST['category']) && $_POST['category'] == 'dimsum') echo 'selected'; ?>>ติ่มซำ</option>
                         <option value="drink" <?php if(isset($_POST['category']) && $_POST['category'] == 'drink') echo 'selected'; ?>>เครื่องดื่ม</option>
                     </select>
-                    <input type="submit" value="Submit">
+                    <input type="submit" class="btn btn-primary" value="Submit">
                 </form>
 
             </div>
