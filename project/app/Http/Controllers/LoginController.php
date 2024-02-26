@@ -1,25 +1,25 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
+
 
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $usrname = "manager";
-        $password = "manager";
-        
-        $user = DB::table('user')->where('username', $usrname)->first();
-        $password = DB::table('user')->where('password', $password)->first();
-        $show = DB::table('user')->select('username', 'password')->get();
-        if ($user && $password) {
-            return "Login success";
+        $user = $request->input('user');
+        $pass = $request->input('password');
+
+        // not done yet $user is not defined
+        if ($pass === "manager" && $user === "manager"){
+            Route::get('/management', [MenuController::class, 'index'])->name('management.index');
+            Route::get('/management', [MenuController::class, 'showMenu']);
+            return redirect('/management');
         } else {
-            return $show;
+            return 'Login failed!';
         }
-        // return DB::table('user')->select('username', 'password')->get();
     }
 }

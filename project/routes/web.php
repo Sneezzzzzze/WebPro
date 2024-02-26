@@ -20,19 +20,10 @@ use App\Http\Controllers\MenuController;
 //     return view('test');
 // });
 
-Route::get('/login', function () {
-    return view('authen/login');
-});
+Route::match(['get', 'post'], '/login', [LoginController::class, 'login']);
 
-Route::post('/login', [LoginController::class, 'login']);
-
-Route::get('/register', function () {
-    return view('authen/register');
-});
-
-Route::get('/management', [MenuController::class, 'index']);
+Route::get('/management', [MenuController::class, 'index'])->name('management.index');
 Route::get('/management', [MenuController::class, 'showMenu']);
+// Route::get('/management', [MenuController::class, 'categoryMenu']);
 
-// Route::get('/management', function () {
-//     return view('management/manager');
-// });
+// Route::post('/management', [MenuController::class, 'addMenu']);

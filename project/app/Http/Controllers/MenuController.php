@@ -13,9 +13,42 @@ class MenuController extends Controller
     
     public function showMenu(Request $request)
     {
-        $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
-
-        // return view('management.manager')->with(compact('foods'));
-        return view('management/manager', ['foods' => $foods]);
+        $category = $request->input('category');
+        if ($category === null) {
+            $category = 'all';
+        }
+        
+        if ($category === 'all') {
+            $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
+        } else {
+            $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->where('Category', $category)->get();
+        }
+        return view('management/manager', ['foods' => $foods], ['category' => $category]);
     }
+
+    // public function addMenu(Request $request)
+    // {
+    //     $name = $request->input('foodname');
+    //     $price = $request->input('price');
+    //     $category = $request->input('category');
+    //     $image = $request->input('photolink');
+
+    //     DB::table('Food')->insert([
+    //         'Name' => $name,
+    //         'Price' => $price,
+    //         'Category' => $category,
+    //         'Image' => $image
+    //     ]);
+
+    //     return redirect('/management/manager');
+    // }
+
+    // public function CategoryMenu(Request $request)
+    // {
+        
+    //     $category = $request->input('category');
+    //     $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->where('Category', $category)->get();
+
+    //     return view('management/manager', ['foods' => $foods]);
+    // }
 }

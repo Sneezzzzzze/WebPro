@@ -58,10 +58,10 @@
                 <form method="POST" action="">
                     @csrf
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="ผู้บัญชีผู้ใช้งาน" name="ีusername" required>
+                        <input type="text" class="form-control" placeholder="ผู้บัญชีผู้ใช้งาน" name="user" id="user" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="รหัสผ่าน" name="password" required>
+                        <input type="password" class="form-control" placeholder="รหัสผ่าน" name="password" id="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit">เข้าสู่ระบบ</button>
                 </form>
