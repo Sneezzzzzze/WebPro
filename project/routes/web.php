@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MenuController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,9 @@ Route::get('/register', function () {
     return view('authen/register');
 });
 
-Route::get('/management', function () {
-    return view('management/manager');
-});
+Route::get('/management', [MenuController::class, 'index']);
+Route::get('/management', [MenuController::class, 'showMenu']);
+
+// Route::get('/management', function () {
+//     return view('management/manager');
+// });
