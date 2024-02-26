@@ -146,8 +146,7 @@
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add">
                     เพิ่มเมนู
                 </button>
-
-                <!-- Modal -->
+                <!-- Add Modal -->
                 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -243,17 +242,74 @@
                     <td>{{$food->Category}}</td>
                     <td>{{$food->Price}}</td>
                     <td>
-                        <button type="button" class="btn btn-warning">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
                                 <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
                                 <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
                             </svg>
                         </button>
-                        <button type="button" class="btn btn-danger">
+                        <!-- Modify Modal -->
+                        <div class="modal fade" id="modify" tabindex="-1" aria-labelledby="modify" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="" method="">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="modify">แก้ไขรายการอาหาร</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h6>ชื่ออาหาร :</h6>
+                                            <div class="mb-3">
+                                                <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" required>
+                                            </div>
+                                            <h6>หมวดหมู่ :</h6>
+                                            <div class="mb-3">
+                                                <select class="form-select header-from" aria-label="Default select example">
+                                                    <option value="0" selected>หมวดหมู่</option>
+                                                    <option value="dimsum">ติ่มซำ</option>
+                                                    <option value="drink">เครื่องดื่ม</option>
+                                                </select>
+                                            </div>
+                                            <h6>ราคา :</h6>
+                                            <div class="mb-3">
+                                                <input type="text" class="form-control" placeholder="ราคา" name="price" required>
+                                            </div>
+                                            <h6>รูปอาหาร (URL) :</h6>
+                                            <div class="mb-3">
+                                                <input type="text" class="form-control" placeholder="https://example.com" name="photolink" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                            <button type="button" class="btn btn-warning">ยืนยันการแก้ไข</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
                             </svg>
                         </button>
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="delete">ท่านต้องการลบเมนูนี้ใช่หรือไม่</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="" method="">
+                                        <div class="modal-body">
+                                            <button type="button" class="btn btn-primary">ใช่</button>
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ไม่</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
