@@ -14,34 +14,47 @@ class MenuController extends Controller
     public function showMenu(Request $request)
     {
         $category = $request->input('category');
+        $search = $request->input('search');
+
+        $name = $request->input('foodname');
+        $price = $request->input('price');
+        $category = $request->input('category');
+        $image = $request->input('photolink');
+
         if ($category === null) {
             $category = 'all';
         }
-        
-        if ($category === 'all') {
-            $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
-        } else {
-            $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->where('Category', $category)->get();
+        if ($search === null) {
+            $search = '';
         }
-        return view('management/manager', ['foods' => $foods], ['category' => $category]);
+
+        if ($search === '') {
+            if ($category === 'all') {
+                $foods = DB::table('Food')
+                    ->select('Name', 'Price', 'Category', 'Image')
+                    ->get();
+            } else {
+                $foods = DB::table('Food')
+                    ->select('Name', 'Price', 'Category', 'Image')
+                    ->where('Category', $category)
+                    ->get();
+            }
+        } else {
+            $foods = DB::table('Food')
+                ->select('Name', 'Price', 'Category', 'Image')
+                ->where('Name', 'LIKE', '%' . $search . '%')
+                ->get();
+        }
+        return view('management/manager', ['foods' => $foods], ['category' => $category], ['search' => $search]);
     }
 
-    // public function addMenu(Request $request)
+    // public function deleteMenu(Request $request)
     // {
     //     $name = $request->input('foodname');
-    //     $price = $request->input('price');
-    //     $category = $request->input('category');
-    //     $image = $request->input('photolink');
-
-    //     DB::table('Food')->insert([
-    //         'Name' => $name,
-    //         'Price' => $price,
-    //         'Category' => $category,
-    //         'Image' => $image
-    //     ]);
-
-    //     return redirect('/management/manager');
+    //     DB::table('Food')->where('Name', $name)->delete();
+    //     return view('management/manager', []);
     // }
+    
 
     // public function CategoryMenu(Request $request)
     // {

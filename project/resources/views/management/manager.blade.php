@@ -69,17 +69,17 @@
             justify-content: right;
         }
 
-        .grid-left > form {
+        .grid-left>form {
             display: flex;
             margin-left: 10px
         }
 
-        .grid-left > form > select {
+        .grid-left>form>select {
             border-radius: 5px 0 0 5px;
             width: 150px;
         }
 
-        .grid-left > form > input {
+        .grid-left>form>input {
             border-radius: 0 5px 5px 0;
         }
 
@@ -120,12 +120,12 @@
         <div class="nav-bar">
             <div class="logo">
                 <span>
-                    <a href="#">
+                    <!-- <a href="/management">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
                             <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
                         </svg>
-                    </a>
+                    </a> -->
                 </span>
             </div>
 
@@ -137,7 +137,7 @@
                     <a href="#">แผนผังร้านอาหาร</a>
                 </span>
                 <span>
-                    <a href="#">ข้อมูลอาหาร</a>
+                    <a href="/management">ข้อมูลอาหาร</a>
                 </span>
                 <span>
                     <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -159,10 +159,11 @@
                 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="" method="">
+                            <form method="POST" action="">
+                                @csrf
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="add">เพิ่มรายการอาหาร</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
                                 </div>
                                 <div class="modal-body">
                                     <h6>ชื่ออาหาร :</h6>
@@ -171,8 +172,8 @@
                                     </div>
                                     <h6>หมวดหมู่ :</h6>
                                     <div class="mb-3">
-                                        <select class="form-select header-from" aria-label="Default select example">
-                                            <option value="0" selected>หมวดหมู่</option>
+                                        <select class="form-select header-from" aria-label="Default select example" name="category">
+                                            <option value="all" selected>หมวดหมู่</option>
                                             <option value="dimsum">ติ่มซำ</option>
                                             <option value="drink">เครื่องดื่ม</option>
                                         </select>
@@ -188,17 +189,37 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                                    <button type="button" class="btn btn-success">ยืนยัน</button>
+                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" name="addMenu">ยืนยัน</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+                <?php
+
+                    // $name = $_POST['foodname'] ? ;
+                    // $price = $_POST['price'];
+                    // $category = $_POST['category'];
+                    // $image = $_POST['photolink'];
+                    // if ((isset($_POST['addMenuButton'])) && (isset($_POST['addMenu']))) {
+
+
+                    //     DB::table('Food')->insert([
+                    //         'Name' => $name,
+                    //         'Price' => $price,
+                    //         'Category' => $category,
+                    //         'Image' => $image
+                    //     ]);
+                    //     echo $name . $price;
+                    // } else {
+                    //     echo 'error';
+                    // }
+                ?>
                 <form method="" action="">
                     <select class="form-select header-from" aria-label="Default select example" name="category">
-                        <option value="all" <?php if(isset($_POST['category']) && $_POST['category'] == 'all') echo 'selected'; ?>>ทั้งหมด</option>
-                        <option value="dimsum" <?php if(isset($_POST['category']) && $_POST['category'] == 'dimsum') echo 'selected'; ?>>ติ่มซำ</option>
-                        <option value="drink" <?php if(isset($_POST['category']) && $_POST['category'] == 'drink') echo 'selected'; ?>>เครื่องดื่ม</option>
+                        <option value="all">ทั้งหมด</option>
+                        <option value="dimsum">ติ่มซำ</option>
+                        <option value="drink">เครื่องดื่ม</option>
                     </select>
                     <input type="submit" class="btn btn-primary" value="Submit">
                 </form>
@@ -208,9 +229,9 @@
             <div class="grid-right">
                 <form action="" method="">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="Search-tab" id="s-tab" placeholder="ค้นหารายการอาหาร" aria-label="ค้นหารายการอาหาร" aria-describedby="addon-wrapping">
+                        <input type="text" class="form-control" placeholder="ค้นหารายการอาหาร" aria-label="ค้นหารายการอาหาร" aria-describedby="addon-wrapping" name="search" id="search">
                         <span class="input-group-text" id="addon-wrapping">
-                            <button onclick="" id="delete-outline">
+                            <button id="delete-outline">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                                 </svg>
@@ -231,104 +252,84 @@
                     <th>แก้ไข/ลบ</th>
                 </tr>
                 @foreach($foods as $food)
-                    <tr>
-                        <td><img src="{{$food->Image}}" alt="food" width="50" height="50"></td>
-                        <td>{{$food->Name}}</td>
-                        <td>{{$food->Category}}</td>
-                        <td>{{$food->Price}}</td>
-                        <td>
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
-                                    <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
-                                    <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
-                                </svg>
-                            </button>
-                            <button type="button" class="btn btn-danger">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                                </svg>
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
-                        <!-- Modify Modal -->
-                        <div class="modal fade" id="modify" tabindex="-1" aria-labelledby="modify" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                    <form action="" method="POST">
-                                        @csrf
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="modify">แก้ไขรายการอาหาร</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h6>ชื่ออาหาร :</h6>
-                                            <div class="mb-3">
-                                                <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" id="foodname" required>
-                                            </div>
-                                            <h6>หมวดหมู่ :</h6>
-                                            <div class="mb-3">
-                                                <select class="form-select header-from" aria-label="Default select example">
-                                                    <option value="0" selected>หมวดหมู่</option>
-                                                    <option value="dimsum">ติ่มซำ</option>
-                                                    <option value="drink">เครื่องดื่ม</option>
-                                                </select>
-                                            </div>
-                                            <h6>ราคา :</h6>
-                                            <div class="mb-3">
-                                                <input type="text" class="form-control" placeholder="ราคา" name="price" id="price" required>
-                                            </div>
-                                            <h6>รูปอาหาร (URL) :</h6>
-                                            <div class="mb-3">
-                                                <input type="text" class="form-control" placeholder="https://example.com" name="photolink" id="photolink" required>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                                            <button type="button" class="btn btn-warning">ยืนยันการแก้ไข</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Delete Modal -->
-                        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="delete">ท่านต้องการลบเมนูนี้ใช่หรือไม่</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form action="" method="">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn btn-primary">ใช่</button>
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ไม่</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- <tr>
-                    <td>ฮะเก๋า</td>
-                    <td>ติ่มซำ</td>
-                    <td>50</td>
+                <tr>
+                    <td><img src="{{$food->Image}}" alt="food" width="50" height="50"></td>
+                    <td>{{$food->Name}}</td>
+                    <td>{{$food->Category}}</td>
+                    <td>{{$food->Price}}</td>
                     <td>
-                        <button type="button" class="btn btn-warning">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
                                 <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
                                 <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
                             </svg>
                         </button>
-                        <button type="button" class="btn btn-danger">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
                             </svg>
                         </button>
                     </td>
-                </tr> -->
+                </tr>
+                @endforeach
+                <!-- Modify Modal -->
+                <div class="modal fade" id="modify" tabindex="-1" aria-labelledby="modify" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="" method="POST">
+                                @csrf
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="modify">แก้ไขรายการอาหาร</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>ชื่ออาหาร :</h6>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" id="foodname" required>
+                                    </div>
+                                    <h6>หมวดหมู่ :</h6>
+                                    <div class="mb-3">
+                                        <select class="form-select header-from" aria-label="Default select example" name="category">
+                                            <option value="0" selected>หมวดหมู่</option>
+                                            <option value="dimsum">ติ่มซำ</option>
+                                            <option value="drink">เครื่องดื่ม</option>
+                                        </select>
+                                    </div>
+                                    <h6>ราคา :</h6>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="ราคา" name="price" id="price" required>
+                                    </div>
+                                    <h6>รูปอาหาร (URL) :</h6>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="https://example.com" name="photolink" id="photolink" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                    <button type="button" class="btn btn-warning">ยืนยันการแก้ไข</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete Modal -->
+                <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="delete">ท่านต้องการลบเมนูนี้ใช่หรือไม่</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="" method="POST">
+                                <div class="modal-body">
+                                    <input type="hidden" name="foodname" id="foodname" value="pepsi">
+                                    <button type="button" class="btn btn-primary" name="delete">ใช่</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ไม่</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </table>
         </div>
     </div>

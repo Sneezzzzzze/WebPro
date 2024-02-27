@@ -2,8 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MenuController;
+use Illuminate\Support\Facades\DB;
 
 
 class LoginController extends Controller
@@ -12,14 +11,12 @@ class LoginController extends Controller
     {
         $user = $request->input('user');
         $pass = $request->input('password');
-
-        // not done yet $user is not defined
-        if ($pass === "manager" && $user === "manager"){
-            Route::get('/management', [MenuController::class, 'index'])->name('management.index');
-            Route::get('/management', [MenuController::class, 'showMenu']);
-            return redirect('/management');
+        if ($user === 'manager' && $pass === 'manager') {
+            $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
+            return view('management/manager', ['category' => 'all', 'search' => '', 'foods' => $foods]);
         } else {
-            return 'Login failed!';
+            return view('authen/login');
         }
     }
+
 }
