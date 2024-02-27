@@ -48,20 +48,54 @@ class MenuController extends Controller
         return view('management/manager', ['foods' => $foods], ['category' => $category], ['search' => $search]);
     }
 
-    // public function deleteMenu(Request $request)
+    // public function modifyMenu(Request $request)
     // {
     //     $name = $request->input('foodname');
-    //     DB::table('Food')->where('Name', $name)->delete();
-    //     return view('management/manager', []);
-    // }
-    
-
-    // public function CategoryMenu(Request $request)
-    // {
-        
+    //     $price = $request->input('price');
     //     $category = $request->input('category');
-    //     $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->where('Category', $category)->get();
+    //     $image = $request->input('photolink');
+    //     $oldname = $request->input('oldname');
+    //     $oldprice = $request->input('oldprice');
+    //     $oldcategory = $request->input('oldcategory');
+    //     $oldimage = $request->input('oldimage');
 
-    //     return view('management/manager', ['foods' => $foods]);
+    //     if ($name === null) {
+    //         $name = $oldname;
+    //     }
+    //     if ($price === null) {
+    //         $price = $oldprice;
+    //     }
+    //     if ($category === null) {
+    //         $category = $oldcategory;
+    //     }
+    //     if ($image === null) {
+    //         $image = $oldimage;
+    //     }
+
+    //     DB::table('Food')
+    //         ->where('Name', $oldname)
+    //         ->where('Price', $oldprice)
+    //         ->where('Category', $oldcategory)
+    //         ->where('Image', $oldimage)
+    //         ->update(['Name' => $name, 'Price' => $price, 'Category' => $category, 'Image' => $image]);
+
+    //     return redirect('/management');
     // }
+
+    public function deleteMenu(Request $request)
+    {
+        $name = $request->input('foodname');
+        $delete = $request->input('yesDelete');
+
+        if ($delete === 'yes') {
+            DB::table('Food')
+                ->where('Name', $name)
+                ->delete();
+            return 'delete success';
+        } else {
+            return 'delete fail';
+        }
+        $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
+        return view('/management', ['foods' => $foods], ['category' => 'all'], ['search' => '']);
+    }
 }

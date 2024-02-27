@@ -22,12 +22,12 @@ Route::get('/login', function () {
 });
 Route::get('login', [LoginController::class, 'show']);
 
-
-
-
-
 Route::get('/management', [MenuController::class, 'index']);
+Route::post('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
+
+Route::post('/management', [MenuController::class, 'deleteMenu']);
+
 // Route::post('/management', [addMenuController::class, 'addMenu']);
 
 // Route::post('/management/add', [MenuController::class, 'addMenu'])->name('addMenu');
