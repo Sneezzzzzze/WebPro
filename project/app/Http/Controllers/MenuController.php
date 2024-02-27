@@ -15,7 +15,6 @@ class MenuController extends Controller
     {
         $category = $request->input('category');
         $search = $request->input('search');
-
         if ($category === null) {
             $category = 'all';
         }
@@ -26,17 +25,17 @@ class MenuController extends Controller
         if ($search === '') {
             if ($category === 'all') {
                 $foods = DB::table('Food')
-                    ->select('FoodID', 'Name', 'Price', 'Category', 'Image')
+                    ->select('rowid', 'Name', 'Price', 'Category', 'Image')
                     ->get();
             } else {
                 $foods = DB::table('Food')
-                    ->select('FoodID', 'Name', 'Price', 'Category', 'Image')
+                    ->select('rowid', 'Name', 'Price', 'Category', 'Image')
                     ->where('Category', $category)
                     ->get();
             }
         } else {
             $foods = DB::table('Food')
-                ->select('FoodID', 'Name', 'Price', 'Category', 'Image')
+                ->select('rowid', 'Name', 'Price', 'Category', 'Image')
                 ->where('Name', 'LIKE', '%' . $search . '%')
                 ->get();
         }
@@ -77,21 +76,4 @@ class MenuController extends Controller
     //     return redirect('/management');
     // }
 
-    public function deleteMenu(Request $request)
-    {
-        $number = $request->input('buttonNumber');
-
-        $delete = $request->input('dDelete');
-
-        if ($delete === 'yes') {
-            DB::table('Food')
-                ->where('FoodID', $number)
-                ->delete();
-            return 'delete success';
-        } else {
-            return 'delete fail';
-        }
-        $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
-        return view('/management', ['foods' => $foods], ['category' => 'all'], ['search' => '']);
-    }
 }

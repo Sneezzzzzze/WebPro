@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\addMenuController;
+use App\Http\Controllers\deleteMenuController;
 
 
 /*
@@ -23,10 +24,10 @@ Route::get('/login', function () {
 Route::get('login', [LoginController::class, 'show']);
 
 Route::get('/management', [MenuController::class, 'index']);
-Route::post('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
 
-Route::post('/management', [MenuController::class, 'deleteMenu']);
+Route::get('/management', [deleteMenuController::class, 'deleteMenu']);
+Route::post('/management', [deleteMenuController::class, 'deleteMenu']);
 
 // Route::post('/management', [addMenuController::class, 'addMenu']);
 
