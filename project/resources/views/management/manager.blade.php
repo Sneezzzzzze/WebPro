@@ -8,111 +8,7 @@
     <title>ระบบจัดการร้านอาหาร</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <style>
-        body,
-        .container {
-            margin: 0;
-            padding: 0;
-            background-color: white;
-        }
-
-        .nav-bar {
-            display: grid;
-            grid-template-columns: auto auto;
-            background-color: #C97926;
-            width: 100vw;
-            height: auto;
-            padding: 10px;
-        }
-
-        .menu-bar {
-            display: flex;
-            justify-content: right;
-        }
-
-        .logo,
-        .menu-bar {
-            padding-left: 100px;
-            padding-right: 100px;
-        }
-
-        .menu-bar>span {
-            padding-right: 20px;
-        }
-
-        .logo>span {
-            padding-left: 20px;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        a:hover {
-            opacity: 0.7;
-        }
-
-        .header {
-            display: grid;
-            grid-template-columns: repeat(2, 6fr);
-            margin: 20px
-        }
-
-        .grid-left {
-            display: flex;
-            margin-left: 50px;
-        }
-
-        .grid-right {
-            display: flex;
-            justify-content: right;
-        }
-
-        .grid-left>form {
-            display: flex;
-            margin-left: 10px
-        }
-
-        .grid-left>form>select {
-            border-radius: 5px 0 0 5px;
-            width: 150px;
-        }
-
-        .grid-left>form>input {
-            border-radius: 0 5px 5px 0;
-        }
-
-        .btn-success {
-            background-color: #BFEA7C;
-            color: black;
-        }
-
-        #delete-outline {
-            border: none;
-            background-color: transparent;
-        }
-
-        #delete-outline:focus {
-            border: none;
-            outline: none;
-        }
-
-        .input-group {
-            width: 350px;
-        }
-
-        .food-table {
-            margin-left: 70px;
-        }
-
-        td {
-            margin: auto;
-            width: 10%;
-            text-align: left;
-            vertical-align: middle;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ URL::asset('css/management/manage-food.css'); }}">
 </head>
 
 <body>
@@ -259,7 +155,7 @@
                     <td>{{$food->Price}}</td>
                     <td>
                         <form method="GET">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify" onclick="insertDataInModify('{{$food->Name}}', '{{$food->Category}}', '{{$food->Price}}', '{{$food->Image}}')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
                                     <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
                                     <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
@@ -273,6 +169,15 @@
                         </form>
                     </td>
                 </tr>
+                <!-- ใส่ข้อมูลลงไปใน modal ตอน click ปุ่ม modify-->
+                <script>
+                    function insertDataInModify (name, category, price, image) {
+                        document.getElementById('mFoodname').value = name;
+                        document.getElementById('mPrice').value = price;
+                        document.querySelector('#mCategory option[value="' + category + '"]').selected = true;
+                        document.getElementById('mPhotolink').value = image;
+                    }
+                </script>
                 @endforeach
                 <!-- Modify Modal -->
                 <div class="modal fade" id="modify" tabindex="-1" aria-labelledby="modify" aria-hidden="true">
@@ -285,11 +190,11 @@
                                 <div class="modal-body">
                                     <h6>ชื่ออาหาร :</h6>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" id="foodname" required>
+                                        <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" id="mFoodname" required>
                                     </div>
                                     <h6>หมวดหมู่ :</h6>
                                     <div class="mb-3">
-                                        <select class="form-select header-from" aria-label="Default select example" name="category">
+                                        <select class="form-select header-from" aria-label="Default select example" name="category" id="mCategory">
                                             <option value="0" selected>หมวดหมู่</option>
                                             <option value="dimsum">ติ่มซำ</option>
                                             <option value="drink">เครื่องดื่ม</option>
@@ -297,11 +202,11 @@
                                     </div>
                                     <h6>ราคา :</h6>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="ราคา" name="price" id="price" required>
+                                        <input type="text" class="form-control" placeholder="ราคา" name="price" id="mPrice" required>
                                     </div>
                                     <h6>รูปอาหาร (URL) :</h6>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="https://example.com" name="photolink" id="photolink" required>
+                                        <input type="text" class="form-control" placeholder="https://example.com" name="photolink" id="mPhotolink" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
