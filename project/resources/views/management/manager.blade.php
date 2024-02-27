@@ -128,7 +128,11 @@
                 </tr>
                 @foreach($foods as $food)
                     <tr>
-                        <td><img src="{{$food->Image}}" alt="food" width="50" height="50"></td>
+                        <td>
+                            <a href="{{$food->Image}}">
+                                <img src="{{$food->Image}}" alt="food" width="50" height="50">
+                            </a>
+                        </td>
                         <td>{{$food->Name}}</td>
                         <td>{{$food->Category}}</td>
                         <td>{{$food->Price}}</td>
