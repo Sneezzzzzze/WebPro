@@ -243,6 +243,7 @@
         <div class="food-table">
             <table class="table table-hover">
                 <tr>
+                    <th>ลำดับ</th>
                     <th>รูปอาหาร</th>
                     <th>ชื่ออาหาร</th>
                     <th>หมวดหมู่</th>
@@ -251,24 +252,25 @@
                 </tr>
                 @foreach($foods as $food)
                 <tr>
+                    <td>{{$food->FoodID}}</td>
                     <td><img src="{{$food->Image}}" alt="food" width="50" height="50"></td>
                     <td>{{$food->Name}}</td>
                     <td>{{$food->Category}}</td>
                     <td>{{$food->Price}}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
-                                <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
-                                <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
-                            </svg>
-                            <input type="hidden" name="action" value="modify">
-                        </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                            </svg>
-                            <input type="hidden" name="action" value="delete">
-                        </button>
+                        <form method="GET">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
+                                    <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
+                                    <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete" name="buttonNumber"id="buttonNumber" value="{{$food->FoodID}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                </svg>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -276,8 +278,6 @@
                 <div class="modal fade" id="modify" tabindex="-1" aria-labelledby="modify" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="" method="">
-
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="modify">แก้ไขรายการอาหาร</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -323,9 +323,10 @@
                             <div class="modal-body">
                                 <!-- not finish -->
                                 <form action="" method="POST">
-                                    <input type="hidden" name="foodname" id="foodname" value="{{$foods}}">
                                 </form>
                                 <form action="/management" method="GET">
+                                    <input type="hidden" name="Number" id="Number" value="{{$food-> FoodID}}">
+
                                     <button type="submit" class="btn btn-primary" name="dDelete" value="yes">ใช่</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" name="dDelete" value="no">ไม่</button>
                                 </form>

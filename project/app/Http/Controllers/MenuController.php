@@ -16,11 +16,6 @@ class MenuController extends Controller
         $category = $request->input('category');
         $search = $request->input('search');
 
-        $name = $request->input('foodname');
-        $price = $request->input('price');
-        $category = $request->input('category');
-        $image = $request->input('photolink');
-
         if ($category === null) {
             $category = 'all';
         }
@@ -31,17 +26,17 @@ class MenuController extends Controller
         if ($search === '') {
             if ($category === 'all') {
                 $foods = DB::table('Food')
-                    ->select('Name', 'Price', 'Category', 'Image')
+                    ->select('FoodID', 'Name', 'Price', 'Category', 'Image')
                     ->get();
             } else {
                 $foods = DB::table('Food')
-                    ->select('Name', 'Price', 'Category', 'Image')
+                    ->select('FoodID', 'Name', 'Price', 'Category', 'Image')
                     ->where('Category', $category)
                     ->get();
             }
         } else {
             $foods = DB::table('Food')
-                ->select('Name', 'Price', 'Category', 'Image')
+                ->select('FoodID', 'Name', 'Price', 'Category', 'Image')
                 ->where('Name', 'LIKE', '%' . $search . '%')
                 ->get();
         }
@@ -84,12 +79,13 @@ class MenuController extends Controller
 
     public function deleteMenu(Request $request)
     {
-        $name = $request->input('foodname');
-        $delete = $request->input('yesDelete');
+        $number = $request->input('buttonNumber');
+
+        $delete = $request->input('dDelete');
 
         if ($delete === 'yes') {
             DB::table('Food')
-                ->where('Name', $name)
+                ->where('FoodID', $number)
                 ->delete();
             return 'delete success';
         } else {
