@@ -51,12 +51,12 @@
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add">
                     เพิ่มเมนู
                 </button>
+            
                 <!-- Add Modal -->
                 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form method="POST" action="">
-
+                            <!-- <form method="POST" action=""> -->
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="add">เพิ่มรายการอาหาร</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
@@ -87,39 +87,16 @@
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
                                     <button type="button" class="btn btn-success" data-bs-dismiss="modal" name="addMenu">ยืนยัน</button>
                                 </div>
-                            </form>
+                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
-                <?php
-
-                // $name = $_POST['foodname'] ? ;
-                // $price = $_POST['price'];
-                // $category = $_POST['category'];
-                // $image = $_POST['photolink'];
-                // if ((isset($_POST['addMenuButton'])) && (isset($_POST['addMenu']))) {
-
-
-                //     DB::table('Food')->insert([
-                //         'Name' => $name,
-                //         'Price' => $price,
-                //         'Category' => $category,
-                //         'Image' => $image
-                //     ]);
-                //     echo $name . $price;
-                // } else {
-                //     echo 'error';
-                // }
-                ?>
-                <form method="" action="">
-                    <select class="form-select header-from" aria-label="Default select example" name="category">
-                        <option value="all">ทั้งหมด</option>
-                        <option value="dimsum">ติ่มซำ</option>
-                        <option value="drink">เครื่องดื่ม</option>
-                    </select>
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                </form>
-
+                        <select class="form-select header-from" aria-label="Default select example" name="category">
+                            <option value="all">ทั้งหมด</option>
+                            <option value="dimsum">ติ่มซำ</option>
+                            <option value="drink">เครื่องดื่ม</option>
+                        </select>
+                        <input type="submit" class="btn btn-primary" value="Submit">
             </div>
 
             <div class="grid-right">
@@ -228,7 +205,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="GET">
+                                <form action="/management" method="">
+                                    @csrf
                                     <input type="hidden" name="fname" id="fname" value="">
                                     <button type="submit" class="btn btn-primary" name="dDelete" value="yes">ใช่</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ไม่</button>
@@ -238,17 +216,17 @@
                     </div>
                 </div>
                 <?php
-                use Illuminate\Support\Facades\DB;
-                if (isset($_GET['fname']) && isset($_GET['dDelete'])) {
-                    $name = $_GET['fname'];
-                    $delete = $_GET['dDelete'];
-                    if ($delete === 'yes') {
-                        DB::table('Food')
-                            ->where('Name', $name)
-                            ->delete();
-                        return redirect('/management');
-                    }
-                }
+                // use Illuminate\Support\Facades\DB;
+                // if (isset($_GET['fname']) && isset($_GET['dDelete'])) {
+                //     $name = $_GET['fname'];
+                //     $delete = $_GET['dDelete'];
+                //     if ($delete === 'yes') {
+                //         DB::table('Food')
+                //             ->where('Name', $name)
+                //             ->delete();
+                //         return redirect('/management');
+                //     }
+                // }
                 ?>
             </table>
         </div>

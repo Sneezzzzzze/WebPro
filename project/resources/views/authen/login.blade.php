@@ -55,7 +55,7 @@
                     </svg>
                 </div>
                 <h4 class="card-title text-center mb-4">เข้าสู่ระบบ</h4>
-                <form method="GET" action="/management">
+                <form method="POST" action="/login">
                     @csrf
                     <div class="mb-3">
                         <input type="text" class="form-control" placeholder="ผู้บัญชีผู้ใช้งาน" name="user" id="user" required>

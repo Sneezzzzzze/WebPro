@@ -11,12 +11,13 @@ class LoginController extends Controller
     {
         $user = $request->input('user');
         $pass = $request->input('password');
+
         if ($user === 'manager' && $pass === 'manager') {
             $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
-            return view('management/manager', ['category' => 'all', 'search' => '', 'foods' => $foods]);
+            return view('/management/manager', ['category' => 'all', 'search' => '', 'foods' => $foods]);
+            // return view('management/managerMainPage');
         } else {
             return view('authen/login');
         }
     }
-
 }

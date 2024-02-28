@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\addMenuController;
 use App\Http\Controllers\deleteMenuController;
 
 
@@ -18,16 +17,16 @@ use App\Http\Controllers\deleteMenuController;
 |
 */
 
+
 Route::get('/login', function () {
     return view('authen/login');
 });
-Route::get('login', [LoginController::class, 'show']);
+Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
 
 Route::get('/management', [deleteMenuController::class, 'deleteMenu']);
-Route::post('/management', [deleteMenuController::class, 'deleteMenu']);
 
 // Route::post('/management', [addMenuController::class, 'addMenu']);
 

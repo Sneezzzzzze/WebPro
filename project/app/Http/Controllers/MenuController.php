@@ -42,38 +42,24 @@ class MenuController extends Controller
         return view('management/manager', ['foods' => $foods], ['category' => $category], ['search' => $search]);
     }
 
-    // public function modifyMenu(Request $request)
-    // {
-    //     $name = $request->input('foodname');
-    //     $price = $request->input('price');
-    //     $category = $request->input('category');
-    //     $image = $request->input('photolink');
-    //     $oldname = $request->input('oldname');
-    //     $oldprice = $request->input('oldprice');
-    //     $oldcategory = $request->input('oldcategory');
-    //     $oldimage = $request->input('oldimage');
-
-    //     if ($name === null) {
-    //         $name = $oldname;
-    //     }
-    //     if ($price === null) {
-    //         $price = $oldprice;
-    //     }
-    //     if ($category === null) {
-    //         $category = $oldcategory;
-    //     }
-    //     if ($image === null) {
-    //         $image = $oldimage;
-    //     }
-
-    //     DB::table('Food')
-    //         ->where('Name', $oldname)
-    //         ->where('Price', $oldprice)
-    //         ->where('Category', $oldcategory)
-    //         ->where('Image', $oldimage)
-    //         ->update(['Name' => $name, 'Price' => $price, 'Category' => $category, 'Image' => $image]);
-
-    //     return redirect('/management');
-    // }
+    public function deleteMenu(Request $request)
+    {
+        $fname = $request->input('fname');
+        $delete = $request->input('delete');
+        return $fname . ' ' . $delete;
+        // if ($request->has('delete') && $request->has('fname')){
+        //     return 'Delete';
+        //     $delete = $request->input('delete');
+        //     $fname = $request->input('fname');
+        //     if ($delete === 'yes') {
+        //         DB::table('Food')
+        //             ->where('Name', $fname)
+        //             ->delete();
+        //         return redirect('/management');
+        //     } else {
+        //         return 'No delete';
+        //     }
+        // }
+    }
 
 }
