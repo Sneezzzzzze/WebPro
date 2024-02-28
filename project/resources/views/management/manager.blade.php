@@ -49,54 +49,82 @@
         <div class="header">
             <div class="grid-left">
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add">
-                    เพิ่มเมนู
+                    เพิ่มเมนูอาหาร
                 </button>
-            
+
                 <!-- Add Modal -->
                 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <!-- <form method="POST" action=""> -->
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="add">เพิ่มรายการอาหาร</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="add">เพิ่มรายการอาหาร</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h6>ชื่ออาหาร :</h6>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" required>
                                 </div>
-                                <div class="modal-body">
-                                    <h6>ชื่ออาหาร :</h6>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" required>
-                                    </div>
-                                    <h6>หมวดหมู่ :</h6>
-                                    <div class="mb-3">
-                                        <select class="form-select header-from" aria-label="Default select example" name="category">
-                                            <option value="all" selected>หมวดหมู่</option>
-                                            <option value="dimsum">ติ่มซำ</option>
-                                            <option value="drink">เครื่องดื่ม</option>
-                                        </select>
-                                    </div>
-                                    <h6>ราคา :</h6>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="ราคา" name="price" required>
-                                    </div>
-                                    <h6>รูปอาหาร (URL) :</h6>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="https://example.com" name="photolink" required>
-                                    </div>
+                                <h6>หมวดหมู่ :</h6>
+                                <div class="mb-3">
+                                    <select class="form-select header-from" aria-label="Default select example" name="category">
+                                        <option value="all" selected>หมวดหมู่</option>
+                                        <option value="dimsum">ติ่มซำ</option>
+                                        <option value="drink">เครื่องดื่ม</option>
+                                    </select>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" name="addMenu">ยืนยัน</button>
+                                <h6>ราคา :</h6>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="ราคา" name="price" required>
                                 </div>
+                                <h6>รูปอาหาร (URL) :</h6>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="https://example.com" name="photolink" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal" name="addMenu">ยืนยัน</button>
+                            </div>
                             <!-- </form> -->
                         </div>
                     </div>
                 </div>
-                        <select class="form-select header-from" aria-label="Default select example" name="category">
-                            <option value="all">ทั้งหมด</option>
-                            <option value="dimsum">ติ่มซำ</option>
-                            <option value="drink">เครื่องดื่ม</option>
-                        </select>
-                        <input type="submit" class="btn btn-primary" value="Submit">
+
+                <button type="button" id="addCate" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategory">
+                    เพิ่มหมวดหมู่อาหาร
+                </button>
+
+                <!-- Add Category Modal -->
+                <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addCategory" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- <form method="POST" action=""> -->
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="addCategory">เพิ่มหมวดหมู่อาหาร</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="ex. ของหวาน" name="AddFoodCategory" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal" name="addMenu">ยืนยัน</button>
+                            </div>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                </div>
+
+                <select class="form-select header-from" aria-label="Default select example" name="category">
+                    <option value="all">ทั้งหมด</option>
+                    <option value="dimsum">ติ่มซำ</option>
+                    <option value="drink">เครื่องดื่ม</option>
+                </select>
+                <input type="submit" class="btn btn-primary" value="Submit">
             </div>
 
             <div class="grid-right">
@@ -114,7 +142,7 @@
         </div>
 
         <div class="food-table">
-            <table class="table table-hover">
+            <table class="table table-hover w-100">
                 <tr>
                     <th>รูปอาหาร</th>
                     <th>ชื่ออาหาร</th>

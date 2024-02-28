@@ -58,18 +58,23 @@ a:hover {
     justify-content: right;
 }
 
-.grid-left>form {
+.grid-left {
     display: flex;
-    margin-left: 10px
+    margin-left: 55px
 }
 
-.grid-left>form>select {
+.grid-left>select {
     border-radius: 5px 0 0 5px;
     width: 150px;
+    margin-left: 10px;
 }
 
-.grid-left>form>input {
+.grid-left>input {
     border-radius: 0 5px 5px 0;
+}
+
+#addCate {
+    margin-left: 10px;
 }
 
 .btn-success {
@@ -95,9 +100,9 @@ a:hover {
     margin-left: 70px;
 }
 
-td {
+td, tr {
     margin: auto;
-    width: 10%;
+    width: 7vh;
     text-align: left;
     vertical-align: middle;
 }
