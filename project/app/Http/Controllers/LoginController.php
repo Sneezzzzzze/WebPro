@@ -1,25 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $usrname = "manager";
-        $password = "manager";
-        
-        $user = DB::table('user')->where('username', $usrname)->first();
-        $password = DB::table('user')->where('password', $password)->first();
-        $show = DB::table('user')->select('username', 'password')->get();
-        if ($user && $password) {
-            return "Login success";
+        $user = $request->input('user');
+        $pass = $request->input('password');
+
+        if ($user === 'manager' && $pass === 'manager') {
+            $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
+            return view('/management/manager', ['category' => 'all', 'search' => '', 'foods' => $foods]);
+            // return view('management/managerMainPage');
         } else {
-            return $show;
+            return view('authen/login');
         }
-        // return DB::table('user')->select('username', 'password')->get();
     }
 }
