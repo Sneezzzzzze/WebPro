@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\deleteMenuController;
+use App\Http\Controllers\addMenuController;
+// use App\Http\Controllers\deleteMenuController;
 
 
 /*
@@ -23,14 +24,15 @@ Route::get('/login', function () {
 });
 Route::post('/login', [LoginController::class, 'login']);
 
+Route::get('/management', [MenuController::class, 'index'])->name('management');
 Route::get('/management', [MenuController::class, 'showMenu']);
-Route::get('/management', [deleteMenuController::class, 'deleteMenu']);
+// // Route::get('/management', [deleteMenuController::class, 'deleteMenu']);
 
 Route::get('/cashier', function () {
     return view('cashier/Tablepage');
 });
 
-// Route::post('/management', [addMenuController::class, 'addMenu']);
+Route::post('/management', [addMenuController::class, 'addMenu']);
 
 // Route::post('/management/add', [MenuController::class, 'addMenu'])->name('addMenu');
 // Route::get('/management/add', [MenuController::class, 'addMenu']);

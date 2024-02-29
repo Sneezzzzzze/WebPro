@@ -106,3 +106,7 @@ td, tr {
     text-align: left;
     vertical-align: middle;
 }
+
+select option[value="ทั้งหมด"] {
+    display: none;
+}

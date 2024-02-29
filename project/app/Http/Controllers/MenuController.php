@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\DB;
 class MenuController extends Controller
 {
     public function index() {
-        return view('management/manager');
+        $foods = DB::table('Food')
+            ->select('rowid', 'Name', 'Price', 'Category', 'Image')
+            ->get();
+        return view('management/manager', ['foods' => $foods], ['category' => 'ทั้งหมด'], ['search' => '']);
     }
     
     public function showMenu(Request $request)
@@ -16,30 +19,28 @@ class MenuController extends Controller
         $category = $request->input('category');
         $search = $request->input('search');
         if ($category === null) {
-            $category = 'all';
+            $category = 'ทั้งหมด';
         }
         if ($search === null) {
-            $search = '';
+            $search = 'ทั้งหมด';
         }
 
-        if ($search === '') {
-            if ($category === 'all') {
-                $foods = DB::table('Food')
-                    ->select('rowid', 'Name', 'Price', 'Category', 'Image')
-                    ->get();
-            } else {
-                $foods = DB::table('Food')
-                    ->select('rowid', 'Name', 'Price', 'Category', 'Image')
-                    ->where('Category', $category)
-                    ->get();
-            }
+        if ($search === 'ทั้งหมด' && $category === 'ทั้งหมด') {
+            $foods = DB::table('Food')
+                ->select('rowid', 'Name', 'Price', 'Category', 'Image')
+                ->get();
+        } else if ($search === 'ทั้งหมด' && $category !== 'ทั้งหมด') {
+            $foods = DB::table('Food')
+                ->select('rowid', 'Name', 'Price', 'Category', 'Image')
+                ->where('Category', $category)
+                ->get();
         } else {
             $foods = DB::table('Food')
                 ->select('rowid', 'Name', 'Price', 'Category', 'Image')
-                ->where('Name', 'LIKE', '%' . $search . '%')
+                ->where('Name', 'like', '%' .  $search . '%')
                 ->get();
         }
-        return view('management/manager', ['foods' => $foods], ['category' => $category], ['search' => $search]);
+        return view('management/manager', ['foods' => $foods], ['search' => $search], ['category' => $category]);
     }
 
     public function deleteMenu(Request $request)
