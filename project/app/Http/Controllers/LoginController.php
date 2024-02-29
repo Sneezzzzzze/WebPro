@@ -16,8 +16,11 @@ class LoginController extends Controller
             $foods = DB::table('Food')->select('Name', 'Price', 'Category', 'Image')->get();
             return view('/management/manager', ['category' => 'all', 'search' => '', 'foods' => $foods]);
             // return view('management/managerMainPage');
+        } else if ($user === 'cashier' && $pass === 'cashier'){
+            return view('cashier/Tablepage');
         } else {
             return view('authen/login');
+            
         }
     }
 }
