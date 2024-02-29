@@ -2,8 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
     <title>menu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <style>
         
@@ -50,7 +50,7 @@
         .hero-image {
             /* Use "linear-gradient" to add a darken background effect to the image. This will make the text easier to read */
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://cdn.cnn.com/cnnnext/dam/assets/160325033254-hk-dim-sum-fook-lam-moon.jpg");
-            margin-left: 100px;
+            /* margin-left: 100px; */
 
             /* Set a specific height */
             height: 50%;
@@ -76,6 +76,51 @@
             color: white;
         }
 
+        .recom_text {
+            text-align: center;
+        }
+
+        .catagory_text {
+            text-align: center;
+        }
+
+        .horizontal::before{
+            content: "";
+            display: inline-block;
+            border:1px solid black;
+            margin-right:10px;
+            margin-bottom: 3px;
+            width: 600px;
+        }
+
+        .horizontal::after{
+            content: "";
+            display: inline-block;
+            border:1px solid black;
+            margin-left:10px;
+            margin-bottom: 3px;
+            width: 600px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row > .column {
+            padding: 0 8px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .column {
+            float: left;
+            width: 20%;
+        }
+
     </style>
 </head>
 <body background="https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif" link="#0000BB">
@@ -93,11 +138,38 @@
                 </span>
             </div>
         </div>
-
+        <!-- Main Image -->
         <div class="hero-image">
             <div class="hero-text">
                 <h1>เมนูอาหาร</h1>
             </div>
+        </div>
+        <!-- Recommendation -->
+        <div class="recom_text">
+            <h4>
+                <span class="horizontal">เมนูแนะนำ</span>
+            </h4>
+        </div>
+        <!-- Recommended food -->
+        <div class="row">
+            <div class="column">
+                <img src="https://static.wixstatic.com/media/e669da_0b3da7703c4b47968360b567dad8ddd2~mv2.jpg/v1/fill/w_251,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_0b3da7703c4b47968360b567dad8ddd2~mv2.jpg" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="https://static.wixstatic.com/media/e669da_0cf068c6475543619dc5f922ec015b1e~mv2.jpg/v1/fill/w_147,h_110,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/e669da_0cf068c6475543619dc5f922ec015b1e~mv2.jpg" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="https://static.wixstatic.com/media/e669da_1e0491651b7b435dbf173a780a3fed93~mv2.jpg/v1/fill/w_251,h_179,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_1e0491651b7b435dbf173a780a3fed93~mv2.jpg" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="https://static.wixstatic.com/media/e669da_2f7c7e8e2e5f4dd5aa9922814a3e5aea~mv2.jpg/v1/fill/w_251,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_2f7c7e8e2e5f4dd5aa9922814a3e5aea~mv2.jpg" style="width:100%">
+            </div>
+        </div>
+        <!-- Category -->
+        <div class="catagory_text">
+            <h4>
+                <span class="horizontal">ประเภทของอาหาร</span>
+            </h4>
         </div>
     </div>
 </body>
