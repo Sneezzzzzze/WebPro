@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="{{ URL::asset('css/cashier/table.css'); }}">
     <title>Table</title>
 </head>
 
@@ -15,7 +15,7 @@
             <header>
                 <h2 class="logo" href="">HOME</h2>
                 <nav class="navigation">
-                    <a href="#">LOGIN</a>
+                    <a href="/login">logout</a>
                 </nav>
             </header>
 

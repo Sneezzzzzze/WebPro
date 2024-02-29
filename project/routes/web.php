@@ -28,6 +28,9 @@ Route::get('/management', [MenuController::class, 'showMenu']);
 
 Route::get('/management', [deleteMenuController::class, 'deleteMenu']);
 
+Route::get('/cashier', function () {
+    return view('cashier/Tablepage');
+});
 // Route::post('/management', [addMenuController::class, 'addMenu']);
 
 // Route::post('/management/add', [MenuController::class, 'addMenu'])->name('addMenu');
