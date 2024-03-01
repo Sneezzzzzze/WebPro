@@ -64,7 +64,7 @@
                 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="" method="GET">
+                            <form action="/management" method="GET">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="add">เพิ่มรายการอาหาร</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
@@ -103,15 +103,18 @@
                             </form>
                             <?php
                             if (isset($_GET['addMenu'])) {
+                                $name = $_GET['foodname'];
+                                $price = $_GET['price'];
+                                $category = $_GET['category'];
+                                $photolink = $_GET['photolink'];
+
                                 DB::table('Food')->insert([
-                                    'Name' => $_GET['foodname'],
-                                    'Price' => $_GET['price'],
-                                    'Category' => $_GET['category'],
-                                    'Image' => $_GET['photolink']
+                                    'Name' => $name,
+                                    'Price' => $price,
+                                    'Category' => $category,
+                                    'Image' => $photolink
                                 ]);
-                                echo '<script>
-                                            window.location.href = "/management";
-                                    </script>'; 
+                                echo '<script>window.location.href = "/management";</script>'; 
                                 }
                             ?>
                         </div>
