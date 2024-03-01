@@ -16,23 +16,24 @@ use App\Http\Controllers\MenuController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('test');
-// });
 
 Route::get('/login', function () {
     return view('authen/login');
 });
-
 Route::post('/login', [LoginController::class, 'login']);
-
-Route::get('/register', function () {
-    return view('authen/register');
-});
 
 Route::get('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
+// // Route::get('/management', [deleteMenuController::class, 'deleteMenu']);
 
-// Route::get('/management', function () {
-//     return view('management/manager');
-// });
+Route::get('/cashier', function () {
+    return view('cashier/Tablepage');
+});
+
+// Route::post('/management', [addMenuController::class, 'addMenu']);
+
+// Route::post('/management/add', [MenuController::class, 'addMenu'])->name('addMenu');
+// Route::get('/management/add', [MenuController::class, 'addMenu']);
+
+// Route::post('/management/deleteMenu', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
+// Route::get('/management', [MenuController::class, 'categoryMenu']);
