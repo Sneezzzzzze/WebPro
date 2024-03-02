@@ -1,0 +1,108 @@
+body,
+.container {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: #C97926;
+    width: 100vw;
+    height: auto;
+    padding: 10px;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: right;
+}
+
+.logo,
+.menu-bar {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.menu-bar>span {
+    padding-right: 20px;
+}
+
+.logo>span {
+    padding-left: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: repeat(2, 6fr);
+    margin: 20px
+}
+
+.grid-left {
+    display: flex;
+    margin-left: 50px;
+}
+
+.grid-right {
+    display: flex;
+    justify-content: right;
+}
+
+.grid-left {
+    display: flex;
+    margin-left: 55px
+}
+
+.grid-left>select {
+    border-radius: 5px 0 0 5px;
+    width: 150px;
+    margin-left: 10px;
+}
+
+.grid-left>input {
+    border-radius: 0 5px 5px 0;
+}
+
+#addCate {
+    margin-left: 10px;
+}
+
+.btn-success {
+    background-color: #BFEA7C;
+    color: black;
+}
+
+#delete-outline {
+    border: none;
+    background-color: transparent;
+}
+
+#delete-outline:focus {
+    border: none;
+    outline: none;
+}
+
+.input-group {
+    width: 350px;
+}
+
+.food-table {
+    margin-left: 70px;
+}
+
+td, tr {
+    margin: auto;
+    width: 7vh;
+    text-align: left;
+    vertical-align: middle;
+}
