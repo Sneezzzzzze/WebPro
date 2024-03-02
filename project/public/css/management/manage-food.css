@@ -4,8 +4,7 @@
     font-family: "Bai Jamjuree", sans-serif;
 }
 
-body,
-.container {
+body {
     margin: 0;
     padding: 0;
     background-color: white;
@@ -13,10 +12,9 @@ body,
 
 .nav-bar {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto; /* Adjusted grid-template-columns */
     background-color: #C97926;
-    width: 100vw;
-    height: auto;
+    width: 100%; /* Full width of the screen */
     padding: 10px;
 }
 
@@ -27,8 +25,8 @@ body,
 
 .logo,
 .menu-bar {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .menu-bar>span {
@@ -42,6 +40,12 @@ a {
 
 a:hover {
     opacity: 0.7;
+}
+
+.header-title {
+    display: grid;
+    place-items: center;
+    margin: 30px;
 }
 
 .header {
@@ -58,6 +62,10 @@ a:hover {
 .grid-right {
     display: flex;
     justify-content: right;
+}
+
+.input-group {
+    
 }
 
 .grid-left {
@@ -105,10 +113,13 @@ a:hover {
 
 .input-group {
     width: 350px;
+    margin-right: 50px;
 }
 
 .food-table {
     margin-left: 70px;
+    max-width: 90%;
+    overflow-x: auto;
 }
 
 td, tr {
