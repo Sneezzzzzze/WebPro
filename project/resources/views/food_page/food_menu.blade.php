@@ -285,6 +285,7 @@
                 <h1>เมนูอาหาร</h1>
             </div>
         </div>
+        <br>
         <!-- Recommendation Line -->
         <div class="recom_text">
             <h4>
@@ -336,29 +337,29 @@
             <div class="menu_container">
                 <div class="restaurant_menu">
                     <div class="menu_item">
-                        <img src="https://raw.githubusercontent.com/programmercloud/foodlover/main/img/menu-1.jpg" alt="" />
-                        <div class="title">Food Restaurant | Chineese & Thai</div>
-                        <div class="location">Thailand, Bangkok</div>
+                        <img src="https://static.wixstatic.com/media/e669da_b3e85e5777ce4979884960b782113fec~mv2.jpg/v1/fill/w_1257,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_b3e85e5777ce4979884960b782113fec~mv2.jpg" alt="" />
+                        <div class="title">ยกทัพติ่มซำ</div>
+                        <div class="location">ติ่มซำนึ่ง</div>
                         <div class="order_info">
-                            <div class="price">$10.00</div>
+                            <div class="price">159.-</div>
                             <a href="#" class="btn btn_menu">สั่งเลย</a>
                         </div>
                     </div>
                     <div class="menu_item">
-                        <img src="https://raw.githubusercontent.com/programmercloud/foodlover/main/img/menu-4.jpg" alt="" />
-                        <div class="title">Food Restaurant | Chineese & Thai</div>
-                        <div class="location">Thailand, Bangkok</div>
+                        <img src="https://static.wixstatic.com/media/e669da_f252fc5f301f47d48604b962b9658d56~mv2.jpg/v1/fill/w_1257,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_f252fc5f301f47d48604b962b9658d56~mv2.jpg" alt="" />
+                        <div class="title">ยกทัพขนมจีบ</div>
+                        <div class="location">ติ่มซำนึ่ง</div>
                         <div class="order_info">
-                            <div class="price">$10.00</div>
+                            <div class="price">149.-</div>
                             <a href="#" class="btn btn_menu">สั่งเลย</a>
                         </div>
                     </div>
                     <div class="menu_item">
-                        <img src="https://raw.githubusercontent.com/programmercloud/foodlover/main/img/menu-6.jpg" alt="" />
-                        <div class="title">Food Restaurant | Chineese & Thai</div>
-                        <div class="location">Thailand, Bangkok</div>
+                        <img src="https://static.wixstatic.com/media/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg/v1/fill/w_1183,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg" alt="" />
+                        <div class="title">ขนมจีบกุ้งผักโขมชีส</div>
+                        <div class="location">ติ่มซำนึ่ง</div>
                         <div class="order_info">
-                            <div class="price">$10.00</div>
+                            <div class="price">59.-</div>
                             <a href="#" class="btn btn_menu">สั่งเลย</a>
                         </div>
                     </div>
