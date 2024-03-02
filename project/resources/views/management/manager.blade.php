@@ -114,8 +114,8 @@
                                     'Category' => $category,
                                     'Image' => $photolink
                                 ]);
-                                echo '<script>window.location.href = "/management";</script>'; 
-                                }
+                                echo '<script>window.location.href = "/management";</script>';
+                            }
                             ?>
                         </div>
                     </div>
@@ -167,21 +167,24 @@
                         </div>
                     </div>
                 </div>
-                <form action="" method="GET">
-                    <select class="form-select header-from" aria-label="Default select example" name="category">
-                </form>
-                @foreach($categ as $cate)
-                <?php
-                $check = $cate->categoryNameTH;
-                if ($check === "ทั้งหมด") {
-                    echo '<option value="' . $cate->categoryNameTH . '" selected>' . $cate->categoryNameTH . '</option>';
-                } else {
-                    echo '<option value="' . $cate->categoryNameTH . '">' . $cate->categoryNameTH . '</option>';
-                }
-                ?>
-                @endforeach
-                </select>
-                <input type="submit" class="btn btn-primary" value="ยืนยัน">
+
+                <div class="choose-category">
+                    <form action="" method="GET">
+                        <select class="form-select header-from" aria-label="Default select example" name="category">
+                            @foreach($categ as $cate)
+                            <?php
+                            $check = $cate->categoryNameTH;
+                            if ($check === "ทั้งหมด") {
+                                echo '<option value="' . $cate->categoryNameTH . '" selected>' . $cate->categoryNameTH . '</option>';
+                            } else {
+                                echo '<option value="' . $cate->categoryNameTH . '">' . $cate->categoryNameTH . '</option>';
+                            }
+                            ?>
+                            @endforeach
+                        </select>
+                        <input type="submit" id="category-submit" class="btn btn-primary" value="ยืนยัน">
+                    </form>
+                </div>
             </div>
 
             <div class="grid-right">

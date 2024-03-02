@@ -63,14 +63,23 @@ a:hover {
     margin-left: 55px
 }
 
-.grid-left>select {
-    border-radius: 5px 0 0 5px;
-    width: 150px;
+.choose-category {
+    display: flex;
     margin-left: 10px;
 }
 
-.grid-left>input {
+.choose-category > form {
+    display: flex;
+}
+
+.choose-category > form > select {
+    border-radius: 5px 0 0 5px;
+    width: 150px;
+}
+
+.choose-category > form > input {
     border-radius: 0 5px 5px 0;
+    margin-left: -1px;
 }
 
 #addCate {
