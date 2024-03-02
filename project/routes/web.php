@@ -30,6 +30,10 @@ Route::get('/cashier', function () {
     return view('cashier/Tablepage');
 });
 
+Route::get('/dashboard', function () {
+    return view('management/dashboard');
+});
+
 // Route::post('/management', [addMenuController::class, 'addMenu']);
 
 // Route::post('/management/add', [MenuController::class, 'addMenu'])->name('addMenu');

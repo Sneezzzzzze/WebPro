@@ -34,7 +34,7 @@
 
         <div class="menu-bar">
             <span>
-                <a href="#">ตรวจสอบยอดขาย</a>
+                <a href="/dashboard">ตรวจสอบยอดขาย</a>
             </span>
             <span>
                 <a href="#">แผนผังร้านอาหาร</a>
