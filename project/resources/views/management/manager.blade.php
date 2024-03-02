@@ -12,6 +12,14 @@
 </head>
 
 <body>
+    <?php
+
+    use Illuminate\Support\Facades\DB;
+
+    $categ = DB::table('Category')
+        ->select('categoryNameTH')
+        ->get();
+    ?>
     <div class="container">
         <div class="nav-bar">
             <div class="logo">
@@ -56,38 +64,59 @@
                 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <!-- <form method="POST" action=""> -->
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="add">เพิ่มรายการอาหาร</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
-                            </div>
-                            <div class="modal-body">
-                                <h6>ชื่ออาหาร :</h6>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" required>
+                            <form action="/management" method="GET">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="add">เพิ่มรายการอาหาร</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
                                 </div>
-                                <h6>หมวดหมู่ :</h6>
-                                <div class="mb-3">
-                                    <select class="form-select header-from" aria-label="Default select example" name="category">
-                                        <option value="all" selected>หมวดหมู่</option>
-                                        <option value="dimsum">ติ่มซำ</option>
-                                        <option value="drink">เครื่องดื่ม</option>
-                                    </select>
+                                <div class="modal-body">
+                                    <h6>ชื่ออาหาร :</h6>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" required>
+                                    </div>
+                                    <h6>หมวดหมู่ :</h6>
+                                    <div class="mb-3">
+                                        <select class="form-select header-from" aria-label="Default select example" name="category">
+                                            <option selected>หมวดหมู่</option>
+                                            @foreach($categ as $cate)
+                                            <?php
+                                            $check = $cate->categoryNameTH;
+                                            $cate->categoryNameTH;
+                                            echo '<option value="' . $cate->categoryNameTH . '">' . $cate->categoryNameTH . '</option>';
+                                            ?>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <h6>ราคา :</h6>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="ราคา" name="price" required>
+                                    </div>
+                                    <h6>รูปอาหาร (URL) :</h6>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="https://example.com" name="photolink" required>
+                                    </div>
                                 </div>
-                                <h6>ราคา :</h6>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="ราคา" name="price" required>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" name="addMenu">ยืนยัน</button>
                                 </div>
-                                <h6>รูปอาหาร (URL) :</h6>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="https://example.com" name="photolink" required>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal" name="addMenu">ยืนยัน</button>
-                            </div>
-                            <!-- </form> -->
+                            </form>
+                            <?php
+                            if (isset($_GET['addMenu'])) {
+                                $name = $_GET['foodname'];
+                                $price = $_GET['price'];
+                                $category = $_GET['category'];
+                                $photolink = $_GET['photolink'];
+
+                                DB::table('Food')->insert([
+                                    'Name' => $name,
+                                    'Price' => $price,
+                                    'Category' => $category,
+                                    'Image' => $photolink
+                                ]);
+                                echo '<script>window.location.href = "/management";</script>'; 
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -100,31 +129,59 @@
                 <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addCategory" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <!-- <form method="POST" action=""> -->
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="addCategory">เพิ่มหมวดหมู่อาหาร</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="ex. ของหวาน" name="AddFoodCategory" required>
+                                    <form action="/management" method="GET">
+                                        <input type="text" class="form-control" placeholder="ex. ของหวาน" name="AddFoodCategory" id="AddFoodCategory" required>
+                                    </form>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal" name="addMenu">ยืนยัน</button>
+                                <form action="/management" method="GET">
+                                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" name="addCategory" id="addCategory" value="yes">ยืนยัน</button>
+                                </form>
+                                <!-- <script>
+                                    function insertDataInDelete(name) {
+                                        document.getElementById('AddFoodCategory').value = name;
+                                    }
+                                </script> -->
+                                <?php
+                                if (isset($_GET['addCategory'])) {
+                                    if (isset($_GET['AddFoodCategory'])) {
+                                        $addcate = $_GET['AddFoodCategory'];
+                                    } else {
+                                        $addcate = "ไม่มีข้อมูล";
+                                    }
+
+                                    DB::table('Category')->insert(['categoryNameTH' => $addcate]);
+
+                                    redirect('/management');
+                                }
+                                ?>
                             </div>
-                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
-
-                <select class="form-select header-from" aria-label="Default select example" name="category">
-                    <option value="all">ทั้งหมด</option>
-                    <option value="dimsum">ติ่มซำ</option>
-                    <option value="drink">เครื่องดื่ม</option>
+                <form action="" method="GET">
+                    <select class="form-select header-from" aria-label="Default select example" name="category">
+                </form>
+                @foreach($categ as $cate)
+                <?php
+                $check = $cate->categoryNameTH;
+                if ($check === "ทั้งหมด") {
+                    echo '<option value="' . $cate->categoryNameTH . '" selected>' . $cate->categoryNameTH . '</option>';
+                } else {
+                    echo '<option value="' . $cate->categoryNameTH . '">' . $cate->categoryNameTH . '</option>';
+                }
+                ?>
+                @endforeach
                 </select>
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-primary" value="ยืนยัน">
             </div>
 
             <div class="grid-right">
@@ -233,8 +290,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="/management" method="">
-                                    @csrf
+                                <form action="" method="">
                                     <input type="hidden" name="fname" id="fname" value="">
                                     <button type="submit" class="btn btn-primary" name="dDelete" value="yes">ใช่</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ไม่</button>
@@ -244,17 +300,16 @@
                     </div>
                 </div>
                 <?php
-                // use Illuminate\Support\Facades\DB;
-                // if (isset($_GET['fname']) && isset($_GET['dDelete'])) {
-                //     $name = $_GET['fname'];
-                //     $delete = $_GET['dDelete'];
-                //     if ($delete === 'yes') {
-                //         DB::table('Food')
-                //             ->where('Name', $name)
-                //             ->delete();
-                //         return redirect('/management');
-                //     }
-                // }
+                if (isset($_GET['fname']) && isset($_GET['dDelete'])) {
+                    $name = $_GET['fname'];
+                    $delete = $_GET['dDelete'];
+                    if ($delete === 'yes') {
+                        DB::table('Food')
+                            ->where('Name', $name)
+                            ->delete();
+                        echo '<script>window.location.href = "/management";</script>';
+                    }
+                }
                 ?>
             </table>
         </div>
