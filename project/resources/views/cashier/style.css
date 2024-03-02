@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-family: "Bai Jamjuree", sans-serif;
+            font-weight: 200;
+            font-style: normal;
 }
 
 /* .tabla-page {
@@ -133,7 +141,7 @@ header {
 .box2-1 {
     position: absolute;
     width: 610px;
-    height: 320px;
+    /* height: 320px; */
     margin-left: 20px;
     background-color: #edeeed;
     border-radius: 10px;
@@ -143,6 +151,7 @@ header {
     margin-left: 20px;
     font-size: 18;
     width: 95%;
+    font-weight: bold;
 }
 
 td {
@@ -155,7 +164,8 @@ td {
 /* ปุ่มรายละเอียด */
 .section5 {
     margin-top: 20px;
-    margin-left: 25px;
+    margin-left: 80px;
+    
 }
 
 .section5 .btnT1 , 
@@ -165,7 +175,7 @@ td {
     border: none;
     display: inline-block;
     width: 90px;
-    height: 80px;
+    height: 50px;
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
@@ -174,12 +184,13 @@ td {
     box-shadow: 5px 0px 4px #00000040;
     color: #ffffff;
     font-size: 16px;
+    margin: 10px;
 }
 .section5 .btnT2{
     border: none;
     display: inline-block;
     width: 90px;
-    height: 80px;
+    height: 50px;
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
@@ -188,12 +199,13 @@ td {
     box-shadow: 5px 0px 4px #00000040;
     color: #ffffff;
     font-size: 16px;
+    margin: 10px;
 }
 .section5 .btnT6{
     border: none;
     display: inline-block;
     width: 90px;
-    height: 80px;
+    height: 50px;
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
@@ -202,6 +214,7 @@ td {
     box-shadow: 5px 0px 4px #00000040;
     color: #ffffff;
     font-size: 16px;
+    margin: 10px;
 }
 
 .group2 .section6{
@@ -216,4 +229,24 @@ td {
 .table-2{
     font-size: 18;
     width: 100%;
+}
+.group2 .section7{
+    margin-top: 20px;
+    position: absolute;
+    width: 610px;
+    height: auto;
+    background-color: #edeeed;
+    border-radius: 10px;
+}
+.table-3{
+    margin-top: 15px;
+    font-size: 18;
+    width: 100%;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.price{
+    text-align: right;
+    padding-right: 15px;
 }
