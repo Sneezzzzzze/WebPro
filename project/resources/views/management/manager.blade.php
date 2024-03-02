@@ -50,7 +50,7 @@
                     </svg>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Logout</a></a></li>
+                    <a class="dropdown-item" href="/login">Logout</a>
                 </ul>
             </span>
         </div>
