@@ -49,6 +49,7 @@
 
         html {
             height: 100%;
+            scroll-behavior: smooth;
         }
         /* End nav_bar&base */
 
@@ -253,25 +254,78 @@
         }
         /* End food&order */
 
+        .menu-btns{
+            padding: 0.6rem 0;
+            display: flex;
+            justify-content: center;
+        }
+        .menu-btn{
+            background: none;
+            border: none;
+            color: black;
+            display: block;
+            margin: 0 1rem;
+            cursor: pointer;
+            outline: 0;
+            transition: opacity 0.4s ease-out;
+        }
+        .menu-btn::after{
+            content: "";
+            display: block;
+            height: 2px;
+            margin-left: auto;
+            margin-right: auto;
+            background: #C97926;
+            margin-top: 0.5rem;
+            width: 0;
+            transition: width 0.4s ease-out;
+        }
+        .menu-btn:hover::after{
+            width: 100%;
+        }
+        .menu-btn:hover{
+            opacity: 0.8;
+        }
+        .active-btn{
+            color: #C97926;
+        }
+
     </style>
 </head>
 
-<!-- <script>
-    const prev = document.getElementById('prev-btn')
-    const next = document.getElementById('next-btn')
-    const list = document.getElementById('item-list')
-        
-    const itemWidth = 150
-    const padding = 10
-        
-    prev.addEventListener('click',()=>{
-      list.scrollLeft -= itemWidth + padding
-    })
-    
-    next.addEventListener('click',()=>{
-      list.scrollLeft += itemWidth + padding
-    })
-</script> -->
+<script>
+    const menuBtns = document.querySelectorAll('.menu-btn');
+    const foodItems = document.querySelectorAll('.menu_container');
+
+    let activeBtn = "steam";
+
+    showFoodMenu(activeBtn);
+
+    menuBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            resetActiveBtn();
+            showFoodMenu(btn.id);
+            btn.classList.add('active-btn');
+        });
+    });
+
+    function resetActiveBtn(){
+        menuBtns.forEach((btn) => {
+            btn.classList.remove('active-btn');
+        });
+    }
+
+    function showFoodMenu(newMenuBtn){
+        activeBtn = newMenuBtn;
+        foodItems.forEach((item) => {
+            if(item.classList.contains(activeBtn)){
+                item.style.display = "grid";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+</script>
 
 <body background="https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif" link="#0000BB">
     <div class="container">
@@ -327,82 +381,280 @@
             </div>
         </div>
 
-        <!-- Category Line -->
-        <!-- <div class="catagory_text">
-            <h4>
-                <span class="horizontal">ประเภทของอาหาร</span>
-            </h4>
-        </div> -->
+        <div class = "menu-btns">
+            <button type = "button" class = "menu-btn" id = "stream" onclick="location.href='#section1'">ติ่มซำนึ่ง</button>
+            <button type = "button" class = "menu-btn" id = "fry" onclick="location.href='#section2'">ติ่มซำทอด</button>
+            <button type = "button" class = "menu-btn" id = "dessert" onclick="location.href='#section3'">ของหวาน</button>
+            <button type = "button" class = "menu-btn" id = "drink" onclick="location.href='#section4'">เครื่องดื่ม</button>
+        </div>
 
-        <div class="section" id="menu_type">
+        <!-- <div class="section" id="menu_type">
             <div class="type_container">
                 <ul class="category">
-                    <li>ติ่มซำนึ่ง</li>
+                    <li class="active">ติ่มซำนึ่ง</li>
                     <li>ติ่มซำทอด</li>
                     <li>ของหวาน</li>
                     <li>เครื่องดื่ม</li>
-                </ul>
+                </ul> -->
+        
+        <!-- Category Line -->
+        <div class="catagory_text" id="section1">
+            <h4>
+                <span class="horizontal">อาหารประเภทติ่มซำนึ่ง</span>
+            </h4>
+        </div>
 
-            <div class="menu_container">
-                <div class="restaurant_menu">
-                    <div class="menu_item">
-                        <img src="https://static.wixstatic.com/media/e669da_b3e85e5777ce4979884960b782113fec~mv2.jpg/v1/fill/w_1257,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_b3e85e5777ce4979884960b782113fec~mv2.jpg" alt="" />
-                        <div class="title">ยกทัพติ่มซำ</div>
-                        <div class="location">ติ่มซำนึ่ง</div>
-                        <div class="order_info">
-                            <div class="price">159.-</div>
-                            <a href="#" class="btn btn_menu">สั่งเลย</a>
-                        </div>
+        <div class="menu_container">
+            <div class="restaurant_menu">
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_b3e85e5777ce4979884960b782113fec~mv2.jpg/v1/fill/w_1257,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_b3e85e5777ce4979884960b782113fec~mv2.jpg" alt="" />
+                    <div class="title">ยกทัพติ่มซำ</div>
+                    <div class="location">ติ่มซำนึ่ง</div>
+                    <div class="order_info">
+                        <div class="price">159.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
                     </div>
-                    <div class="menu_item">
-                        <img src="https://static.wixstatic.com/media/e669da_f252fc5f301f47d48604b962b9658d56~mv2.jpg/v1/fill/w_1257,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_f252fc5f301f47d48604b962b9658d56~mv2.jpg" alt="" />
-                        <div class="title">ยกทัพขนมจีบ</div>
-                        <div class="location">ติ่มซำนึ่ง</div>
-                        <div class="order_info">
-                            <div class="price">149.-</div>
-                            <a href="#" class="btn btn_menu">สั่งเลย</a>
-                        </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_f252fc5f301f47d48604b962b9658d56~mv2.jpg/v1/fill/w_1257,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_f252fc5f301f47d48604b962b9658d56~mv2.jpg" alt="" />
+                    <div class="title">ยกทัพขนมจีบ</div>
+                    <div class="location">ติ่มซำนึ่ง</div>
+                    <div class="order_info">
+                        <div class="price">149.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
                     </div>
-                    <div class="menu_item">
-                        <img src="https://static.wixstatic.com/media/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg/v1/fill/w_1183,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg" alt="" />
-                        <div class="title">ขนมจีบกุ้งผักโขมชีส</div>
-                        <div class="location">ติ่มซำนึ่ง</div>
-                        <div class="order_info">
-                            <div class="price">59.-</div>
-                            <a href="#" class="btn btn_menu">สั่งเลย</a>
-                        </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg/v1/fill/w_1183,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg" alt="" />
+                    <div class="title">ขนมจีบกุ้งผักโขมชีส</div>
+                    <div class="location">ติ่มซำนึ่ง</div>
+                    <div class="order_info">
+                        <div class="price">59.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
                     </div>
-                    <div class="menu_item">
-                        <img src="https://static.wixstatic.com/media/e669da_4cffc3fb6bac4ccbba00acf3cbd56f55~mv2.jpg/v1/fill/w_964,h_723,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_4cffc3fb6bac4ccbba00acf3cbd56f55~mv2.jpg" alt="" />
-                        <div class="title">ซาลาเปาโชคดีลาวา</div>
-                        <div class="location">ติ่มซำนึ่ง</div>
-                        <div class="order_info">
-                            <div class="price">55.-</div>
-                            <a href="#" class="btn btn_menu">สั่งเลย</a>
-                        </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_4cffc3fb6bac4ccbba00acf3cbd56f55~mv2.jpg/v1/fill/w_964,h_723,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_4cffc3fb6bac4ccbba00acf3cbd56f55~mv2.jpg" alt="" />
+                    <div class="title">ซาลาเปาโชคดีลาวา</div>
+                    <div class="location">ติ่มซำนึ่ง</div>
+                    <div class="order_info">
+                        <div class="price">55.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
                     </div>
-                    <div class="menu_item">
-                        <img src="https://static.wixstatic.com/media/e669da_207cbd849af14c5583314fa2e4b976b9~mv2.jpg/v1/fill/w_965,h_724,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_207cbd849af14c5583314fa2e4b976b9~mv2.jpg" alt="" />
-                        <div class="title">ซาลาเปาหมูแดง</div>
-                        <div class="location">ติ่มซำนึ่ง</div>
-                        <div class="order_info">
-                            <div class="price">45.-</div>
-                            <a href="#" class="btn btn_menu">สั่งเลย</a>
-                        </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_207cbd849af14c5583314fa2e4b976b9~mv2.jpg/v1/fill/w_965,h_724,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_207cbd849af14c5583314fa2e4b976b9~mv2.jpg" alt="" />
+                    <div class="title">ซาลาเปาหมูแดง</div>
+                    <div class="location">ติ่มซำนึ่ง</div>
+                    <div class="order_info">
+                        <div class="price">45.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
                     </div>
-                    <div class="menu_item">
-                        <img src="https://static.wixstatic.com/media/e669da_71f1afad574849a686e59a778ec22211~mv2.jpg/v1/fill/w_250,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_71f1afad574849a686e59a778ec22211~mv2.jpg" alt="" />
-                        <div class="title">ขนมจีบกุ้งต้มยำ</div>
-                        <div class="location">ติ่มซำนึ่ง</div>
-                        <div class="order_info">
-                            <div class="price">59.-</div>
-                            <a href="#" class="btn btn_menu">สั่งเลย</a>
-                        </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_71f1afad574849a686e59a778ec22211~mv2.jpg/v1/fill/w_250,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_71f1afad574849a686e59a778ec22211~mv2.jpg" alt="" />
+                    <div class="title">ขนมจีบกุ้งต้มยำ</div>
+                    <div class="location">ติ่มซำนึ่ง</div>
+                    <div class="order_info">
+                        <div class="price">59.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Category Line -->
+        <div class="catagory_text" id="section2">
+            <h4>
+            <span class="horizontal">อาหารประเภทติ่มซำทอด</span>
+            </h4>
+        </div>
+        <div class="menu_container">
+            <div class="restaurant_menu">
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_9e505f3636344628a585b7871d95e41a~mv2_d_1667_1250_s_2.jpg/v1/fill/w_251,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_9e505f3636344628a585b7871d95e41a~mv2_d_1667_1250_s_2.jpg" alt="" />
+                    <div class="title">ซาลาเปาโชคดีลาวาทอด</div>
+                    <div class="location">ติ่มซำทอด</div>
+                    <div class="order_info">
+                        <div class="price">55.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_55c6f454f9b843128458320ee4318f46~mv2.jpg/v1/fill/w_251,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_55c6f454f9b843128458320ee4318f46~mv2.jpg" alt="" />
+                    <div class="title">เผือกทอดลาวา</div>
+                    <div class="location">ติ่มซำทอด</div>
+                    <div class="order_info">
+                        <div class="price">65.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_cc8583df1935403ebbecde87defef00c~mv2.jpg/v1/fill/w_251,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_cc8583df1935403ebbecde87defef00c~mv2.jpg" alt="" />
+                    <div class="title">เผือกทอด</div>
+                    <div class="location">ติ่มซำทอด</div>
+                    <div class="order_info">
+                        <div class="price">59.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_6fb5e3af52504307b66e6cf30ab74571~mv2.jpg/v1/fill/w_251,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_6fb5e3af52504307b66e6cf30ab74571~mv2.jpg" alt="" />
+                    <div class="title">แฮกึ๋น</div>
+                    <div class="location">ติ่มซำทอด</div>
+                    <div class="order_info">
+                        <div class="price">69.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_2f7c7e8e2e5f4dd5aa9922814a3e5aea~mv2.jpg/v1/fill/w_251,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_2f7c7e8e2e5f4dd5aa9922814a3e5aea~mv2.jpg" alt="" />
+                    <div class="title">ปลาท่องโก๋ดิป</div>
+                    <div class="location">ติ่มซำทอด</div>
+                    <div class="order_info">
+                        <div class="price">49.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_039e2b34cff445e6b54177fb8f355798~mv2.jpg/v1/fill/w_251,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_039e2b34cff445e6b54177fb8f355798~mv2.jpg" alt="" />
+                    <div class="title">ซาลาเปาไส้ครีมทอด</div>
+                    <div class="location">ติ่มซำทอด</div>
+                    <div class="order_info">
+                        <div class="price">45.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Category Line -->
+        <div class="catagory_text" id="section3">
+            <h4>
+            <span class="horizontal">ประเภทขนมหวาน</span>
+            </h4>
+        </div>
+        <div class="menu_container">
+            <div class="restaurant_menu">
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_b7f38e8d5eb5455d954298a066a62931~mv2.jpg/v1/fill/w_253,h_175,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_b7f38e8d5eb5455d954298a066a62931~mv2.jpg" alt="" />
+                    <div class="title">ลูกตาลนมสด</div>
+                    <div class="location">ขนมหวาน</div>
+                    <div class="order_info">
+                        <div class="price">55.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_649d2f73472b41218b020e1cb6dc3631~mv2.jpg/v1/fill/w_253,h_175,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_649d2f73472b41218b020e1cb6dc3631~mv2.jpg" alt="" />
+                    <div class="title">ทับทิมกรอบ</div>
+                    <div class="location">ขนมหวาน</div>
+                    <div class="order_info">
+                        <div class="price">49.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_b778c823995a44009999c9c8be29d8e9~mv2.jpg/v1/fill/w_253,h_175,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_b778c823995a44009999c9c8be29d8e9~mv2.jpg" alt="" />
+                    <div class="title">บัวลอยเผือก</div>
+                    <div class="location">ขนมหวาน</div>
+                    <div class="order_info">
+                        <div class="price">49.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_f1fa411317874fc380ce5da45f6e1af3~mv2.jpg/v1/fill/w_253,h_175,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_f1fa411317874fc380ce5da45f6e1af3~mv2.jpg" alt="" />
+                    <div class="title">สละลอยแก้ว</div>
+                    <div class="location">ขนมหวาน</div>
+                    <div class="order_info">
+                        <div class="price">49.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_9ec46fd2f3494fbab4b6e0879884adcb~mv2.jpg/v1/fill/w_253,h_175,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_9ec46fd2f3494fbab4b6e0879884adcb~mv2.jpg" alt="" />
+                    <div class="title">บัวลอยน้ำขิง</div>
+                    <div class="location">ขนมหวาน</div>
+                    <div class="order_info">
+                        <div class="price">49.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://static.wixstatic.com/media/e669da_9cb22ed24ed84995927a21f60c5a1ad0~mv2.jpg/v1/fill/w_253,h_175,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_9cb22ed24ed84995927a21f60c5a1ad0~mv2.jpg" alt="" />
+                    <div class="title">บัวลอย 4 เซียน</div>
+                    <div class="location">ขนมหวาน</div>
+                    <div class="order_info">
+                        <div class="price">49.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Category Line -->
+        <div class="catagory_text" id="section4">
+            <h4>
+            <span class="horizontal">เครื่องดื่ม</span>
+            </h4>
+        </div>
+        <div class="menu_container">
+            <div class="restaurant_menu">
+                <div class="menu_item">
+                    <img src="https://www.fatehpharma.com/wp-content/uploads/2020/07/pepsi_cola_bottle_500ml.jpg" alt="" />
+                    <div class="title">เป๊ปซี่ 500ml.</div>
+                    <div class="location">เครื่องดื่ม</div>
+                    <div class="order_info">
+                        <div class="price">25.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://cdn0.woolworths.media/content/wowproductimages/large/038121.jpg" alt="" />
+                    <div class="title">โค้ก 2l.</div>
+                    <div class="location">เครื่องดื่ม</div>
+                    <div class="order_info">
+                        <div class="price">40.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://th.bing.com/th/id/OIP.pgEFe3HeXq2YVdULtYDjTgHaHa?w=500&h=500&rs=1&pid=ImgDetMain" alt="" />
+                    <div class="title">ชาเขียว โออิชิ</div>
+                    <div class="location">เครื่องดื่ม</div>
+                    <div class="order_info">
+                        <div class="price">15.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://th-test-11.slatic.net/p/e44bbb7b1c024743d158788bdaf21b8f.jpg" alt="" />
+                    <div class="title">น้ำฟัก</div>
+                    <div class="location">เครื่องดื่ม</div>
+                    <div class="order_info">
+                        <div class="price">25.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://img.wongnai.com/p/400x400/2023/05/10/d515d3e34b7a4b7ea554a99efa4a6edf.jpg" alt="" />
+                    <div class="title">น้ำเก็กฮวย</div>
+                    <div class="location">เครื่องดื่ม</div>
+                    <div class="order_info">
+                        <div class="price">20.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+                <div class="menu_item">
+                    <img src="https://suckhoedoisong.qltns.mediacdn.vn/thumb_w/640/324455921873985536/2023/2/14/base64-1676355577881189087789.png" alt="" />
+                    <div class="title">ชามะนาว</div>
+                    <div class="location">เครื่องดื่ม</div>
+                    <div class="order_info">
+                        <div class="price">20.-</div>
+                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
