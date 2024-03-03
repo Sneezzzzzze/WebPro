@@ -9,6 +9,7 @@
         
         @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
+        /* nav_bar&base */
         body,
         .container {
             font-family: "Bai Jamjuree", sans-serif;
@@ -49,6 +50,7 @@
         html {
             height: 100%;
         }
+        /* End nav_bar&base */
 
         /* The hero image */
         .hero-image {
@@ -75,7 +77,9 @@
             transform: translate(-50%, -50%);
             color: white;
         }
+        /* End The hero image */
 
+        /* Recommendation Line */
         .recom_text {
             text-align: center;
         }
@@ -101,7 +105,9 @@
             margin-bottom: 3px;
             width: 600px;
         }
+        /* End Recommendation Line */
 
+        /* Recommendation img */
         img {
             border: 10px solid #BFBFBF;
             border-radius: 5px;
@@ -165,7 +171,9 @@
             background-color: deeppink;
             border-radius:8px;
         }
+        /* End Recommendation img */
 
+        /* food&order */
         .section {
             width: 100%;
             padding: 40px 0;
@@ -220,7 +228,7 @@
             width: 100%;
         }
 
-        .order {
+        .order_info {
             justify-content: space-between;
         }
 
@@ -243,11 +251,12 @@
             font-size: 18px;
             font-weight: 500;
         }
+        /* End food&order */
 
     </style>
 </head>
 
-<script>
+<!-- <script>
     const prev = document.getElementById('prev-btn')
     const next = document.getElementById('next-btn')
     const list = document.getElementById('item-list')
@@ -262,7 +271,7 @@
     next.addEventListener('click',()=>{
       list.scrollLeft += itemWidth + padding
     })
-</script>
+</script> -->
 
 <body background="https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif" link="#0000BB">
     <div class="container">
@@ -279,7 +288,7 @@
                 </span>
             </div>
         </div>
-        <!-- Main Image -->
+        <!-- Hero Image -->
         <div class="hero-image">
             <div class="hero-text">
                 <h1>เมนูอาหาร</h1>
@@ -328,7 +337,7 @@
         <div class="section" id="menu_type">
             <div class="type_container">
                 <ul class="category">
-                    <li class="active">ติ่มซำนึ่ง</li>
+                    <li>ติ่มซำนึ่ง</li>
                     <li>ติ่มซำทอด</li>
                     <li>ของหวาน</li>
                     <li>เครื่องดื่ม</li>
@@ -357,6 +366,33 @@
                     <div class="menu_item">
                         <img src="https://static.wixstatic.com/media/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg/v1/fill/w_1183,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg" alt="" />
                         <div class="title">ขนมจีบกุ้งผักโขมชีส</div>
+                        <div class="location">ติ่มซำนึ่ง</div>
+                        <div class="order_info">
+                            <div class="price">59.-</div>
+                            <a href="#" class="btn btn_menu">สั่งเลย</a>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <img src="https://static.wixstatic.com/media/e669da_4cffc3fb6bac4ccbba00acf3cbd56f55~mv2.jpg/v1/fill/w_964,h_723,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_4cffc3fb6bac4ccbba00acf3cbd56f55~mv2.jpg" alt="" />
+                        <div class="title">ซาลาเปาโชคดีลาวา</div>
+                        <div class="location">ติ่มซำนึ่ง</div>
+                        <div class="order_info">
+                            <div class="price">55.-</div>
+                            <a href="#" class="btn btn_menu">สั่งเลย</a>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <img src="https://static.wixstatic.com/media/e669da_207cbd849af14c5583314fa2e4b976b9~mv2.jpg/v1/fill/w_965,h_724,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_207cbd849af14c5583314fa2e4b976b9~mv2.jpg" alt="" />
+                        <div class="title">ซาลาเปาหมูแดง</div>
+                        <div class="location">ติ่มซำนึ่ง</div>
+                        <div class="order_info">
+                            <div class="price">45.-</div>
+                            <a href="#" class="btn btn_menu">สั่งเลย</a>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <img src="https://static.wixstatic.com/media/e669da_71f1afad574849a686e59a778ec22211~mv2.jpg/v1/fill/w_250,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_71f1afad574849a686e59a778ec22211~mv2.jpg" alt="" />
+                        <div class="title">ขนมจีบกุ้งต้มยำ</div>
                         <div class="location">ติ่มซำนึ่ง</div>
                         <div class="order_info">
                             <div class="price">59.-</div>
