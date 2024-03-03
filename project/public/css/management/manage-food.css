@@ -1,5 +1,10 @@
-body,
-.container {
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+* {
+    font-family: "Bai Jamjuree", sans-serif;
+}
+
+body {
     margin: 0;
     padding: 0;
     background-color: white;
@@ -7,10 +12,9 @@ body,
 
 .nav-bar {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto; /* Adjusted grid-template-columns */
     background-color: #C97926;
-    width: 100vw;
-    height: auto;
+    width: 100%; /* Full width of the screen */
     padding: 10px;
 }
 
@@ -21,16 +25,12 @@ body,
 
 .logo,
 .menu-bar {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .menu-bar>span {
     padding-right: 20px;
-}
-
-.logo>span {
-    padding-left: 20px;
 }
 
 a {
@@ -40,6 +40,12 @@ a {
 
 a:hover {
     opacity: 0.7;
+}
+
+.header-title {
+    display: grid;
+    place-items: center;
+    margin: 30px;
 }
 
 .header {
@@ -58,19 +64,32 @@ a:hover {
     justify-content: right;
 }
 
+.input-group {
+    
+}
+
 .grid-left {
     display: flex;
     margin-left: 55px
 }
 
-.grid-left>select {
-    border-radius: 5px 0 0 5px;
-    width: 150px;
+.choose-category {
+    display: flex;
     margin-left: 10px;
 }
 
-.grid-left>input {
+.choose-category > form {
+    display: flex;
+}
+
+.choose-category > form > select {
+    border-radius: 5px 0 0 5px;
+    width: 150px;
+}
+
+.choose-category > form > input {
     border-radius: 0 5px 5px 0;
+    margin-left: -1px;
 }
 
 #addCate {
@@ -94,10 +113,13 @@ a:hover {
 
 .input-group {
     width: 350px;
+    margin-right: 50px;
 }
 
 .food-table {
     margin-left: 70px;
+    max-width: 90%;
+    overflow-x: auto;
 }
 
 td, tr {

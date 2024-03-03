@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $foods = DB::table('Food')
             ->select('rowid', 'Name', 'Price', 'Category', 'Image')
             ->get();
         return view('management/manager', ['foods' => $foods], ['category' => 'ทั้งหมด'], ['search' => '']);
     }
-    
+
     public function showMenu(Request $request)
     {
         $category = $request->input('category');
@@ -43,24 +44,18 @@ class MenuController extends Controller
         return view('management/manager', ['foods' => $foods], ['search' => $search], ['category' => $category]);
     }
 
-    public function deleteMenu(Request $request)
-    {
-        $fname = $request->input('fname');
-        $delete = $request->input('delete');
-        return $fname . ' ' . $delete;
-        // if ($request->has('delete') && $request->has('fname')){
-        //     return 'Delete';
-        //     $delete = $request->input('delete');
-        //     $fname = $request->input('fname');
-        //     if ($delete === 'yes') {
-        //         DB::table('Food')
-        //             ->where('Name', $fname)
-        //             ->delete();
-        //         return redirect('/management');
-        //     } else {
-        //         return 'No delete';
-        //     }
-        // }
-    }
+    // public function deleteMenu(Request $request)
+    // {
+    //     $name = $request->input('fname');
+    //     $delete = $request->input('dDelete');
 
+    //     if ($delete === 'yes') {
+    //         DB::table('Food')
+    //             ->where('Name', $name)
+    //             ->delete();
+    //         // return redirect('/management');
+    //     } else {
+    //         // return redirect('/management');
+    //     }
+    // }
 }
