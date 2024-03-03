@@ -24,7 +24,9 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
-// // Route::get('/management', [deleteMenuController::class, 'deleteMenu']);
+
+// Route::post('/management', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
+
 
 Route::get('/cashier', function () {
     return view('cashier/Tablepage');

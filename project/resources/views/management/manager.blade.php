@@ -139,41 +139,27 @@
                             <h1 class="modal-title fs-5" id="addCategory">เพิ่มหมวดหมู่อาหาร</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <form action="/management" method="GET">
+                        <form action="/management" method="">
+                            <div class="modal-body">
+                                <div class="mb-3">
                                     <input type="text" class="form-control" placeholder="ex. ของหวาน" name="AddFoodCategory" id="AddFoodCategory" required>
-                                </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                            <form action="/management" method="GET">
-                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" name="addCategory" id="addCategory" value="yes">ยืนยัน</button>
-                            </form>
-                            <!-- <script>
-                                    function insertDataInDelete(name) {
-                                        document.getElementById('AddFoodCategory').value = name;
-                                    }
-                                </script> -->
-                            <?php
-                            if (isset($_GET['addCategory'])) {
-                                if (isset($_GET['AddFoodCategory'])) {
-                                    $addcate = $_GET['AddFoodCategory'];
-                                } else {
-                                    $addcate = "ไม่มีข้อมูล";
-                                }
-
-                                DB::table('Category')->insert(['categoryNameTH' => $addcate]);
-
-                                redirect('/management');
-                            }
-                            ?>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" name="addCategory" id="addCategory">ยืนยัน</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-
+            <?php
+            if (isset($_GET['addCategory'])) {
+                $addcate = $_GET['AddFoodCategory'];
+                DB::table('Category')->insert(['categoryNameTH' => $addcate]);
+                echo '<script>window.location.href = "/management";</script>';
+            }
+            ?>
             <div class="choose-category">
                 <form action="" method="GET">
                     <select class="form-select header-from" aria-label="Default select example" name="category">
@@ -193,18 +179,20 @@
             </div>
         </div>
 
-        <div class="grid-right">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="ค้นหารายการอาหาร" aria-label="ค้นหารายการอาหาร" aria-describedby="addon-wrapping" name="search" id="search">
-                <span class="input-group-text" id="addon-wrapping">
-                    <button id="delete-outline">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                        </svg>
-                    </button>
-                </span>
+        <form action="" method="GET">
+            <div class="grid-right">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="ค้นหารายการอาหาร" aria-label="ค้นหารายการอาหาร" aria-describedby="addon-wrapping" name="search" id="search">
+                    <span class="input-group-text" id="addon-wrapping">
+                        <button id="delete-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </span>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="food-table">
@@ -223,8 +211,8 @@
                 <td>{{$food->Category}}</td>
                 <td>{{$food->Price}}</td>
                 <td>
-                    <form method="GET">
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify" onclick="insertDataInModify('{{$food->Name}}', '{{$food->Category}}', '{{$food->Price}}', '{{$food->Image}}')">
+                    <form method="">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modify" onclick="insertDataInModify('{{$food->rowid}}', '{{$food->Name}}', '{{$food->Category}}', '{{$food->Price}}', '{{$food->Image}}')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
                                 <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61" />
                                 <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
@@ -240,7 +228,8 @@
             </tr>
             <!-- ใส่ข้อมูลลงไปใน modal ตอน click ปุ่ม modify-->
             <script>
-                function insertDataInModify(name, category, price, image) {
+                function insertDataInModify(rowid, name, category, price, image) {
+                    document.getElementById('mrowid').value = rowid;
                     document.getElementById('mFoodname').value = name;
                     document.getElementById('mPrice').value = price;
                     document.querySelector('#mCategory option[value="' + category + '"]').selected = true;
@@ -260,33 +249,58 @@
                             <h1 class="modal-title fs-5" id="modify">แก้ไขรายการอาหาร</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <h6>ชื่ออาหาร :</h6>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="foodname" id="mFoodname" required>
+                        <form action="/management" method="">
+                            <input type="hidden" name="mrowid" id="mrowid">
+                            <div class="modal-body">
+                                <h6>ชื่ออาหาร :</h6>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="ชื่ออาหาร" name="mFoodname" id="mFoodname" required>
+                                </div>
+                                <h6>หมวดหมู่ :</h6>
+                                <div class="mb-3">
+                                    <select class="form-select header-from" aria-label="Default select example" name="mCategory" id="mCategory">
+                                        @foreach($categ as $cate)
+                                        <?php
+                                        $check = $cate->categoryNameTH;
+                                        echo '<option value="' . $cate->categoryNameTH . '">' . $cate->categoryNameTH . '</option>';
+                                        ?>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <h6>ราคา :</h6>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="ราคา" name="mPrice" id="mPrice" required>
+                                </div>
+                                <h6>รูปอาหาร (URL) :</h6>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="https://example.com" name="mPhotolink" id="mPhotolink" required>
+                                </div>
                             </div>
-                            <h6>หมวดหมู่ :</h6>
-                            <div class="mb-3">
-                                <select class="form-select header-from" aria-label="Default select example" name="category" id="mCategory">
-                                    <option value="0" selected>หมวดหมู่</option>
-                                    <option value="dimsum">ติ่มซำ</option>
-                                    <option value="drink">เครื่องดื่ม</option>
-                                </select>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                <button type="submit" class="btn btn-warning" name="modifyMenu">ยืนยันการแก้ไข</button>
                             </div>
-                            <h6>ราคา :</h6>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="ราคา" name="price" id="mPrice" required>
-                            </div>
-                            <h6>รูปอาหาร (URL) :</h6>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="https://example.com" name="photolink" id="mPhotolink" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                            <button type="button" class="btn btn-warning">ยืนยันการแก้ไข</button>
-                        </div>
                         </form>
+                        <?php
+                        if (isset($_GET['modifyMenu'])) {
+                            $rowid = $_GET['mrowid'];
+                            $name = $_GET['mFoodname'];
+                            $price = $_GET['mPrice'];
+                            $category = $_GET['mCategory'];
+                            $photolink = $_GET['mPhotolink'];
+
+
+                            DB::table('Food')
+                                ->where('rowid', $rowid)
+                                ->update([
+                                    'Name' => $name,
+                                    'Price' => $price,
+                                    'Category' => $category,
+                                    'Image' => $photolink
+                                ]);
+                            echo '<script>window.location.href = "/management";</script>';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -299,7 +313,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="" method="">
+                            <form action="/management" method="">
                                 <input type="hidden" name="fname" id="fname" value="">
                                 <button type="submit" class="btn btn-primary" name="dDelete" value="yes">ใช่</button>
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ไม่</button>
