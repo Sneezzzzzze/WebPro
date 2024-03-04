@@ -31,9 +31,7 @@
         </div>
     </div>
     <div style="display:flex; margin-bottom:10px;">
-        <a style="color: white; text-decoration: none;" href="index.html">
-            <div class="backbutton" style="border-radius:15px; margin-left:20px; font-size:25px;">Back</div>
-        </a>
+        <h1>รายการอาหารที่ลูกค้าสั่ง</h1>
     </div>
     <div id="box" class="center" style="display:grid; grid-template-columns:auto auto">
 
