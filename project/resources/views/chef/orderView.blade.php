@@ -30,7 +30,7 @@
             </span>
         </div>
     </div>
-    <div style="display:flex; margin-bottom:10px;">
+    <div class="center" style="display:flex; margin-bottom:10px;">
         <h1>รายการอาหารที่ลูกค้าสั่ง</h1>
     </div>
     <div id="box" class="center" style="display:grid; grid-template-columns:auto auto">
