@@ -32,7 +32,7 @@
    <title>shopping cart</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_page.css'); }}">
+   <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_style.css'); }}">
 
 </head>
 <body>
