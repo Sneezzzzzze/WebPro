@@ -44,18 +44,4 @@ class MenuController extends Controller
         return view('management/manager', ['foods' => $foods], ['search' => $search], ['category' => $category]);
     }
 
-    // public function deleteMenu(Request $request)
-    // {
-    //     $name = $request->input('fname');
-    //     $delete = $request->input('dDelete');
-
-    //     if ($delete === 'yes') {
-    //         DB::table('Food')
-    //             ->where('Name', $name)
-    //             ->delete();
-    //         // return redirect('/management');
-    //     } else {
-    //         // return redirect('/management');
-    //     }
-    // }
 }
