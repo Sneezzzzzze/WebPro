@@ -36,7 +36,7 @@ Route::get('/dashboard', function () {
     return view('management/dashboard');
 });
 
-Route::get('/menu', function () {
+Route::get('/', function () {
     return view('food_page/food_menu');
 });
 
