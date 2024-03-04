@@ -36,13 +36,10 @@ Route::get('/dashboard', function () {
     return view('management/dashboard');
 });
 
-Route::get('/Table-{table}', function (string $table) {
-    return view('food_page/food_menu');
-})->where('table', 'A(10|[1-9])');
+Route::get('/Table/{table}', function (string $table) {
+    return view('food_page.food_menu');
+})->where('table', 'A(10|[1-9])|B(10|[1-9])');
 
-Route::get('/Table-{table}', function (string $table) {
-    return view('food_page/food_menu');
-})->where('table', 'B(10|[1-9])');
 
 
 
