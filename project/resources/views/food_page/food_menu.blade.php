@@ -54,7 +54,7 @@
         ->get();
     $fried = DB::table('Food')
         ->select('Name', 'Category', 'Price', 'Image')
-        ->where('Category', 'ติ่มซำทอด')
+        ->where('Category', 'ของทอด')
         ->get();
 
     $sweet = DB::table('Food')
