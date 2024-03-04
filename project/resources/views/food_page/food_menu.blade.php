@@ -42,6 +42,13 @@
 </script> -->
 
 <body background="https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif" link="#0000BB">
+    <?php
+    use Illuminate\Support\Facades\DB;
+    $dimsum = DB::table('Food')
+            ->select('Name', 'Category', 'Price', 'Image')
+            ->where('Category', 'ติ่มซำ')
+            ->get();
+    ?>
     <div class="container">
         <!-- NavBar with Home Icon -->
         <div class="nav-bar">
@@ -118,66 +125,24 @@
             </h4>
         </div>
 
+        <!-- dimsum -->
         <div class="menu_container">
             <div class="restaurant_menu">
-                <div class="menu_item">
-                    <img src="https://static.wixstatic.com/media/e669da_b3e85e5777ce4979884960b782113fec~mv2.jpg/v1/fill/w_1257,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_b3e85e5777ce4979884960b782113fec~mv2.jpg" alt="" />
-                    <div class="title">ยกทัพติ่มซำ</div>
-                    <div class="location">ติ่มซำนึ่ง</div>
-                    <div class="order_info">
-                        <div class="price">159.-</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                @foreach($dimsum as $dimsums)
+                    <div class="menu_item">
+                            <img src="{{$dimsums->Image}}" alt="" />
+                            <div class="title">{{$dimsums->Name}}</div>
+                            <div class="location">{{$dimsums->Category}}</div>
+                            <div class="order_info">
+                                <div class="price">{{$dimsums->Price}}</div>
+                                <a href="#" class="btn btn_menu">สั่งเลย</a>
+                            </div>
                     </div>
-                </div>
-                <div class="menu_item">
-                    <img src="https://static.wixstatic.com/media/e669da_f252fc5f301f47d48604b962b9658d56~mv2.jpg/v1/fill/w_1257,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_f252fc5f301f47d48604b962b9658d56~mv2.jpg" alt="" />
-                    <div class="title">ยกทัพขนมจีบ</div>
-                    <div class="location">ติ่มซำนึ่ง</div>
-                    <div class="order_info">
-                        <div class="price">149.-</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
-                    </div>
-                </div>
-                <div class="menu_item">
-                    <img src="https://static.wixstatic.com/media/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg/v1/fill/w_1183,h_943,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_ab0e12bd07b94358a11c3def8344669a~mv2.jpg" alt="" />
-                    <div class="title">ขนมจีบกุ้งผักโขมชีส</div>
-                    <div class="location">ติ่มซำนึ่ง</div>
-                    <div class="order_info">
-                        <div class="price">59.-</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
-                    </div>
-                </div>
-                <div class="menu_item">
-                    <img src="https://static.wixstatic.com/media/e669da_4cffc3fb6bac4ccbba00acf3cbd56f55~mv2.jpg/v1/fill/w_964,h_723,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_4cffc3fb6bac4ccbba00acf3cbd56f55~mv2.jpg" alt="" />
-                    <div class="title">ซาลาเปาโชคดีลาวา</div>
-                    <div class="location">ติ่มซำนึ่ง</div>
-                    <div class="order_info">
-                        <div class="price">55.-</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
-                    </div>
-                </div>
-                <div class="menu_item">
-                    <img src="https://static.wixstatic.com/media/e669da_207cbd849af14c5583314fa2e4b976b9~mv2.jpg/v1/fill/w_965,h_724,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e669da_207cbd849af14c5583314fa2e4b976b9~mv2.jpg" alt="" />
-                    <div class="title">ซาลาเปาหมูแดง</div>
-                    <div class="location">ติ่มซำนึ่ง</div>
-                    <div class="order_info">
-                        <div class="price">45.-</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
-                    </div>
-                </div>
-                <div class="menu_item">
-                    <img src="https://static.wixstatic.com/media/e669da_71f1afad574849a686e59a778ec22211~mv2.jpg/v1/fill/w_250,h_169,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_71f1afad574849a686e59a778ec22211~mv2.jpg" alt="" />
-                    <div class="title">ขนมจีบกุ้งต้มยำ</div>
-                    <div class="location">ติ่มซำนึ่ง</div>
-                    <div class="order_info">
-                        <div class="price">59.-</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
-        <!-- Category Line -->
+        <!-- fried dimsum -->
         <div class="catagory_text" id="section2">
             <h4>
             <span class="horizontal">อาหารประเภทติ่มซำทอด</span>
