@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_page.css'); }}">
     <title>menu</title>
 </head>
@@ -83,6 +84,9 @@
                     </a>
                 </span>
             </div>
+            <a href="/Table/cart" role="button" aria-expanded="false" style="padding-left: 800px">
+                <span class="fa fa-shopping-cart" style="font-size:36px"></span><span class="caret"></span>
+            </a>
         </div>
         <!-- Hero Image -->
         <div class="hero-image">

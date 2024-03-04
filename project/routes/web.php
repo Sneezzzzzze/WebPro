@@ -40,6 +40,10 @@ Route::get('/Table/{table}', function (string $table) {
     return view('food_page.food_menu');
 })->where('table', 'A(10|[1-9])|B(10|[1-9])');
 
+Route::get('/Table/cart', function() {
+    return view('food_page.cart');
+});
+
 
 
 
