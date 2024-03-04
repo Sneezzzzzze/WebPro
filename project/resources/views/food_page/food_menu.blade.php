@@ -56,10 +56,6 @@
         ->where('Category', 'ติ่มซำทอด')
         ->get();
 
-    $fried = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image')
-        ->where('Category', 'ติ่มซำทอด')
-        ->get();
     $sweet = DB::table('Food')
         ->select('Name', 'Category', 'Price', 'Image')
         ->where('Category', 'ของหวาน')
@@ -68,6 +64,11 @@
     $drink = DB::table('Food')
         ->select('Name', 'Category', 'Price', 'Image')
         ->where('Category', 'เครื่องดื่ม')
+        ->get();
+
+    $rec = DB::table('Food')
+        ->select('Image')
+        ->where('recommand', 1)
         ->get();
     ?>
     <div class="container">
@@ -100,27 +101,32 @@
 
         <!-- Recommended food -->
         <div class="rec_food">
-            <div class="carousel-view">
-                <button id="prev-btn" class="prev-btn">
-                    <svg viewBox="0 0 512 512" width="20" title="chevron-circle-left">
-                        <path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z" />
-                    </svg>
-                </button>
-                <div id="item-list" class="item-list">
-                    <img id="item" class="item" src="https://static.wixstatic.com/media/e669da_1f66d010ca2e45a99bfd2ed178a504be~mv2.jpg/v1/fill/w_363,h_363,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_1f66d010ca2e45a99bfd2ed178a504be~mv2.jpg" />
-                    <img id="item" class="item" src="https://static.wixstatic.com/media/e669da_10dbbfc2ae8040ccaf532b1afb4a86e4~mv2.jpg/v1/fill/w_363,h_363,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_10dbbfc2ae8040ccaf532b1afb4a86e4~mv2.jpg" />
-                    <img id="item" class="item" src="https://static.wixstatic.com/media/e669da_9feb609f26e844dba37f1d4994443129~mv2.jpg/v1/fill/w_363,h_363,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_9feb609f26e844dba37f1d4994443129~mv2.jpg" />
-                    <img id="item" class="item" src="https://static.wixstatic.com/media/e669da_67b92665297f4935a6cb136a0062b573~mv2.jpg/v1/fill/w_366,h_366,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_67b92665297f4935a6cb136a0062b573~mv2.jpg" />
-                    <img id="item" class="item" src="https://static.wixstatic.com/media/e669da_573694f7dbc0465193743017d158c21c~mv2.jpg/v1/fill/w_363,h_363,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_573694f7dbc0465193743017d158c21c~mv2.jpg" />
-                    <img id="item" class="item" src="https://static.wixstatic.com/media/e669da_5055347a972446e6b3bb39641c641625~mv2.jpg/v1/fill/w_366,h_366,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_5055347a972446e6b3bb39641c641625~mv2.jpg" />
-                    <img id="item" class="item" src="https://static.wixstatic.com/media/e669da_dc71e5534509418b8557fa8abd79aac2~mv2.jpg/v1/fill/w_363,h_363,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e669da_dc71e5534509418b8557fa8abd79aac2~mv2.jpg" />
-                </div>
-                <button id="next-btn" class="next-btn">
-                    <svg viewBox="0 0 512 512" width="20" title="chevron-circle-right">
-                        <path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z" />
-                    </svg>
-                </button>
+            <div id="item-list" class="item-list">
+                @foreach($rec as $recs)
+                <img id="item" class="item" src="{{$recs->Image}}" />
+                @endforeach
             </div>
+            <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="..." alt="First slide">
+                    </div>
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div> -->
         </div>
 
         <div class="menu-btns">
@@ -228,5 +234,4 @@
         </div>
     </div>
 </body>
-
 </html>

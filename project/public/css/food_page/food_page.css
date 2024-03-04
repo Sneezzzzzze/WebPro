@@ -135,10 +135,11 @@
     }
     .item {
         scroll-snap-align: center;
-        min-width: 120px;
+        min-width: 180px;
         height: 120px;
         background-color: deeppink;
         border-radius:8px;
+        margin-right: 20px;
     }
     /* End Recommendation img */
     /* food&order */
