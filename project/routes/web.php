@@ -36,6 +36,10 @@ Route::get('/dashboard', function () {
     return view('management/dashboard');
 });
 
+Route::get('/menu', function () {
+    return view('food_page/food_menu');
+});
+
 // Route::post('/management', [addMenuController::class, 'addMenu']);
 
 // Route::post('/management/add', [MenuController::class, 'addMenu'])->name('addMenu');
