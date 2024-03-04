@@ -8,8 +8,8 @@
 
 body {
     font-family: "Bai Jamjuree", sans-serif;
-            font-weight: 200;
-            font-style: normal;
+    font-weight: 200;
+    font-style: normal;
 }
 
 /* .tabla-page {
@@ -72,28 +72,31 @@ header {
     background-color: #ffffff;
 }
 
-.group .section1{
+.group .section1 {
     position: absolute;
     margin-left: 35px;
     margin-right: 10px;
     margin-top: 15px;
     margin-bottom: 100px;
 }
-.group .section2{
+
+.group .section2 {
     position: absolute;
     margin-left: 35px;
     margin-right: 10px;
     margin-top: 160px;
     margin-bottom: 100px;
 }
-.group .section3{
+
+.group .section3 {
     position: absolute;
     margin-left: 35px;
     margin-right: 10px;
     margin-top: 305px;
     margin-bottom: 100px;
 }
-.group .section4{
+
+.group .section4 {
     position: absolute;
     margin-left: 35px;
     margin-right: 10px;
@@ -102,9 +105,28 @@ header {
 }
 
 .section1 .btn-1,
-.section2 .btn-2,
-.section3 .btn-3,
-.section4 .btn-4{
+.section1 .btn-2,
+.section1 .btn-3,
+.section1 .btn-4,
+.section1 .btn-5,
+
+.section2 .btn-6,
+.section2 .btn-7,
+.section2 .btn-8,
+.section2 .btn-9,
+.section2 .btn-10,
+
+.section3 .btn-11,
+.section3 .btn-12,
+.section3 .btn-13,
+.section3 .btn-14,
+.section3 .btn-15,
+
+.section4 .btn-16,
+.section4 .btn-17,
+.section4 .btn-18,
+.section4 .btn-19,
+.section4 .btn-20 {
     border: none;
     display: inline-block;
     vertical-align: middle;
@@ -146,7 +168,8 @@ header {
     background-color: #edeeed;
     border-radius: 10px;
 }
-.table-1{
+
+.table-1 {
     margin-top: 20px;
     margin-left: 20px;
     font-size: 18;
@@ -157,6 +180,7 @@ header {
 td {
     padding-bottom: 15px;
 }
+
 .tdR {
     text-align: right;
 }
@@ -165,13 +189,13 @@ td {
 .section5 {
     margin-top: 20px;
     margin-left: 80px;
-    
+
 }
 
-.section5 .btnT1 , 
+.section5 .btnT1,
 .section5 .btnT3,
 .section5 .btnT4,
-.section5 .btnT5{
+.section5 .btnT5 {
     border: none;
     display: inline-block;
     width: 90px;
@@ -186,7 +210,8 @@ td {
     font-size: 16px;
     margin: 10px;
 }
-.section5 .btnT2{
+
+.section5 .btnT2 {
     border: none;
     display: inline-block;
     width: 90px;
@@ -201,7 +226,8 @@ td {
     font-size: 16px;
     margin: 10px;
 }
-.section5 .btnT6{
+
+.section5 .btnT6 {
     border: none;
     display: inline-block;
     width: 90px;
@@ -217,7 +243,7 @@ td {
     margin: 10px;
 }
 
-.group2 .section6{
+.group2 .section6 {
     margin-top: 20px;
     position: absolute;
     width: 610px;
@@ -226,11 +252,12 @@ td {
     border-radius: 10px;
 }
 
-.table-2{
+.table-2 {
     font-size: 18;
     width: 100%;
 }
-.group2 .section7{
+
+.group2 .section7 {
     margin-top: 20px;
     position: absolute;
     width: 610px;
@@ -238,7 +265,8 @@ td {
     background-color: #edeeed;
     border-radius: 10px;
 }
-.table-3{
+
+.table-3 {
     margin-top: 15px;
     font-size: 18;
     width: 100%;
@@ -246,7 +274,8 @@ td {
     padding-left: 15px;
 }
 
-.price{
+.price {
     text-align: right;
     padding-right: 15px;
 }
+
