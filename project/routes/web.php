@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MenuController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +16,30 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('test');
-// });
 
 Route::get('/login', function () {
     return view('authen/login');
 });
-
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::get('/register', function () {
-    return view('authen/register');
+Route::get('/management', [MenuController::class, 'index']);
+Route::get('/management', [MenuController::class, 'showMenu']);
+
+// Route::post('/management', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
+
+
+Route::get('/cashier', function () {
+    return view('cashier/Tablepage');
+});
+
+Route::get('/dashboard', function () {
+    return view('management/dashboard');
+});
+
+Route::get('/Table/{table}', function (string $table) {
+    return view('food_page.food_menu');
+})->where('table', 'A(10|[1-9])|B(10|[1-9])');
+
+Route::get('/Table/cart', function() {
+    return view('food_page.cart');
 });
