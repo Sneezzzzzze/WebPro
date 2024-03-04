@@ -10,13 +10,25 @@
     <title>Document</title>
 </head>
 <body>
-    <ul style="margin-bottom:10px;">
-        <!-- <li><a class="active" href="#order">Order</a></li>
-        <li><a href="index.html">Food</a></li> -->
-    </ul>
+    <div class="nav-bar" style="margin-bottom:10px">
+        <div class="logo">
+            <span>
+                <a href="">
+                    <svg width="100" height="35" viewBox="0 0 188 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="94" cy="42" rx="94" ry="25" fill="#C97026" />
+                        <rect y="42" width="188" height="78" fill="#C97026" />
+                        <ellipse cx="94" cy="67" rx="91" ry="60" fill="white" />
+                        <path d="M187.999 41C183.499 67.6667 6.99996 67.6667 -3.53854e-05 41V121C-2.91718e-05 151.5 187.999 154 187.999 121V41Z" fill="#870000" />
+                        <ellipse cx="94.5" cy="12" rx="5.5" ry="9" fill="white" />
+                        <ellipse cx="67.1142" cy="17.3147" rx="4.5" ry="28.3343" transform="rotate(61.9015 67.1142 17.3147)" fill="white" />
+                        <ellipse cx="121.114" cy="17.3154" rx="4.5" ry="28.3343" transform="rotate(-61.9 121.114 17.3154)" fill="white" />
+                    </svg>
+                </a>
+            </span>
+        </div>
+    </div>
     <div style="display:flex; margin-bottom:10px;">
-        <a style="color: white; text-decoration: none;" href="index.html"><div class="backbutton" style="margin-right:20px;">Back</div></a>
-        <div class="backbutton" onclick="newOrder()">Test create</div>
+        <a style="color: white; text-decoration: none;" href="index.html"><div class="backbutton" style="border-radius:15px; margin-right:20px; font-size:25px;">Back</div></a>
     </div>
     <div id="box" class="center" style="display:grid; grid-template-columns:auto auto">
 

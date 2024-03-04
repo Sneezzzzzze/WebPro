@@ -62,3 +62,31 @@ body {
     justify-content:center;
     align-items:center;
   }
+
+  .nav-bar {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: #C97926;
+    width: 100vw;
+    height: 50px;
+    padding: 10px;
+}
+.logo {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.logo>span {
+    padding-left: 20px;
+}
+
+.logo>span {
+    padding-right: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    opacity: 0.7;
+}
