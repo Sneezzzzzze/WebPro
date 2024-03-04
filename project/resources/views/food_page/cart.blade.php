@@ -1,129 +1,133 @@
-<?php
-
-// @include 'config.php';
-
-// if(isset($_POST['update_update_btn'])){
-//    $update_value = $_POST['update_quantity'];
-//    $update_id = $_POST['update_quantity_id'];
-//    $update_quantity_query = mysqli_query($conn, "UPDATE `cart` SET quantity = '$update_value' WHERE id = '$update_id'");
-//    if($update_quantity_query){
-//       header('location:cart.php');
-//    };
-// };
-
-// if(isset($_GET['remove'])){
-//    $remove_id = $_GET['remove'];
-//    mysqli_query($conn, "DELETE FROM `cart` WHERE id = '$remove_id'");
-//    header('location:cart.php');
-// };
-
-// if(isset($_GET['delete_all'])){
-//    mysqli_query($conn, "DELETE FROM `cart`");
-//    header('location:cart.php');
-// }
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>shopping cart</title>
-
-   <!-- custom css file link  -->
    <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_style.css'); }}">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
+
 <body>
 
-<?php
-// include 'header.php';
-?>
+   <?php
+   $final = 0;
 
-<div class="container">
+   use Illuminate\Support\Facades\Request;
+   use Illuminate\Support\Facades\DB;
 
-<section class="shopping-cart">
+   $currentPath = Request::path();
 
-   <h1 class="heading">shopping cart</h1>
+   // $lastSegment = basename($currentPath);
+   $lastSegment = 'A1';
+   $cart = DB::table('Cart')
+      ->select('Cart_id', 'TableName', 'FoodName', 'FoodPrice', 'FoodImage')
+      ->where('TableName', $lastSegment)
+      ->get();
+   ?>
 
-   <table>
+   <div class="container">
 
-      <thead>
-         <th>image</th>
-         <th>name</th>
-         <th>price</th>
-         <th>quantity</th>
-         <th>total price</th>
-         <th>action</th>
-      </thead>
+      <section class="shopping-cart">
 
-      <tbody>
+         <h1 class="heading">shopping cart</h1>
 
-         <?php 
+         <table>
+
+            <thead>
+               <th>image</th>
+               <th>name</th>
+               <th>price</th>
+               <th>quantity</th>
+               <th></th>
+               <th>action</th>
+            </thead>
+
+            <tbody>
+               <form action="" method="GET">
+                  @foreach($cart as $item)
+                  <tr>
+                     <input type="hidden" name="cartid" value="{{$item->Cart_id}}">
+                     <td>
+                        <img src="{{$item->FoodImage}}" height="100" alt="">
+                     </td>
+                     <td>{{$item->FoodName}}</td>
+                     <td>{{intval($item->FoodPrice)}}</td>
+                     <td>
+                        <input type="number" name="update_quantity" min=1>
+                        <?php
+                        if (isset($_GET['update_update_btn'])) {
+                           $update_quantity = $_GET['update_quantity'];
+                           if ($update_quantity == "") {
+                              $update_quantity = 1;
+                           }
+                           $update_total = floatval(intval($item->FoodPrice) * intval($update_quantity));
+                           $final += $update_total;
+                        }
+                        ?>
+                     </td>
+                     <td></td>
+                     <td><input type="submit" value="Remove" class="delete-btn" name="removeInCart"></td>
+
+                     <?php
+                     if (isset($_GET['removeInCart'])) {
+                        $cartid = $_GET['cartid'];
+                        DB::table('Cart')
+                           ->where('Cart_id', $cartid)
+                           ->where('TableName', $lastSegment)
+                           ->delete();
+                        echo '<script>window.location.href = "/Table/cart";</script>';
+                     }
+                     ?>
+                     @endforeach
+                  </tr>
+                  <?php
+                  ?>
+                  <tr class="table-bottom">
+                     <td><a href="/Table/{{$lastSegment}}" class="option-btn" style="margin-top: 0;">continue shopping</a></td>
+                     <td colspan="2">Total Price</td>
+                     <td>{{$final}}</td>
+                     <td><input type="submit" value="Total Price" name="update_update_btn"></td>
+                     <td><input type="submit" value="Delete All" class="delete-btn" name="deleteAll"></td>
+                  </tr>
+                  <?php
+                  if (isset($_GET['deleteAll'])) {
+                     DB::table('Cart')
+                        ->where('TableName', $lastSegment)
+                        ->delete();
+                     echo '<script>window.location.href = "/Table/cart";</script>';
+                  }
+                  ?>
+
+               </form>
+            </tbody>
+
+         </table>
+
+      </section>
+
+   </div>
+   <div class="container">
+      <form action="" method="GET">
+         <input type="submit" value="Order it Now" class="btn btn-success" name="orderNowBtn" style="width: 250px; height: 50px; align-items: center">
+      </form>
+      <?php
+      if (isset($_GET['orderNowBtn'])) {
+         $cartItems = DB::table('cart')->get();
+
+         foreach ($cartItems as $item) {
+            DB::table('Order')->insert((array) $item);
+         }
          
-        //  $select_cart = mysqli_query($conn, "SELECT * FROM `cart`");
-        //  $grand_total = 0;
-        //  if(mysqli_num_rows($select_cart) > 0){
-        //     while($fetch_cart = mysqli_fetch_assoc($select_cart)){
-         ?>
-
-         <tr>
-            <td><img src="uploaded_img/<?php 
-            // echo $fetch_cart['image']; ?>" height="100" alt=""></td>
-            <td><?php 
-            // echo $fetch_cart['name']; 
-            ?></td>
-            <td>
-                <?php 
-                // echo number_format($fetch_cart['price']); 
-                ?>/-</td>
-            <td>
-               <form action="" method="post">
-                  <input type="hidden" name="update_quantity_id"  value="<?php 
-                //   echo $fetch_cart['id']; 
-                  ?>" >
-                  <input type="number" name="update_quantity" min="1"  value="<?php 
-                //   echo $fetch_cart['quantity']; 
-                  ?>" >
-                  <input type="submit" value="update" name="update_update_btn">
-               </form>   
-            </td>
-            <td>$<?php 
-            // echo $sub_total = number_format($fetch_cart['price'] * $fetch_cart['quantity']); 
-            ?>/-</td>
-            <td><a href="cart.php?remove=<?php 
-            // echo $fetch_cart['id']; 
-            ?>" onclick="return confirm('remove item from cart?')" class="delete-btn"> <i class="fas fa-trash"></i> remove</a></td>
-         </tr>
-         <?php
-        //    $grand_total += $sub_total;  
-        //     };
-        //  };
-         ?>
-         <tr class="table-bottom">
-            <td><a href="products.php" class="option-btn" style="margin-top: 0;">continue shopping</a></td>
-            <td colspan="3">grand total</td>
-            <td><?php 
-            // echo $grand_total; 
-            ?>/-</td>
-            <td><a href="cart.php?delete_all" onclick="return confirm('are you sure you want to delete all?');" class="delete-btn"> <i class="fas fa-trash"></i> delete all </a></td>
-         </tr>
-
-      </tbody>
-
-   </table>
-
-   <div class="checkout-btn">
-      <!-- <a href="checkout.php" class="btn">procced to checkout</a> -->
+         DB::table('Cart')
+            ->where('TableName', $lastSegment)
+            ->delete();
+      }
+      ?>
    </div>
 
-</section>
-
-</div>
-   
-<!-- custom js file link  -->
-<!-- <script src="js/script.js"></script> -->
-
 </body>
+
 </html>

@@ -47,6 +47,7 @@
     <?php
 
     use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Request;
 
     $dimsum = DB::table('Food')
         ->select('Name', 'Category', 'Price', 'Image')
@@ -115,27 +116,7 @@
                 <img id="item" class="item" src="{{$recs->Image}}" />
                 @endforeach
             </div>
-            <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="..." alt="First slide">
-                    </div>
 
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div> -->
         </div>
 
         <div class="menu-btns">
@@ -166,19 +147,42 @@
             <div class="restaurant_menu">
                 @foreach($dimsum as $dimsums)
                 <div class="menu_item">
-                    <img src="{{$dimsums->Image}}" alt="" />
-                    <div class="title">{{$dimsums->Name}}</div>
-                    <div class="location">{{$dimsums->Category}}</div>
-                    <div class="order_info">
-                        <div class="price">{{$dimsums->Price}}</div>
-                        <form action="" method="">
-                            <button type="submit" class="btn btn_menu">สั่งเลย</button>
-                        </form>
-                    </div>
+                    <form action="" method="GET">
+                        <input type="hidden" name="fname" id="fname" value="{{$dimsums->Name}}">
+                        <input type="hidden" name="fprice" id="fprice" value="{{$dimsums->Price}}">
+                        <input type="hidden" name="fimg" id="fimg" value="{{$dimsums->Image}}">
+                        
+                        <img src="{{$dimsums->Image}}"/>
+                        <div class="title">{{$dimsums->Name}}</div>
+                        <div class="location">{{$dimsums->Category}}</div>
+                        <div class="order_info">
+                            <div class="price">{{$dimsums->Price}}</div>
+                        </div>
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn">สั่งเลย</button>
+                    </form>
                 </div>
                 @endforeach
             </div>
         </div>
+
+        <?php
+        $currentPath = Request::path();
+
+        $lastSegment = basename($currentPath);
+
+        if(isset($_GET['orderBtn'])) {
+            $fname = $_GET['fname'];
+            $fprice = $_GET['fprice'];
+            $fimg = $_GET['fimg'];
+
+            DB::table('Cart')->insert([
+                'TableName' => $lastSegment,
+                'FoodImage' => $fimg,
+                'FoodName' => $fname,
+                'FoodPrice' => $fprice
+            ]);
+        }
+        ?>
 
         <!-- fried dimsum -->
         <div class="catagory_text" id="section2">

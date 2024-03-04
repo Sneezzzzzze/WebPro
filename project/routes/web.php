@@ -43,14 +43,3 @@ Route::get('/Table/{table}', function (string $table) {
 Route::get('/Table/cart', function() {
     return view('food_page.cart');
 });
-
-
-
-
-// Route::post('/management', [addMenuController::class, 'addMenu']);
-
-// Route::post('/management/add', [MenuController::class, 'addMenu'])->name('addMenu');
-// Route::get('/management/add', [MenuController::class, 'addMenu']);
-
-// Route::post('/management/deleteMenu', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
-// Route::get('/management', [MenuController::class, 'categoryMenu']);
