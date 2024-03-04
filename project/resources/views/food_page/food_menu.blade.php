@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_page.css'); }}">
     <title>menu</title>
@@ -45,9 +46,12 @@
 
 <body background="https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif" link="#0000BB">
     <?php
-
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Request;
+
+    $currentPath = Request::path();
+
+    $lastSegment = basename($currentPath);
 
     $dimsum = DB::table('Food')
         ->select('Name', 'Category', 'Price', 'Image')
@@ -91,14 +95,64 @@
                     </a>
                 </span>
             </div>
-            <a href="/Table/cart" role="button" aria-expanded="false" style="padding-left: 800px">
-                <span class="fa fa-shopping-cart" style="font-size:36px"></span><span class="caret"></span>
-            </a>
+
+            <div class="shop-cart">
+                <a data-bs-toggle="offcanvas" href="#shopping-cart" role="button" aria-controls="shopping-cart">
+                    <span class="fa fa-shopping-cart" style="font-size:36px"></span><span class="caret"></span>
+                </a>
+
+                <form action="" method="">
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="shopping-cart" aria-labelledby="offcanvasLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasLabel">รายการอาหารที่สั่ง</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0 all-align-center">
+                                    <div class="col-md-4">
+                                        <img src="https://upload.wikimedia.org/wikipedia/vi/9/90/Microsoft_Photos_Icon_on_Windows_10.png" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <div class="flex-card-header">
+                                                <h6 class="card-title">ชื่ออาหาร</h6>
+                                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                            </div>
+                                            <p>ราคา : 9999</p>
+                                            <div class="flex-button">
+                                                <input type="button" class="minus-btn" value="-">
+                                                <input type="text" class="form-control w-50 amount-field" name="amountOfFood" id="amount" min=1 value="1">
+                                                <input type="button" class="plus-btn" value="+">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offcanvas-bottom">
+                            <div class="total-price">
+                                <div id="total-label">
+                                    ทั้งหมด :
+                                </div>
+                                <div id="totalNumPrice">
+                                    9999.87฿
+                                </div>
+                            </div>
+                            <div class="check-out">
+                                <button type="submit" class="btn-danger rounded-0">ลบรายการอาหารทั้งหมด</button>
+                                <button type="submit" class="btn-success rounded-0">ยืนยันการสั่งอาหาร</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <!-- Hero Image -->
         <div class="hero-image">
             <div class="hero-text">
-                <h1>เมนูอาหาร</h1>
+                <h1>โต๊ะ {{$lastSegment}}</h1>
+                <h2>เมนูอาหาร</h2>
             </div>
         </div>
         <br>
@@ -151,8 +205,8 @@
                         <input type="hidden" name="fname" id="fname" value="{{$dimsums->Name}}">
                         <input type="hidden" name="fprice" id="fprice" value="{{$dimsums->Price}}">
                         <input type="hidden" name="fimg" id="fimg" value="{{$dimsums->Image}}">
-                        
-                        <img src="{{$dimsums->Image}}"/>
+
+                        <img src="{{$dimsums->Image}}" id="customerFoodImage" />
                         <div class="title">{{$dimsums->Name}}</div>
                         <div class="location">{{$dimsums->Category}}</div>
                         <div class="order_info">
@@ -166,11 +220,7 @@
         </div>
 
         <?php
-        $currentPath = Request::path();
-
-        $lastSegment = basename($currentPath);
-
-        if(isset($_GET['orderBtn'])) {
+        if (isset($_GET['orderBtn'])) {
             $fname = $_GET['fname'];
             $fprice = $_GET['fprice'];
             $fimg = $_GET['fimg'];
@@ -254,5 +304,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const minusBtn = document.querySelector('.minus-btn');
+            const plusBtn = document.querySelector('.plus-btn');
+            const amountField = document.querySelector('.amount-field');
+
+            minusBtn.addEventListener('click', () => {
+                const currentValue = parseInt(amountField.value);
+                if (currentValue > 1) {
+                    amountField.value = currentValue - 1;
+                }
+            });
+
+            plusBtn.addEventListener('click', () => {
+                const currentValue = parseInt(amountField.value);
+                amountField.value = currentValue + 1;
+            });
+        });
+    </script>
 </body>
+
 </html>
