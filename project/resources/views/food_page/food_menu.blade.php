@@ -171,7 +171,9 @@
                     <div class="location">{{$dimsums->Category}}</div>
                     <div class="order_info">
                         <div class="price">{{$dimsums->Price}}</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                        <form action="" method="">
+                            <button type="submit" class="btn btn_menu">สั่งเลย</button>
+                        </form>
                     </div>
                 </div>
                 @endforeach
@@ -193,7 +195,9 @@
                     <div class="location">{{$frieds->Category}}</div>
                     <div class="order_info">
                         <div class="price">{{$frieds->Price}}</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                        <form action="" method="">
+                            <button type="submit" class="btn btn_menu">สั่งเลย</button>
+                        </form>
                     </div>
                 </div>
                 @endforeach
@@ -214,7 +218,9 @@
                     <div class="location">{{$sweets->Category}}</div>
                     <div class="order_info">
                         <div class="price">{{$sweets->Price}}</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                        <form action="" method="">
+                            <button type="submit" class="btn btn_menu">สั่งเลย</button>
+                        </form>
                     </div>
                 </div>
                 @endforeach
@@ -235,7 +241,9 @@
                     <div class="location">{{$drinks->Category}}</div>
                     <div class="order_info">
                         <div class="price">{{$drinks->Price}}</div>
-                        <a href="#" class="btn btn_menu">สั่งเลย</a>
+                        <form action="" method="">
+                            <button type="submit" class="btn btn_menu">สั่งเลย</button>
+                        </form>
                     </div>
                 </div>
                 @endforeach
@@ -243,5 +251,4 @@
         </div>
     </div>
 </body>
-
 </html>
