@@ -43,3 +43,11 @@ Route::get('/Table/{table}', function (string $table) {
 Route::get('/Table/cart', function() {
     return view('food_page.cart');
 });
+
+// Route::get('/Table/checkout', function() {
+//     return view('food_page.status');
+// });
+
+Route::get('/chef', function() {
+    return view('chef.orderView');
+});
