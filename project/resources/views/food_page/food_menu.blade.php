@@ -76,10 +76,15 @@
         <div class="nav-bar">
             <div class="logo">
                 <span>
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                    <a href="">
+                        <svg width="100" height="35" viewBox="0 0 188 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="94" cy="42" rx="94" ry="25" fill="#C97026" />
+                            <rect y="42" width="188" height="78" fill="#C97026" />
+                            <ellipse cx="94" cy="67" rx="91" ry="60" fill="white" />
+                            <path d="M187.999 41C183.499 67.6667 6.99996 67.6667 -3.53854e-05 41V121C-2.91718e-05 151.5 187.999 154 187.999 121V41Z" fill="#870000" />
+                            <ellipse cx="94.5" cy="12" rx="5.5" ry="9" fill="white" />
+                            <ellipse cx="67.1142" cy="17.3147" rx="4.5" ry="28.3343" transform="rotate(61.9015 67.1142 17.3147)" fill="white" />
+                            <ellipse cx="121.114" cy="17.3154" rx="4.5" ry="28.3343" transform="rotate(-61.9 121.114 17.3154)" fill="white" />
                         </svg>
                     </a>
                 </span>
@@ -234,4 +239,5 @@
         </div>
     </div>
 </body>
+
 </html>
