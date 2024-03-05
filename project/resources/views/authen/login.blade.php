@@ -42,6 +42,12 @@
             margin-top: 20px;
         }
     </style>
+    <script>
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
 </head>
 
 <body>
