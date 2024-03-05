@@ -49,11 +49,12 @@
 
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Request;
-
+    
     $currentPath = Request::path();
     $lastSegment = basename($currentPath);
     $table = $lastSegment;
-
+    session_start();
+    $_SESSION['table'] = $table;
     $dimsum = DB::table('Food')
         ->select('Name', 'Category', 'Price', 'Image')
         ->where('Category', 'ติ่มซำ')

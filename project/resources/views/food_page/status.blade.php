@@ -44,7 +44,14 @@
 
             // Add click event listener to navigate back to "/Table/A1"
             button.addEventListener("click", function() {
-                window.location.href = "/Table/A1";
+                <?php
+                session_start();
+                if(isset($_SESSION['table'])) {
+                    $table = $_SESSION['table'];
+                }
+                ?>
+                window.location.href = "/Table/{{ $table }}";
+                session_destroy();
             });
 
             // Append the button to the body
