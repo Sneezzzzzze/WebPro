@@ -42,7 +42,7 @@
             // Set an id for the button for easy reference when removing
             button.id = "mainMenuButton";
 
-            // Add click event listener to navigate back to "/Table/A1"
+            // Add click event listener to navigate back to "/Table/{{ $table }}"
             button.addEventListener("click", function() {
                 <?php
                 session_start();
