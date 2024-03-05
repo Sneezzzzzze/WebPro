@@ -25,8 +25,6 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
 
-// Route::post('/management', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
-
 
 Route::get('/cashier', function () {
     return view('cashier/Tablepage');
@@ -40,14 +38,10 @@ Route::get('/Table/{table}', function (string $table) {
     return view('food_page.food_menu');
 })->where('table', 'A(10|[1-9])|B(10|[1-9])');
 
-Route::get('/Table/cart', function() {
-    return view('food_page.cart');
-});
+// Route::get('/Table/cart', function() {
+//     return view('food_page.cart');
+// })->where('_token', csrf_token());
 
-// Route::get('/Table/checkout', function() {
-//     return view('food_page.status');
-// });
-
-Route::get('/chef', function() {
-    return view('chef.orderView');
+Route::get('/Table/status', function () {
+    return view('food_page.status');
 });

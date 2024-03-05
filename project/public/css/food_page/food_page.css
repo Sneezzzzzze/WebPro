@@ -40,6 +40,82 @@
         height: 100%;
         scroll-behavior: smooth;
     }
+
+    .shop-cart {
+        display: flex;
+        justify-content: right;
+        margin-right: 150px;
+    }
+    
+    .all-align-center {
+        align-items: center;
+    }
+
+    .img-fluid {
+        border: none;
+    }
+    
+    .flex-card-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .flex-button {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .flex-button > .plus-btn,.minus-btn {
+        background-color: rgb(255, 191, 0);
+        border-radius: 50%;
+        border: none;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .total-price {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px;
+        font-size: 30px;
+        font-weight: 700;
+    }
+    
+    .check-out {
+        display: flex;
+    }
+    
+    .check-out > .btn-danger {
+        width: 50%;
+        height: 100px;
+        background-color: rgb(225, 15, 15);
+        border: none;
+        font-size: 20px;
+    }
+    
+    .check-out > .btn-success {
+        width: 50%;
+        height: 100px;
+        background-color: rgb(0, 183, 0);
+        border: none;
+        font-size: 20px;
+    }
+    
+    .check-out > .btn-success:hover {
+        background-color: rgb(0, 95, 0);
+    }
+
+    .check-out > .btn-danger:hover {
+        background-color: rgb(126, 2, 2);
+    }
+
+    .check-out > .btn-success:focus {
+        background-color: rgb(18, 255, 18);
+    }
+
+    .check-out > .btn-danger:focus {
+        background-color: rgb(255, 91, 91);
+    }
     /* End nav_bar&base */
     /* The hero image */
     .hero-image {
@@ -63,6 +139,11 @@
         left: 50%;
         transform: translate(-50%, -50%);
         color: white;
+
+    }
+
+    .hero-text > h1 {
+        font-size: 80px;
     }
     /* End The hero image */
     /* Recommendation Line */
@@ -94,6 +175,7 @@
         border: 10px solid #BFBFBF;
         border-radius: 5px;
     }
+
     button{
         border: none;
         cursor: pointer;

@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-family: "Bai Jamjuree", sans-serif;
+    font-weight: 200;
+    font-style: normal;
 }
 
 /* .tabla-page {
@@ -64,28 +72,31 @@ header {
     background-color: #ffffff;
 }
 
-.group .section1{
+.group .section1 {
     position: absolute;
     margin-left: 35px;
     margin-right: 10px;
     margin-top: 15px;
     margin-bottom: 100px;
 }
-.group .section2{
+
+.group .section2 {
     position: absolute;
     margin-left: 35px;
     margin-right: 10px;
     margin-top: 160px;
     margin-bottom: 100px;
 }
-.group .section3{
+
+.group .section3 {
     position: absolute;
     margin-left: 35px;
     margin-right: 10px;
     margin-top: 305px;
     margin-bottom: 100px;
 }
-.group .section4{
+
+.group .section4 {
     position: absolute;
     margin-left: 35px;
     margin-right: 10px;
@@ -94,9 +105,28 @@ header {
 }
 
 .section1 .btn-1,
-.section2 .btn-2,
-.section3 .btn-3,
-.section4 .btn-4{
+.section1 .btn-2,
+.section1 .btn-3,
+.section1 .btn-4,
+.section1 .btn-5,
+
+.section2 .btn-6,
+.section2 .btn-7,
+.section2 .btn-8,
+.section2 .btn-9,
+.section2 .btn-10,
+
+.section3 .btn-11,
+.section3 .btn-12,
+.section3 .btn-13,
+.section3 .btn-14,
+.section3 .btn-15,
+
+.section4 .btn-16,
+.section4 .btn-17,
+.section4 .btn-18,
+.section4 .btn-19,
+.section4 .btn-20 {
     border: none;
     display: inline-block;
     vertical-align: middle;
@@ -133,21 +163,24 @@ header {
 .box2-1 {
     position: absolute;
     width: 610px;
-    height: 320px;
+    /* height: 320px; */
     margin-left: 20px;
     background-color: #edeeed;
     border-radius: 10px;
 }
-.table-1{
+
+.table-1 {
     margin-top: 20px;
     margin-left: 20px;
     font-size: 18;
     width: 95%;
+    font-weight: bold;
 }
 
 td {
     padding-bottom: 15px;
 }
+
 .tdR {
     text-align: right;
 }
@@ -155,17 +188,18 @@ td {
 /* ปุ่มรายละเอียด */
 .section5 {
     margin-top: 20px;
-    margin-left: 25px;
+    margin-left: 80px;
+
 }
 
-.section5 .btnT1 , 
+.section5 .btnT1,
 .section5 .btnT3,
 .section5 .btnT4,
-.section5 .btnT5{
+.section5 .btnT5 {
     border: none;
     display: inline-block;
     width: 90px;
-    height: 80px;
+    height: 50px;
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
@@ -174,12 +208,14 @@ td {
     box-shadow: 5px 0px 4px #00000040;
     color: #ffffff;
     font-size: 16px;
+    margin: 10px;
 }
-.section5 .btnT2{
+
+.section5 .btnT2 {
     border: none;
     display: inline-block;
     width: 90px;
-    height: 80px;
+    height: 50px;
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
@@ -188,12 +224,14 @@ td {
     box-shadow: 5px 0px 4px #00000040;
     color: #ffffff;
     font-size: 16px;
+    margin: 10px;
 }
-.section5 .btnT6{
+
+.section5 .btnT6 {
     border: none;
     display: inline-block;
     width: 90px;
-    height: 80px;
+    height: 50px;
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
@@ -202,9 +240,10 @@ td {
     box-shadow: 5px 0px 4px #00000040;
     color: #ffffff;
     font-size: 16px;
+    margin: 10px;
 }
 
-.group2 .section6{
+.group2 .section6 {
     margin-top: 20px;
     position: absolute;
     width: 610px;
@@ -213,7 +252,38 @@ td {
     border-radius: 10px;
 }
 
-.table-2{
+.table-2 {
     font-size: 18;
     width: 100%;
+}
+
+.group2 .section7 {
+    margin-top: 20px;
+    position: absolute;
+    width: 610px;
+    height: auto;
+    background-color: #edeeed;
+    border-radius: 10px;
+}
+
+.table-3 {
+    margin-top: 15px;
+    font-size: 18;
+    width: 100%;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.price {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.green {
+    background-color: #00cc20;
+    color: white;
+}
+.active {
+    background-color: #00cc20 !important;
+    color: white !important;
 }
