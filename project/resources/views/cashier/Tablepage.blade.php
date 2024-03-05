@@ -6,6 +6,12 @@
     <link href="style.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('css/cashier/table.css'); }}">
     <title>Table</title>
+    <script>
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
 </head>
 
 <body>
@@ -13,9 +19,11 @@
 
         <div class="div">
             <header>
-                <h2 class="logo" href="">HOME</h2>
                 <nav class="navigation">
-                    <a href="#">LOGIN</a>
+                    <h2 ><a href="/cashier">หน้าหลัก</a></h2>
+                </nav>
+                <nav class="navigation">
+                    <a href="/login">ออกจากระบบ</a>
                 </nav>
             </header>
 
