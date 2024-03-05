@@ -279,3 +279,11 @@ td {
     padding-right: 15px;
 }
 
+.green {
+    background-color: #00cc20;
+    color: white;
+}
+.active {
+    background-color: #00cc20 !important;
+    color: white !important;
+}
