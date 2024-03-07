@@ -49,12 +49,20 @@
 
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Request;
-    
+
     $currentPath = Request::path();
     $lastSegment = basename($currentPath);
     $table = $lastSegment;
+    date_default_timezone_set('Asia/Bangkok');
     session_start();
+
     $_SESSION['table'] = $table;
+    $refreshed = time();
+    $_SESSION['refreshed'] = $refreshed;
+
+    if (isset($_GET['refreshed'])) {
+        $_SESSION['table'] = $table;
+    }
     $dimsum = DB::table('Food')
         ->select('Name', 'Category', 'Price', 'Image')
         ->where('Category', 'ติ่มซำ')
@@ -155,6 +163,7 @@
                             <div class="check-out">
                                 <button type="submit" class="btn-danger rounded-0" name="deleteAll">ลบรายการอาหารทั้งหมด</button>
                                 <button type="submit" class="btn-success rounded-0" name="confirmOrder">ยืนยันการสั่งอาหาร</button>
+                                <input type="hidden" name="refreshed" value="<?php echo $refreshed; ?>">
                             </div>
                             <?php
                             if (isset($_GET['removeInCart'])) {
@@ -186,9 +195,13 @@
                                     ->select('TableName', 'FoodImage', 'FoodName', 'FoodPrice')
                                     ->get();
                                 $status = 'กำลังทำ';
+
+
+                                $time = now()->format('H:i:s');
                                 foreach ($cartItems as $item) {
-                                    $item->status = $status;
                                     $item->quantity = $amount;
+                                    $item->time = $time;
+                                    $item->status = $status;
                                     DB::table('Order')->insert((array) $item);
                                 }
 
@@ -196,6 +209,20 @@
                                     'TableName' => $lastSegment,
                                     'TotalPrice' => $final
                                 ]);
+
+                                $count = DB::table('Cart')
+                                    ->where('TableName', $lastSegment)
+                                    ->count();
+                                
+                                $_SESSION['count'] = $count;
+                                
+                                
+
+                                if ($count === 0) {
+                                    echo "<script>window.location.href = '/Table/{$table}';</script>";
+                                } else {
+                                    echo "<script>window.location.href = '/Table/status';</script>";
+                                }
 
                                 DB::table('Cart')
                                     ->where('TableName', $lastSegment)

@@ -22,6 +22,8 @@ class LoginController extends Controller
                     return redirect('/management');
                 } else if ($user === 'cashier') {
                     return redirect('/cashier');
+                } else if ($user === 'chef') {
+                    return redirect('/chef');
                 } else {
                     return redirect('/login')->with('error', 'User not found');
                 }

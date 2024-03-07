@@ -7,9 +7,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('css/chef/styles.css'); }}">
+    <meta http-equiv="refresh" content="5">
 </head>
 
 <body>
+    <?php
+
+    use Illuminate\Support\Facades\DB;
+
+    $order = DB::table('Order')
+        ->where('status', 'กำลังทำ')
+        ->get();
+    session_start();
+    ?>
     <div class="nav-bar">
         <div class="logo">
             <span>
@@ -31,111 +41,57 @@
     <div class="center-point" style="margin: 30px;">
         <h1>รายการอาหารที่ลูกค้าสั่ง</h1>
     </div>
-
     <div class="center-card">
-        <div class="container" id="orderCount0">
-            <div class="orderNum center-point">
-                <!-- <h1 id="orderID0">0</h1> -->
-            </div>
+        @foreach($order as $orders)
+        <div class="container" id="{{$orders->Order_id}}">
+            <!-- <div class="orderNum center-point"></div> -->
             <div class="menu-list">
                 <div class="toDoList">
                     <span>
-                        <h2 id="table"></h2>
-                        <h3>เวลาที่สั่ง : 00:00:00 น.</h3>
+                        <h2 id="table">โต๊ะ {{$orders->TableName}}</h2>
+                        <h3>เวลาที่สั่ง : {{$orders->time}} น.</h3>
                     </span>
                     <div>
                         <h4>รายการอาหารที่สั่ง :</h4>
-                        <p id="foodName"></p>
+                        <p id="foodName">{{$orders->FoodName}}</p>
+                        <h4>จำนวน : {{$orders->quantity}}</h4>
                     </div>
-                </div>
-                <div class="done">
-                    <button class="btn btn-success btn-lg" onclick=deleteSelf(0)>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="136" height="462" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="container" id="orderCount1">
-            <div class="orderNum center-point">
-                <!-- <h1 id="orderID1">1</h1> -->
-            </div>
-            <div class="menu-list">
-                <div class="toDoList">
-                    <span>
-                        <h2 id="table"></h2>
-                        <h3>เวลาที่สั่ง : 00:00:00 น.</h3>
-                    </span>
                     <div>
-                        <h4>รายการอาหารที่สั่ง :</h4>
-                        <p id="foodName"></p>
+                        <img src="{{$orders->FoodImage}}" style="width: 300px; height: 200px">
                     </div>
                 </div>
                 <div class="done">
-                    <button class="btn btn-success btn-lg" onclick=deleteSelf(0)>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="136" height="462" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                        </svg>
-                    </button>
+                    <form action="" method="GET">
+                        <input type="hidden" name="collectId" value="{{$orders->Order_id}}">
+                        <button type="submit" class="btn btn-success btn-lg" onclick="deleteSelf('{{$orders->Order_id}}')" name="checkBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="136" height="462" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                            </svg>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <div class="container" id="orderCount2">
-            <div class="orderNum center-point">
-                <!-- <h1 id="orderID2">2</h1> -->
-            </div>
-            <div class="menu-list">
-                <div class="toDoList">
-                    <span>
-                        <h2 id="table"></h2>
-                        <h3>เวลาที่สั่ง : 00:00:00 น.</h3>
-                    </span>
-                    <div>
-                        <h4>รายการอาหารที่สั่ง :</h4>
-                        <p id="foodName"></p>
-                    </div>
-                </div>
-                <div class="done">
-                    <button class="btn btn-success btn-lg" onclick=deleteSelf(0)>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="136" height="462" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 
 
     <script>
-        let tableNum = 'A1'
-        let orderName = 'Black Egg'
-
-        let foodName = document.getElementById("foodName")
-        foodName.innerText = orderName
-        let table = document.getElementById("table")
-        table.innerText = "โต๊ะ: " + tableNum
-
-        function newOrder() {
-            //Provide order count and keep track on the amount of order
-            orderCount++;
-        }
-
-        function deleteSelf(check) {
-            let order0 = document.getElementById('orderCount0');
-            let order1 = document.getElementById('orderCount1');
-            let order2 = document.getElementById('orderCount2');
-            if (check === 0) {
-                order0.remove();
-                a
-            } else if (check === 1) {
-                order1.remove();
-            } else {
-                order2.remove();
+        function deleteSelf(id) {
+            <?php
+            if (isset($_GET['collectId'])) {
+                $check = $_GET['collectId'];
             }
+            if (isset($_GET['checkBtn'])) {
+                DB::table('Order')
+                    ->where('Order_id', $check)
+                    ->update([
+                        'status' => 'เสร็จแล้ว'
+                    ]);
+            }
+            ?>
+            window.location.href = '/chef';
+            
         }
     </script>
 </body>
