@@ -114,7 +114,7 @@
                     <div class="section5">
                         <button type="submit" class="btnT2">ยกเลิกโต๊ะ</button>
                         <button type="submit" class="btnT3">สถานะโต๊ะ</button>
-                        <button type="submit" class="btnT6">เช็คบิล</button>
+                        <button type="submit" class="btnT6" data-bs-toggle="modal" data-bs-target="#checkBill">เช็คบิล</button>
                     </div>
 
                     <div class="section6 overflow-scroll">
@@ -322,6 +322,47 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Check bill Modal -->
+    <div class="modal fade" id="checkBill" tabindex="-1" aria-labelledby="checkBill" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="checkBill">ใบเสร็จ</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" name="addMenuButton"></button>
+                </div>
+                <form action="/management" method="">
+                    <div class="modal-body">
+                        <div class="bill-container">
+                            <p style="text-align: right;">บาท</p>
+                            <div class="list-bill">
+                                <p>x2 hum</p>
+                                <p>200</p>
+                            </div>
+                            <div class="list-bill">
+                                <p>kuy</p>
+                                <p>1500</p>
+                            </div>
+                            <div class="list-bill">
+                                <p>x10 PorkSlice</p>
+                                <p>20000</p>
+                            </div>
+                            <hr class="hr">
+                            <div class="list-bill">
+                                <p>ราคาทั้งหมด</p>
+                                <p>139253</p>
+                            </div>
+                            <hr class="hr">
+                            <img src="https://ih1.redbubble.net/image.4074919657.8583/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u1.jpg" alt="QRcode">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

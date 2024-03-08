@@ -1,17 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 * {
+    font-family: "Bai Jamjuree", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-body {
-    font-family: "Bai Jamjuree", sans-serif;
-    font-weight: 200;
-    font-style: normal;
-}
-
 /* .tabla-page {
     background-color: #edeeed;
     display: flex;
@@ -304,4 +298,33 @@ td {
     top: 95%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+}
+
+.bill-container {
+    width: 80%;
+    height: auto;
+    padding: 20px;
+    border: 2px solid gainsboro;
+    box-shadow: 5px 7px grey;
+}
+
+.list-bill {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bill-container > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.btn-danger {
+    width: 100px;
 }
