@@ -8,41 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_page.css'); }}">
     <title>menu</title>
+    <script>
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
 </head>
-
-<!-- <script>
-    const menuBtns = document.querySelectorAll('.menu-btn');
-    const foodItems = document.querySelectorAll('.menu_container');
-
-    let activeBtn = "steam";
-
-    showFoodMenu(activeBtn);
-
-    menuBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            resetActiveBtn();
-            showFoodMenu(btn.id);
-            btn.classList.add('active-btn');
-        });
-    });
-
-    function resetActiveBtn(){
-        menuBtns.forEach((btn) => {
-            btn.classList.remove('active-btn');
-        });
-    }
-
-    function showFoodMenu(newMenuBtn){
-        activeBtn = newMenuBtn;
-        foodItems.forEach((item) => {
-            if(item.classList.contains(activeBtn)){
-                item.style.display = "grid";
-            } else {
-                item.style.display = "none";
-            }
-        });
-    }
-</script> -->
 
 <body background="https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif" link="#0000BB">
     <?php
@@ -141,7 +113,7 @@
                                             <p>ราคา : {{$carts->FoodPrice}}</p>
                                             <div class="flex-button">
                                                 <input type="button" class="minus-btn" value="-" data-cartid="{{$carts->Cart_id}}">
-                                                <input type="text" class="form-control w-50 amount-field" name="amountOfFood" id="amount_{{$carts->Cart_id}}" min=1 value="1" data-price="{{$carts->FoodPrice}}">
+                                                <input type="text" class="form-control w-50 amount-field" name="amountOfFood[{{$carts->Cart_id}}]" id="amount_{{$carts->Cart_id}}" min=1 value="1" data-price="{{$carts->FoodPrice}}">
                                                 <input type="button" class="plus-btn" value="+" data-cartid="{{$carts->Cart_id}}">
                                             </div>
                                         </div>
@@ -183,26 +155,37 @@
                             }
 
                             if (isset($_GET['confirmOrder'])) {
-                                if (isset($_GET['amountOfFood'])) {
-                                    $amount = $_GET['amountOfFood'];
-                                }
+                                // if (isset($_GET['amountOfFood'])) {
+                                //     $amount = $_GET['amountOfFood'];
+                                // }
 
                                 if (isset($_GET['PriceToPay'])) {
                                     $final = $_GET['PriceToPay'];
                                 }
 
                                 $cartItems = DB::table('cart')
-                                    ->select('TableName', 'FoodImage', 'FoodName', 'FoodPrice')
+                                    ->select('TableName', 'FoodImage', 'FoodName', 'FoodPrice', 'Cart_id')
                                     ->get();
-                                $status = 'กำลังทำ';
 
-
-                                $time = now()->format('H:i:s');
-                                foreach ($cartItems as $item) {
-                                    $item->quantity = $amount;
-                                    $item->time = $time;
-                                    $item->status = $status;
-                                    DB::table('Order')->insert((array) $item);
+                                if (isset($_GET['amountOfFood'])) {
+                                    $amountOfFood = $_GET['amountOfFood'];
+                                    foreach ($amountOfFood as $cartId => $quantity) {
+                                        // Retrieve other details of the item based on the $cartId
+                                        $item = DB::table('Cart')->where('Cart_id', $cartId)->first();
+                                        if ($item) {
+                                            // Insert the order with the correct quantity
+                                            $orderDetails = [
+                                                'TableName' => $lastSegment,
+                                                'FoodImage' => $item->FoodImage,
+                                                'FoodName' => $item->FoodName,
+                                                'FoodPrice' => $item->FoodPrice,
+                                                'quantity' => $quantity,
+                                                'time' => now()->format('H:i:s'),
+                                                'status' => 'กำลังทำ'
+                                            ];
+                                            DB::table('Order')->insert($orderDetails);
+                                        }
+                                    }
                                 }
 
                                 DB::table('TotalPrice')->insert([
@@ -213,21 +196,20 @@
                                 $count = DB::table('Cart')
                                     ->where('TableName', $lastSegment)
                                     ->count();
-                                
+
                                 $_SESSION['count'] = $count;
-                                
-                                
+
+
 
                                 if ($count === 0) {
                                     echo "<script>window.location.href = '/Table/{$table}';</script>";
                                 } else {
+                                    DB::table('Cart')
+                                        ->where('TableName', $lastSegment)
+                                        ->delete();
                                     echo "<script>window.location.href = '/Table/status';</script>";
                                 }
 
-                                DB::table('Cart')
-                                    ->where('TableName', $lastSegment)
-                                    ->delete();
-                                echo "<script>window.location.href = '/Table/status';</script>";
                             }
                             ?>
                         </div>
@@ -267,14 +249,6 @@
             <button type="button" class="menu-btn" id="drink" onclick="location.href='#section4'">เครื่องดื่ม</button>
         </div>
 
-        <!-- <div class="section" id="menu_type">
-            <div class="type_container">
-                <ul class="category">
-                    <li class="active">ติ่มซำนึ่ง</li>
-                    <li>ติ่มซำทอด</li>
-                    <li>ของหวาน</li>
-                    <li>เครื่องดื่ม</li>
-                </ul> -->
 
         <!-- Category Line -->
         <div class="catagory_text" id="section1">
@@ -298,7 +272,11 @@
                         <div class="order_info">
                             <div class="price">{{$dimsums->Price}}</div>
                         </div>
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn">สั่งเลย</button>
+                        @php
+                            $isInCart = $cart->contains('FoodName', $dimsums->Name); // Check if the item is in the cart
+                        @endphp
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
+                        </button>
                     </form>
                 </div>
                 @endforeach
@@ -326,7 +304,11 @@
                         <div class="order_info">
                             <div class="price">{{$frieds->Price}}</div>
                         </div>
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn">สั่งเลย</button>
+                        @php
+                            $isInCart = $cart->contains('FoodName', $frieds->Name); // Check if the item is in the cart
+                        @endphp
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
+                        </button>
                     </form>
                 </div>
                 @endforeach
@@ -353,8 +335,12 @@
                         <div class="location">{{$sweets->Category}}</div>
                         <div class="order_info">
                             <div class="price">{{$sweets->Price}}</div>
-                            <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn">สั่งเลย</button>
                         </div>
+                        @php
+                            $isInCart = $cart->contains('FoodName', $sweets->Name); // Check if the item is in the cart
+                        @endphp
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
+                        </button>
                     </form>
                 </div>
                 @endforeach
@@ -379,8 +365,12 @@
                         <div class="location">{{$drinks->Category}}</div>
                         <div class="order_info">
                             <div class="price">{{$drinks->Price}}</div>
-                            <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn">สั่งเลย</button>
                         </div>
+                        @php
+                            $isInCart = $cart->contains('FoodName', $drinks->Name); // Check if the item is in the cart
+                        @endphp
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
+                        </button>
                     </form>
                 </div>
                 @endforeach
