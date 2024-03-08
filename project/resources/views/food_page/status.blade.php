@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wait</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::asset('css/food_page/status_style.css'); }}">
     <meta http-equiv="refresh" content="10">
 </head>
@@ -18,7 +19,10 @@
     ?>
     <h1 id="text">พวกเราได้รับออเดอร์ของคุณแล้ว</h1>
     <h2 id="subtext">กรุณารอสักครู่</h2>
-    <img src="https://cdn.dribbble.com/users/2556713/screenshots/7569532/media/266e0452b1ce6ebebee6d3d8871d6ddd.gif" id="image1" width="750" />
+    <img src="https://media.giphy.com/media/kYqVAj5QNOXug/giphy.gif" id="image1" width="450" />
+    <br>
+    <br>
+    <br>
     <!-- <button id="mainMenuButton" onclick="test()">next</button> -->
     <?php
     if (isset($_SESSION['table'])) {
@@ -45,7 +49,7 @@
     ?>
     <script>
         function all() {
-            document.getElementById("image1").src = "";
+            document.getElementById("image1").src = "https://www.nicepng.com/png/full/32-324680_like-emoji-smiley-face-thumbs-up.png";
 
             // Change text content
             var maintext = document.getElementById("text");
