@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::asset('css/chef/styles.css'); }}">
     <meta http-equiv="refresh" content="5">
 </head>
@@ -52,12 +53,10 @@
                         <h3>เวลาที่สั่ง : {{$orders->time}} น.</h3>
                     </span>
                     <div>
-                        <h4>รายการอาหารที่สั่ง :</h4>
-                        <p id="foodName">{{$orders->FoodName}}</p>
-                        <h4>จำนวน : {{$orders->quantity}}</h4>
+                        <h4 id="foodName">รายการอาหารที่สั่ง : {{$orders->FoodName}} x {{$orders->quantity}}</h4>
                     </div>
                     <div>
-                        <img src="{{$orders->FoodImage}}" style="width: 300px; height: 200px">
+                        <img src="{{$orders->FoodImage}}">
                     </div>
                 </div>
                 <div class="done">
