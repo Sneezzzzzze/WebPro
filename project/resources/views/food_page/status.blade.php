@@ -9,7 +9,7 @@
     <meta http-equiv="refresh" content="10">
 </head>
 
-<body>
+<body background="https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif" link="#0000BB">
     <?php
 
     use Illuminate\Support\Facades\DB;
@@ -18,7 +18,7 @@
     ?>
     <h1 id="text">พวกเราได้รับออเดอร์ของคุณแล้ว</h1>
     <h2 id="subtext">กรุณารอสักครู่</h2>
-    <img src="https://cdn.dribbble.com/users/2556713/screenshots/7569532/media/266e0452b1ce6ebebee6d3d8871d6ddd.gif" alt="chef ian" id="image1" width="750" />
+    <img src="https://cdn.dribbble.com/users/2556713/screenshots/7569532/media/266e0452b1ce6ebebee6d3d8871d6ddd.gif" id="image1" width="750" />
     <!-- <button id="mainMenuButton" onclick="test()">next</button> -->
     <?php
     if (isset($_SESSION['table'])) {
@@ -45,7 +45,7 @@
     ?>
     <script>
         function all() {
-            document.getElementById("image1").src = "https://th.bing.com/th/id/OIP.e-79gsYn5gujmPhIoUq-TQHaFj?rs=1&pid=ImgDetMain";
+            document.getElementById("image1").src = "";
 
             // Change text content
             var maintext = document.getElementById("text");
