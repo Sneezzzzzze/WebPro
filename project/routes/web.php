@@ -46,3 +46,8 @@ Route::get('/Table/status', function () {
 Route::get('/chef', function () {
     return view('chef.orderView');
 });
+
+
+Route::get('/history', function () {
+    return view('food_page.history');
+});
