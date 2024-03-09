@@ -11,10 +11,17 @@
 </head>
 
 <body>
+    <?php
+
+    use Illuminate\Support\Facades\DB;
+
+    session_start();
+    $table = $_SESSION['table'];
+    ?>
     <div class="nav-bar">
         <div class="logo">
             <span>
-                <a href="#">
+                <a href="/history">
                     <svg width="100" height="35" viewBox="0 0 188 145" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <ellipse cx="94" cy="42" rx="94" ry="25" fill="#C97026" />
                         <rect y="42" width="188" height="78" fill="#C97026" />
@@ -30,50 +37,44 @@
     </div>
 
     <div class="header">
-        <button type="button" class="btn btn-warning">
+        <button type="button" class="btn btn-warning" id="back">
             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
                 <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
             </svg>
         </button>
         <h1>ประวัติการสั่งอาหาร</h1>
     </div>
-
+    <?php
+    $order = DB::table('Order')
+        ->where('status', 'เสร็จแล้ว')
+        ->orderBy('time', 'ASC')
+        ->get()
+        ->groupBy('time');
+    ?>
     <div class="history-container">
+        <?php $orderNumber = 1; ?>
+        @foreach($order as $time => $orderGroup)
         <div class="order-card">
-            <h2>ออเดอร์ #001</h2>
+            <h2>ออเดอร์ # {{$orderNumber}}</h2>
+            <?php $orderNumber++ ;?>
             <div class="flex-between">
                 <h6>ชื่ออาหาร</>
                     <h6>จำนวน</h6>
             </div>
+            @foreach($orderGroup as $orders)
             <div class="flex-between">
-                <p>x2 hum</p>
-                <p>200</p>
+                <p>{{$orders->FoodName}}</p>
+                <p>{{$orders->quantity}}</p>
             </div>
-            <div class="flex-between">
-                <p>kuy</p>
-                <p>1500</p>
-            </div>
-            <div class="flex-between">
-                <p>x10 PorkSlice</p>
-                <p>20000</p>
-            </div>
+            @endforeach
         </div>
-        <div>
-            2
-        </div>
-        <div>
-            3
-        </div>
-        <div>
-            4
-        </div>
-        <div>
-            5
-        </div>
-        <div>
-            6
-        </div>
+        @endforeach
     </div>
+    <script>
+        document.getElementById('back').onclick = function() {
+            window.location.href = '/Table/<?= $table ?>';
+        }
+    </script>
 </body>
 
 </html>
