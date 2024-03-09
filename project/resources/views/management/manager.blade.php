@@ -39,7 +39,7 @@
                 <a href="/dashboard">ตรวจสอบยอดขาย</a>
             </span>
             <span>
-                <a href="#">แผนผังร้านอาหาร</a>
+                <a href="/food-available-manager">ปิด-เปิด รายการอาหาร</a>
             </span>
             <span>
                 <a href="/management">ข้อมูลอาหาร</a>

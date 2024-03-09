@@ -53,6 +53,10 @@ Route::get('/history', function () {
     return view('food_page.history');
 });
 
-Route::get('/managefood', function () {
-    return view('food_page.manage_food');
+Route::get('/food-available-manager', function () {
+    return view('management/openAndCloseManage');
+});
+
+Route::get('/food-available-chef', function () {
+    return view('food_page/openAndCloseChef');
 });
