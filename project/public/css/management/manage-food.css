@@ -7,14 +7,15 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: white;
 }
 
 .nav-bar {
     display: grid;
-    grid-template-columns: auto auto; /* Adjusted grid-template-columns */
+    grid-template-columns: auto auto;
+    /* Adjusted grid-template-columns */
     background-color: #C97926;
-    width: 100%; /* Full width of the screen */
+    width: 100%;
+    /* Full width of the screen */
     padding: 10px;
 }
 
@@ -64,9 +65,7 @@ a:hover {
     justify-content: right;
 }
 
-.input-group {
-    
-}
+.input-group {}
 
 .grid-left {
     display: flex;
@@ -78,16 +77,16 @@ a:hover {
     margin-left: 10px;
 }
 
-.choose-category > form {
+.choose-category>form {
     display: flex;
 }
 
-.choose-category > form > select {
+.choose-category>form>select {
     border-radius: 5px 0 0 5px;
     width: 150px;
 }
 
-.choose-category > form > input {
+.choose-category>form>input {
     border-radius: 0 5px 5px 0;
     margin-left: -1px;
 }
@@ -118,15 +117,30 @@ a:hover {
 
 .food-table {
     margin-left: 70px;
+    margin-bottom: 100px;
     max-width: 90%;
     overflow-x: auto;
+    border-radius: 20px;
 }
 
-td, tr {
-    margin: auto;
+table tr td,
+table tr th {
+    background-color: #f0c9a0 !important;
+    border-bottom: 1px solid white;
+    margin: 200px;
     width: 7vh;
     text-align: left;
     vertical-align: middle;
+}
+
+.food-table table tr th {
+    padding: 20px;
+    /* ปรับระยะห่างของเนื้อหาภายในเซลล์ */
+}
+
+.food-table table tr td {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 select option[value="ทั้งหมด"] {

@@ -7,14 +7,15 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: white;
 }
 
 .nav-bar {
     display: grid;
-    grid-template-columns: auto auto; /* Adjusted grid-template-columns */
+    grid-template-columns: auto auto;
+    /* Adjusted grid-template-columns */
     background-color: #C97926;
-    width: 100%; /* Full width of the screen */
+    width: 100%;
+    /* Full width of the screen */
     padding: 10px;
 }
 
@@ -59,4 +60,28 @@ a:hover {
 
 .year-table {
     grid-column: 1 / span 2;
+}
+
+table tr td,
+table tr th {
+    background-color: #f0c9a0 !important;
+    border-bottom: 1px solid white;
+    margin: 200px;
+    width: 7vh;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.day-table table tr th,
+.month-table table tr th,
+.year-table table tr th {
+    padding: 20px;
+    /* ปรับระยะห่างของเนื้อหาภายในเซลล์ */
+}
+
+.day-table table tr td,
+.month-table table tr td,
+.year-table table tr td {
+    padding-left: 20px;
+    padding-right: 20px;
 }

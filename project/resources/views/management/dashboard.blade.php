@@ -29,9 +29,6 @@
                 <a href="/dashboard">ตรวจสอบยอดขาย</a>
             </span>
             <span>
-                <a href="#">แผนผังร้านอาหาร</a>
-            </span>
-            <span>
                 <a href="/management">ข้อมูลอาหาร</a>
             </span>
             <span>
