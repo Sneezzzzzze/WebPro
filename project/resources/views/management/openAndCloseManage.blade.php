@@ -18,13 +18,17 @@
 
     use Illuminate\Support\Facades\DB;
 
-    $categ = DB::table('Category')
-        ->select('categoryNameTH')
-        ->get();
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (isset($_GET['food_id']) && isset($_GET['available'])) {
+            $foodId = $_GET['food_id'];
+            $available = $_GET['available'];
 
-    $foods = DB::table('Food')
-        ->select('rowid', 'Name', 'Category', 'Price', 'Image')
-        ->get();
+            // Update the database
+            DB::table('Food')->where('rowid', $foodId)->update(['available' => $available]);
+        }
+    }
+
+    $foods = DB::table('Food')->get();
     ?>
     <div class="nav-bar">
         <div class="logo">
@@ -75,35 +79,58 @@
                 <th>ราคา (บาท)</th>
                 <th>ปิด/เปิด</th>
             </tr>
-            @foreach($foods as $food)
-            <tr>
-                <td><img src="{{$food->Image}}" alt="food" width="50" height="50"></td>
-                <td>{{$food->Name}}</td>
-                <td>{{$food->Category}}</td>
-                <td>{{$food->Price}}</td>
-                <td>
-                    <div class="form-check form-switch d-flex justify-content-between align-items-center">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                    </div>
-                </td>
-            </tr>
-            <!-- ใส่ข้อมูลลงไปใน modal ตอน click ปุ่ม modify-->
-            <!-- <script>
-                function insertDataInModify(rowid, name, category, price, image) {
-                    document.getElementById('mrowid').value = rowid;
-                    document.getElementById('mFoodname').value = name;
-                    document.getElementById('mPrice').value = price;
-                    document.querySelector('#mCategory option[value="' + category + '"]').selected = true;
-                    document.getElementById('mPhotolink').value = image;
-                }
-
-                function insertDataInDelete(name) {
-                    document.getElementById('fname').value = name;
-                }
-            </script> -->
-            @endforeach
+            <?php foreach ($foods as $food) : ?>
+                <tr>
+                    <td><img src="<?= $food->Image ?>" alt="food" width="50" height="50"></td>
+                    <td><?= $food->Name ?></td>
+                    <td><?= $food->Category ?></td>
+                    <td><?= $food->Price ?></td>
+                    <td>
+                        <div class="form-check form-switch d-flex justify-content-between align-items-center">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheck<?= $food->rowid ?>" <?= $food->available == 'เปิด' ? 'checked' : '' ?>>
+                            <form action="" method="GET" style="display: none;">
+                                @csrf
+                                <input type="hidden" name="food_id" value="<?= $food->rowid ?>">
+                                <input type="hidden" name="available" value="<?= $food->available == 'เปิด' ? 'ปิด' : 'เปิด' ?>">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </table>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the vertical scroll position when the page loads
+            var initialScrollPosition = sessionStorage.getItem('scrollPosition');
+
+            // If there is a stored scroll position, scroll to it
+            if (initialScrollPosition) {
+                window.scrollTo(0, initialScrollPosition);
+            }
+
+            var switches = document.querySelectorAll('.form-check-input');
+
+            switches.forEach(function(switchElem) {
+                switchElem.addEventListener('change', function(event) {
+                    var isChecked = event.target.checked;
+                    var form = event.target.parentElement.querySelector('form');
+
+                    if (isChecked) {
+                        form.submit();
+                    } else {
+                        form.submit();
+                    }
+                });
+            });
+
+            // Save the vertical scroll position in sessionStorage before refreshing the page
+            window.addEventListener('beforeunload', function() {
+                sessionStorage.setItem('scrollPosition', window.scrollY);
+            });
+        });
+    </script>
 </body>
 
 </html>

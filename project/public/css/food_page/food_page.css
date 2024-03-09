@@ -340,3 +340,22 @@
     .active-btn{
         color: #C97926;
     }
+
+    .blurred-image {
+        filter: blur(5px); /* Adjust the blur level as needed */
+    }
+    .blur-container {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .middle-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+    }

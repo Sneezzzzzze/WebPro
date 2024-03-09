@@ -3,14 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ยอดขาย</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ URL::asset('css/management/dashboard.css'); }}">
-    <link rel="icon" href="{{ URL::asset('image/DimsumLogo.png')}}" type="image/x-icon">
-
+    <title>Total Sales by Table (Monthly and Yearly)</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ URL::asset('css/management/dashboard.css') }}">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- CanvasJS -->
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 
 <body>
@@ -44,7 +48,7 @@
                     </svg>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Logout</a></a></li>
+                    <li><a class="dropdown-item" href="/login">Logout</a></a></li>
                 </ul>
             </span>
         </div>
@@ -54,56 +58,98 @@
         <h1>ยอดขายโดยภาพรวม</h1>
     </div>
 
-    <div class="sale-table">
-        <div class="day-table">
-            <table class="table table-hover">
-                <tr>
-                    <th>ว / ด / ป</th>
-                    <th>ยอดขาย</th>
-                </tr>
-                <tr>
-                    <td><!-- d / m / y--></td>
-                    <td><!-- ยอดขายของวันนั้น--></td>
-                </tr>
-                <tr>
-                    <td>รวม</td>
-                    <td><!-- --></td>
-                </tr>
-            </table>
-        </div>
-        <div class="month-table">
-            <table class="table table-hover">
-                <tr>
-                    <th>เดือน</th>
-                    <th>ยอดขาย</th>
-                </tr>
-                <tr>
-                    <td><!--ชื่อเดือน --></td>
-                    <td><!-- ยอดขายของเดิอนนั้น --></td>
-                </tr>
-                <tr>
-                    <td>รวม</td>
-                    <td><!-- --></td>
-                </tr>
-            </table>
-        </div>
-        <div class="year-table">
-            <table class="table table-hover">
-                <tr>
-                    <th>ปี</th>
-                    <th>ยอดขาย</th>
-                </tr>
-                <tr>
-                    <td><!-- ex. 2024--></td>
-                    <td><!-- ยอดขายของปีนั้นนั้น--></td>
-                </tr>
-                <tr>
-                    <td>รวม</td>
-                    <td><!-- --></td>
-                </tr>
-            </table>
+
+    <!-- Chart Container -->
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
     </div>
+
+    <!-- PHP Data -->
+    <?php
+
+    use Illuminate\Support\Facades\DB;
+    // Fetch data from the database
+    $data = DB::table('TotalPrice')
+        ->select(
+            DB::raw('TableName || " " || strftime("%Y", date) AS label'), // Concatenate table name and year
+            DB::raw('strftime("%m", date) AS month'), // Extract month
+            DB::raw('strftime("%Y", date) AS year'), // Extract year
+            DB::raw('SUM(TotalPrice) AS y')
+        )
+        ->groupBy('TableName', 'year', 'month')
+        ->orderBy('year', 'asc')
+        ->orderBy('month', 'asc')
+        ->get();
+    $dataPoints = $data->toArray();
+    ?>
+
+    <!-- JavaScript for Chart -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Data from controller
+            var dataPoints = <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>;
+            console.log(dataPoints); // Debugging - Check if data is fetched correctly
+
+            // Group data by table name
+            var groupedData = {};
+            dataPoints.forEach(function(point) {
+                var label = point.label;
+                if (!groupedData[label]) {
+                    groupedData[label] = {
+                        label: label,
+                        data: []
+                    };
+                }
+                groupedData[label].data.push({
+                    x: point.year + '-' + point.month, // Combine year and month
+                    y: point.y
+                });
+            });
+
+            // Prepare datasets for the chart
+            var datasets = [];
+            for (var label in groupedData) {
+                datasets.push({
+                    label: label,
+                    data: groupedData[label].data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Background color for bars
+                    borderColor: 'rgba(54, 162, 235, 1)', // Border color for bars
+                    borderWidth: 1
+                });
+            }
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar', // Choose the chart type (bar, line, pie, etc.)
+                data: {
+                    datasets: datasets
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                unit: 'month'
+                            },
+                            distribution: 'series',
+                            ticks: {
+                                source: 'data'
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -54,9 +54,9 @@ Route::get('/history', function () {
 });
 
 Route::get('/food-available-manager', function () {
-    return view('management/openAndCloseManage');
+    return view('management.openAndCloseManage');
 });
 
-Route::get('/food-available-chef', function () {
-    return view('food_page/openAndCloseChef');
+Route::any('/food-available-chef', function () {
+    return view('chef.openAndCloseChef');
 });
