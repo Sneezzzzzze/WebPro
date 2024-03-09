@@ -20,8 +20,8 @@ class LoginController extends Controller
             if ($pass === $dbUser->password) {
                 if ($user === 'manager') {
                     return redirect('/management');
-                } else if ($user === 'cashier') {
-                    return redirect('/cashier');
+                } else if ($user === 'staff') {
+                    return redirect('/staff');
                 } else if ($user === 'chef') {
                     return redirect('/chef');
                 } else {
