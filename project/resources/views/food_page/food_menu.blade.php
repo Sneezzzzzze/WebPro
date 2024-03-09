@@ -7,6 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_page.css'); }}">
+    <link rel="icon" href="{{ URL::asset('image/DimsumLogo.png')}}" type="image/x-icon">
+
     <title>menu</title>
     <script>
         window.history.pushState(null, "", window.location.href);
@@ -36,21 +38,21 @@
         $_SESSION['table'] = $table;
     }
     $dimsum = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image')
+        ->select('Name', 'Category', 'Price', 'Image', 'available')
         ->where('Category', 'ติ่มซำ')
         ->get();
     $fried = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image')
+        ->select('Name', 'Category', 'Price', 'Image', 'available')
         ->where('Category', 'ของทอด')
         ->get();
 
     $sweet = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image')
+        ->select('Name', 'Category', 'Price', 'Image', 'available')
         ->where('Category', 'ของหวาน')
         ->get();
 
     $drink = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image')
+        ->select('Name', 'Category', 'Price', 'Image', 'available')
         ->where('Category', 'เครื่องดื่ม')
         ->get();
 
@@ -87,7 +89,7 @@
                 <span>
                     <a href="/history">ประวัติการสั่งอาหาร</a>
                 </span>
-                
+
                 <a data-bs-toggle="offcanvas" href="#shopping-cart" role="button" aria-controls="shopping-cart">
                     <span class="fa fa-shopping-cart" style="font-size:36px"></span><span class="caret"></span>
                 </a>
@@ -194,7 +196,8 @@
 
                                 DB::table('TotalPrice')->insert([
                                     'TableName' => $lastSegment,
-                                    'TotalPrice' => $final
+                                    'TotalPrice' => $final,
+                                    'date' => now()->format('Y-m-d')
                                 ]);
 
                                 $count = DB::table('Cart')
@@ -269,16 +272,32 @@
                         <input type="hidden" name="fname" id="fname" value="{{$dimsums->Name}}">
                         <input type="hidden" name="fprice" id="fprice" value="{{$dimsums->Price}}">
                         <input type="hidden" name="fimg" id="fimg" value="{{$dimsums->Image}}">
-                        <img src="{{$dimsums->Image}}" id="customerFoodImage" />
+
+                        <?php if ($dimsums->available == 'ปิด') : ?>
+                            <div class="blur-container">
+                                <img src="{{$dimsums->Image}}" class="blurred-image" />
+                                <div class="middle-text">สินค้าหมด</div>
+                            </div>
+                            <?php
+                            $isInCart = false;
+                            ?>
+                        <?php else : ?>
+                            <img src="{{$dimsums->Image}}" />
+                            <?php
+                            $isInCart = $cart->contains('FoodName', $dimsums->Name);
+                            ?>
+                        <?php endif; ?>
+
+                        <!-- Title, location, and price -->
                         <div class="title">{{$dimsums->Name}}</div>
                         <div class="location">{{$dimsums->Category}}</div>
                         <div class="order_info">
                             <div class="price">{{$dimsums->Price}}</div>
                         </div>
-                        @php
-                        $isInCart = $cart->contains('FoodName', $dimsums->Name); // Check if the item is in the cart
-                        @endphp
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
+
+                        <!-- Order button -->
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $dimsums->available == 'ปิด' ? 'disabled' : '' }}>
+                            {{ $dimsums->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
                         </button>
                     </form>
                 </div>
@@ -301,16 +320,32 @@
                         <input type="hidden" name="fname" id="fname" value="{{$frieds->Name}}">
                         <input type="hidden" name="fprice" id="fprice" value="{{$frieds->Price}}">
                         <input type="hidden" name="fimg" id="fimg" value="{{$frieds->Image}}">
-                        <img src="{{$frieds->Image}}" id="customerFoodImage" />
+                        
+                        <?php if ($frieds->available == 'ปิด') : ?>
+                            <div class="blur-container">
+                                <img src="{{$frieds->Image}}" class="blurred-image" />
+                                <div class="middle-text">สินค้าหมด</div>
+                            </div>
+                            <?php
+                            $isInCart = false;
+                            ?>
+                        <?php else : ?>
+                            <img src="{{$frieds->Image}}" />
+                            <?php
+                            $isInCart = $cart->contains('FoodName', $frieds->Name);
+                            ?>
+                        <?php endif; ?>
+
+                        <!-- Title, location, and price -->
                         <div class="title">{{$frieds->Name}}</div>
                         <div class="location">{{$frieds->Category}}</div>
                         <div class="order_info">
                             <div class="price">{{$frieds->Price}}</div>
                         </div>
-                        @php
-                        $isInCart = $cart->contains('FoodName', $frieds->Name); // Check if the item is in the cart
-                        @endphp
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
+
+                        <!-- Order button -->
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $frieds->available == 'ปิด' ? 'disabled' : '' }}>
+                            {{ $frieds->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
                         </button>
                     </form>
                 </div>
@@ -333,16 +368,32 @@
                         <input type="hidden" name="fname" id="fname" value="{{$sweets->Name}}">
                         <input type="hidden" name="fprice" id="fprice" value="{{$sweets->Price}}">
                         <input type="hidden" name="fimg" id="fimg" value="{{$sweets->Image}}">
-                        <img src="{{$sweets->Image}}" alt="" />
+
+                        <?php if ($sweets->available == 'ปิด') : ?>
+                            <div class="blur-container">
+                                <img src="{{$sweets->Image}}" class="blurred-image" />
+                                <div class="middle-text">สินค้าหมด</div>
+                            </div>
+                            <?php
+                            $isInCart = false;
+                            ?>
+                        <?php else : ?>
+                            <img src="{{$sweets->Image}}" />
+                            <?php
+                            $isInCart = $cart->contains('FoodName', $sweets->Name);
+                            ?>
+                        <?php endif; ?>
+
+                        <!-- Title, location, and price -->
                         <div class="title">{{$sweets->Name}}</div>
                         <div class="location">{{$sweets->Category}}</div>
                         <div class="order_info">
                             <div class="price">{{$sweets->Price}}</div>
                         </div>
-                        @php
-                        $isInCart = $cart->contains('FoodName', $sweets->Name); // Check if the item is in the cart
-                        @endphp
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
+
+                        <!-- Order button -->
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $sweets->available == 'ปิด' ? 'disabled' : '' }}>
+                            {{ $sweets->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
                         </button>
                     </form>
                 </div>
@@ -363,16 +414,32 @@
                         <input type="hidden" name="fname" id="fname" value="{{$drinks->Name}}">
                         <input type="hidden" name="fprice" id="fprice" value="{{$drinks->Price}}">
                         <input type="hidden" name="fimg" id="fimg" value="{{$drinks->Image}}">
-                        <img src="{{$drinks->Image}}" alt="" />
+
+                        <?php if ($drinks->available == 'ปิด') : ?>
+                            <div class="blur-container">
+                                <img src="{{$drinks->Image}}" class="blurred-image" />
+                                <div class="middle-text">สินค้าหมด</div>
+                            </div>
+                            <?php
+                            $isInCart = false;
+                            ?>
+                        <?php else : ?>
+                            <img src="{{$drinks->Image}}" />
+                            <?php
+                            $isInCart = $cart->contains('FoodName', $drinks->Name);
+                            ?>
+                        <?php endif; ?>
+
+                        <!-- Title, location, and price -->
                         <div class="title">{{$drinks->Name}}</div>
                         <div class="location">{{$drinks->Category}}</div>
                         <div class="order_info">
                             <div class="price">{{$drinks->Price}}</div>
                         </div>
-                        @php
-                        $isInCart = $cart->contains('FoodName', $drinks->Name); // Check if the item is in the cart
-                        @endphp
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
+
+                        <!-- Order button -->
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $drinks->available == 'ปิด' ? 'disabled' : '' }}>
+                            {{ $drinks->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
                         </button>
                     </form>
                 </div>
@@ -443,12 +510,11 @@
             }
             updateTotalPrice();
         });
-        // function removeCard() {
-        //     const card = document.querySelector('.offcanvas-body .card');
-        //     if(card) {
-        //         card.remove();
-        //     }
-        // }
+
+        function blur() {
+
+
+        }
     </script>
 </body>
 

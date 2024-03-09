@@ -26,6 +26,7 @@ Route::get('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
 
 
+
 Route::any('/staff', function () {
     return view('staff/Tablepage');
 });
@@ -50,4 +51,12 @@ Route::get('/chef', function () {
 
 Route::get('/history', function () {
     return view('food_page.history');
+});
+
+Route::get('/food-available-manager', function () {
+    return view('management.openAndCloseManage');
+});
+
+Route::any('/food-available-chef', function () {
+    return view('chef.openAndCloseChef');
 });
