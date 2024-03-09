@@ -7,9 +7,30 @@ body {
     display: grid;
     text-align: center;
     align-content: center;
+    padding: 50px;
 }
 
 img {
     margin-left: auto;
     margin-right: auto;
+}
+
+.mainmenu_btn {
+    width: 150px; /* Fixed the missing 'px' in width property */
+    padding: 6px 10px;
+    font-size: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #C97926;
+    color: #C97926;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s; /* Add smooth transition */
+}
+
+.mainmenu_btn:hover {
+    background: none;
+    border: none;
+    color: black;
 }

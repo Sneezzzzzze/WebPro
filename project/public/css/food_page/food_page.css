@@ -117,6 +117,7 @@
         background-color: rgb(255, 91, 91);
     }
     /* End nav_bar&base */
+
     /* The hero image */
     .hero-image {
         /* Use "linear-gradient" to add a darken background effect to the image. This will make the text easier to read */
@@ -146,6 +147,7 @@
         font-size: 80px;
     }
     /* End The hero image */
+
     /* Recommendation Line */
     .recom_text {
         text-align: center;
@@ -170,6 +172,7 @@
         width: 600px;
     }
     /* End Recommendation Line */
+
     /* Recommendation img */
     img {
         border: 10px solid #BFBFBF;
@@ -229,6 +232,7 @@
         margin-right: 20px;
     }
     /* End Recommendation img */
+
     /* food&order */
     .section {
         width: 100%;
