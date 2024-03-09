@@ -26,8 +26,8 @@ Route::get('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
 
 
-Route::get('/cashier', function () {
-    return view('cashier/Tablepage');
+Route::any('/staff', function () {
+    return view('staff/Tablepage');
 });
 
 Route::get('/dashboard', function () {
@@ -38,9 +38,6 @@ Route::get('/Table/{table}', function (string $table) {
     return view('food_page.food_menu');
 })->where('table', 'A(10|[1-9])|B(10|[1-9])');
 
-// Route::get('/Table/cart', function() {
-//     return view('food_page.cart');
-// })->where('_token', csrf_token());
 
 Route::get('/Table/status', function () {
     return view('food_page.status');
@@ -48,4 +45,9 @@ Route::get('/Table/status', function () {
 
 Route::get('/chef', function () {
     return view('chef.orderView');
+});
+
+
+Route::get('/history', function () {
+    return view('food_page.history');
 });

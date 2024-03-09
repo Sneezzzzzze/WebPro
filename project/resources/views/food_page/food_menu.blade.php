@@ -84,6 +84,10 @@
             </div>
 
             <div class="shop-cart">
+                <span>
+                    <a href="/history">ประวัติการสั่งอาหาร</a>
+                </span>
+                
                 <a data-bs-toggle="offcanvas" href="#shopping-cart" role="button" aria-controls="shopping-cart">
                     <span class="fa fa-shopping-cart" style="font-size:36px"></span><span class="caret"></span>
                 </a>
@@ -209,7 +213,6 @@
                                         ->delete();
                                     echo "<script>window.location.href = '/Table/status';</script>";
                                 }
-
                             }
                             ?>
                         </div>
@@ -273,7 +276,7 @@
                             <div class="price">{{$dimsums->Price}}</div>
                         </div>
                         @php
-                            $isInCart = $cart->contains('FoodName', $dimsums->Name); // Check if the item is in the cart
+                        $isInCart = $cart->contains('FoodName', $dimsums->Name); // Check if the item is in the cart
                         @endphp
                         <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
                         </button>
@@ -305,7 +308,7 @@
                             <div class="price">{{$frieds->Price}}</div>
                         </div>
                         @php
-                            $isInCart = $cart->contains('FoodName', $frieds->Name); // Check if the item is in the cart
+                        $isInCart = $cart->contains('FoodName', $frieds->Name); // Check if the item is in the cart
                         @endphp
                         <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
                         </button>
@@ -337,7 +340,7 @@
                             <div class="price">{{$sweets->Price}}</div>
                         </div>
                         @php
-                            $isInCart = $cart->contains('FoodName', $sweets->Name); // Check if the item is in the cart
+                        $isInCart = $cart->contains('FoodName', $sweets->Name); // Check if the item is in the cart
                         @endphp
                         <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
                         </button>
@@ -367,7 +370,7 @@
                             <div class="price">{{$drinks->Price}}</div>
                         </div>
                         @php
-                            $isInCart = $cart->contains('FoodName', $drinks->Name); // Check if the item is in the cart
+                        $isInCart = $cart->contains('FoodName', $drinks->Name); // Check if the item is in the cart
                         @endphp
                         <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart ? 'disabled' : '' }}>{{ $isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย' }}
                         </button>
