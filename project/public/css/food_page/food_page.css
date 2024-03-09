@@ -44,7 +44,12 @@
     .shop-cart {
         display: flex;
         justify-content: right;
-        margin-right: 150px;
+        margin-right: 100px;
+    }
+
+    .shop-cart > span {
+        margin-right: 50px;
+        font-weight: 400;
     }
     
     .all-align-center {

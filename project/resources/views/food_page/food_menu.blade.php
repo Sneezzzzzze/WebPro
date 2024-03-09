@@ -103,108 +103,114 @@
             </div>
 
             <div class="shop-cart">
-                <a data-bs-toggle="offcanvas" href="#shopping-cart" role="button" aria-controls="shopping-cart">
-                    <span class="fa fa-shopping-cart" style="font-size:36px"></span><span class="caret"></span>
-                </a>
+                <span>
+                    <a href="/history">ประวัติการสั่งอาหาร</a>
+                </span>
 
-                <form action="" method="">
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="shopping-cart" aria-labelledby="offcanvasLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasLabel">รายการอาหารที่สั่ง</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            @foreach($cart as $carts)
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0 all-align-center">
-                                    <div class="col-md-4">
-                                        <img src="{{$carts->FoodImage}}" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <div class="flex-card-header">
-                                                <h6 class="card-title">{{$carts->FoodName}}</h6>
-                                                <form action="" method="GET">
-                                                    <input type="hidden" name="cartid" value="{{$carts->Cart_id}}">
-                                                    <button type="submit" class="btn-close btn-close-card" aria-label="Close" name="removeInCart"></button>
-                                                </form>
-                                            </div>
-                                            <p>ราคา : {{$carts->FoodPrice}}</p>
-                                            <div class="flex-button">
-                                                <input type="button" class="minus-btn" value="-" data-cartid="{{$carts->Cart_id}}">
-                                                <input type="text" class="form-control w-50 amount-field" name="amountOfFood" id="amount_{{$carts->Cart_id}}" min=1 value="1" data-price="{{$carts->FoodPrice}}">
-                                                <input type="button" class="plus-btn" value="+" data-cartid="{{$carts->Cart_id}}">
+                <span>
+                    <a data-bs-toggle="offcanvas" href="#shopping-cart" role="button" aria-controls="shopping-cart">
+                        <span class="fa fa-shopping-cart" style="font-size:36px"></span><span class="caret"></span>
+                    </a>
+
+                    <form action="" method="">
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="shopping-cart" aria-labelledby="offcanvasLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasLabel">รายการอาหารที่สั่ง</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                @foreach($cart as $carts)
+                                <div class="card mb-3" style="max-width: 540px;">
+                                    <div class="row g-0 all-align-center">
+                                        <div class="col-md-4">
+                                            <img src="{{$carts->FoodImage}}" class="img-fluid rounded-start" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <div class="flex-card-header">
+                                                    <h6 class="card-title">{{$carts->FoodName}}</h6>
+                                                    <form action="" method="GET">
+                                                        <input type="hidden" name="cartid" value="{{$carts->Cart_id}}">
+                                                        <button type="submit" class="btn-close btn-close-card" aria-label="Close" name="removeInCart"></button>
+                                                    </form>
+                                                </div>
+                                                <p>ราคา : {{$carts->FoodPrice}}</p>
+                                                <div class="flex-button">
+                                                    <input type="button" class="minus-btn" value="-" data-cartid="{{$carts->Cart_id}}">
+                                                    <input type="text" class="form-control w-50 amount-field" name="amountOfFood" id="amount_{{$carts->Cart_id}}" min=1 value="1" data-price="{{$carts->FoodPrice}}">
+                                                    <input type="button" class="plus-btn" value="+" data-cartid="{{$carts->Cart_id}}">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                            @endforeach
-                        </div>
 
-                        <div class="offcanvas-bottom">
-                            <div class="total-price">
-                                <div id="total-label">
-                                    ทั้งหมด :
+                            <div class="offcanvas-bottom">
+                                <div class="total-price">
+                                    <div id="total-label">
+                                        ทั้งหมด :
+                                    </div>
+                                    <input type="hidden" name="PriceToPay">
+                                    <div id="totalNumPrice" name="totalPrice"></div>
+                                    <div>บาท</div>
                                 </div>
-                                <input type="hidden" name="PriceToPay">
-                                <div id="totalNumPrice" name="totalPrice"></div>
-                                <div>บาท</div>
+                                <div class="check-out">
+                                    <button type="submit" class="btn-danger rounded-0" name="deleteAll">ลบรายการอาหารทั้งหมด</button>
+                                    <button type="submit" class="btn-success rounded-0" name="confirmOrder">ยืนยันการสั่งอาหาร</button>
+                                </div>
+                                <?php
+                                if (isset($_GET['removeInCart'])) {
+                                    $cartid = $_GET['cartid'];
+                                    DB::table('Cart')
+                                        ->where('Cart_id', $cartid)
+                                        ->where('TableName', $lastSegment)
+                                        ->delete();
+                                    echo "<script>window.location.href = '/Table/{$table}';</script>";
+                                }
+
+                                if (isset($_GET['deleteAll'])) {
+                                    DB::table('Cart')
+                                        ->where('TableName', $table)
+                                        ->delete();
+                                    echo "<script>window.location.href = '/Table/{$table}';</script>";
+                                }
+
+                                if (isset($_GET['confirmOrder'])) {
+                                    if (isset($_GET['amountOfFood'])) {
+                                        $amount = $_GET['amountOfFood'];
+                                    }
+
+                                    if (isset($_GET['PriceToPay'])) {
+                                        $final = $_GET['PriceToPay'];
+                                    }
+
+                                    $cartItems = DB::table('cart')
+                                        ->select('TableName', 'FoodImage', 'FoodName', 'FoodPrice')
+                                        ->get();
+                                    $status = 'กำลังทำ';
+                                    foreach ($cartItems as $item) {
+                                        $item->status = $status;
+                                        $item->quantity = $amount;
+                                        DB::table('Order')->insert((array) $item);
+                                    }
+
+                                    DB::table('TotalPrice')->insert([
+                                        'TableName' => $lastSegment,
+                                        'TotalPrice' => $final
+                                    ]);
+
+                                    DB::table('Cart')
+                                        ->where('TableName', $lastSegment)
+                                        ->delete();
+                                    echo "<script>window.location.href = '/Table/status';</script>";
+                                }
+                                ?>
                             </div>
-                            <div class="check-out">
-                                <button type="submit" class="btn-danger rounded-0" name="deleteAll">ลบรายการอาหารทั้งหมด</button>
-                                <button type="submit" class="btn-success rounded-0" name="confirmOrder">ยืนยันการสั่งอาหาร</button>
-                            </div>
-                            <?php
-                            if (isset($_GET['removeInCart'])) {
-                                $cartid = $_GET['cartid'];
-                                DB::table('Cart')
-                                    ->where('Cart_id', $cartid)
-                                    ->where('TableName', $lastSegment)
-                                    ->delete();
-                                echo "<script>window.location.href = '/Table/{$table}';</script>";
-                            }
-
-                            if (isset($_GET['deleteAll'])) {
-                                DB::table('Cart')
-                                    ->where('TableName', $table)
-                                    ->delete();
-                                echo "<script>window.location.href = '/Table/{$table}';</script>";
-                            }
-
-                            if (isset($_GET['confirmOrder'])) {
-                                if (isset($_GET['amountOfFood'])) {
-                                    $amount = $_GET['amountOfFood'];
-                                }
-
-                                if (isset($_GET['PriceToPay'])) {
-                                    $final = $_GET['PriceToPay'];
-                                }
-
-                                $cartItems = DB::table('cart')
-                                    ->select('TableName', 'FoodImage', 'FoodName', 'FoodPrice')
-                                    ->get();
-                                $status = 'กำลังทำ';
-                                foreach ($cartItems as $item) {
-                                    $item->status = $status;
-                                    $item->quantity = $amount;
-                                    DB::table('Order')->insert((array) $item);
-                                }
-
-                                DB::table('TotalPrice')->insert([
-                                    'TableName' => $lastSegment,
-                                    'TotalPrice' => $final
-                                ]);
-
-                                DB::table('Cart')
-                                    ->where('TableName', $lastSegment)
-                                    ->delete();
-                                echo "<script>window.location.href = '/Table/status';</script>";
-                            }
-                            ?>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </span>
             </div>
         </div>
         <!-- Hero Image -->
