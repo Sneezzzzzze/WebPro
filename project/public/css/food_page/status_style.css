@@ -13,15 +13,3 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
-
-.mainmenu_btn {
-    width: 150;
-    padding: 6px 10px;
-    font-size: 16px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background: #fff;
-    border: 1px solid #C97926;
-    color: #C97926;
-}
