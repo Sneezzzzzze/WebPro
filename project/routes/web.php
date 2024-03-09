@@ -26,8 +26,8 @@ Route::get('/management', [MenuController::class, 'index']);
 Route::get('/management', [MenuController::class, 'showMenu']);
 
 
-Route::get('/staff', function () {
-    return view('cashier/Tablepage');
+Route::any('/staff', function () {
+    return view('staff/Tablepage');
 });
 
 Route::get('/dashboard', function () {
