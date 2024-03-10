@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_page.css'); }}">
     <link rel="icon" href="{{ URL::asset('image/DimsumLogo.png')}}" type="image/x-icon">
-
     <title>menu</title>
     <script>
         window.history.pushState(null, "", window.location.href);
@@ -87,7 +86,7 @@
 
             <div class="shop-cart">
                 <span>
-                    <a href="/history">ประวัติการสั่งอาหาร</a>
+                    <a href="/history" onclick="refreshAndGoToHistory()">ประวัติการสั่งอาหาร</a>
                 </span>
 
                 <a data-bs-toggle="offcanvas" href="#shopping-cart" role="button" aria-controls="shopping-cart">
@@ -161,10 +160,6 @@
                             }
 
                             if (isset($_GET['confirmOrder'])) {
-                                // if (isset($_GET['amountOfFood'])) {
-                                //     $amount = $_GET['amountOfFood'];
-                                // }
-
                                 if (isset($_GET['PriceToPay'])) {
                                     $final = $_GET['PriceToPay'];
                                 }
@@ -320,7 +315,7 @@
                         <input type="hidden" name="fname" id="fname" value="{{$frieds->Name}}">
                         <input type="hidden" name="fprice" id="fprice" value="{{$frieds->Price}}">
                         <input type="hidden" name="fimg" id="fimg" value="{{$frieds->Image}}">
-                        
+
                         <?php if ($frieds->available == 'ปิด') : ?>
                             <div class="blur-container">
                                 <img src="{{$frieds->Image}}" class="blurred-image" />
@@ -511,9 +506,11 @@
             updateTotalPrice();
         });
 
-        function blur() {
-
-
+        function refreshAndGoToHistory() {
+            window.location.reload();
+            setTimeout(function() {
+                window.location.href = '/history';
+            }, 100);
         }
     </script>
 </body>
