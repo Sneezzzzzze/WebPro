@@ -28,15 +28,12 @@ header {
     left: 0;
     width: 100%;
     padding: 10px 100px;
-    background-color: #C5211C;
+    background-color: #C97926;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-
-
 }
-
 .logo {
     font-size: 2em;
     color: white;
@@ -54,7 +51,7 @@ header {
 
 .navigation a:hover {
     background: white;
-    color: #C5211C;
+    color: #C97926;;
 }
 
 .group {

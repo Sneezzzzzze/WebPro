@@ -7,14 +7,16 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: #faf1e7;
 }
 
 .nav-bar {
     display: grid;
-    grid-template-columns: auto auto; /* Adjusted grid-template-columns */
+    grid-template-columns: auto auto;
+    /* Adjusted grid-template-columns */
     background-color: #C97926;
-    width: 100%; /* Full width of the screen */
+    width: 100%;
+    /* Full width of the screen */
     padding: 10px;
 }
 
@@ -48,20 +50,32 @@ a:hover {
 }
 
 .food-table {
-    margin-left: 70px;
-    max-width: 90%;
-    overflow-x: auto;
+    display: flex;
+    justify-content: center;
 }
 
-td, tr {
-    margin: auto;
-    width: 7vh;
-    text-align: left;
-    vertical-align: middle;
+.food-table table {
+    border-collapse: collapse;
+    width: 90vw;
 }
 
+.food-table th,
+.food-table td {
+    border: 1px solid #ddd;
+    /* Add borders for better visibility */
+    padding: 8px;
+    /* Add padding for better spacing */
+}
+
+.food-table th {
+    background-color: #acacac;
+    /* Add a light gray background color for the table header */
+}
 
 td div input {
     transform: scale(1.5);
+}
+
+.form-check {
     margin-left: 10px;
 }

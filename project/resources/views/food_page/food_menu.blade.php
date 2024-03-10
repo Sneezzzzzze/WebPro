@@ -292,7 +292,7 @@
                         <div class="title">{{$dimsums->Name}}</div>
                         <div class="location">{{$dimsums->Category}}</div>
                         <div class="order_info">
-                            <div class="price">{{$dimsums->Price}}</div>
+                            <div class="price">{{$dimsums->Price}}฿</div>
                         </div>
 
                         <!-- Order button -->
@@ -340,7 +340,7 @@
                         <div class="title">{{$frieds->Name}}</div>
                         <div class="location">{{$frieds->Category}}</div>
                         <div class="order_info">
-                            <div class="price">{{$frieds->Price}}</div>
+                            <div class="price">{{$frieds->Price}}฿</div>
                         </div>
 
                         <!-- Order button -->
@@ -388,7 +388,7 @@
                         <div class="title">{{$sweets->Name}}</div>
                         <div class="location">{{$sweets->Category}}</div>
                         <div class="order_info">
-                            <div class="price">{{$sweets->Price}}</div>
+                            <div class="price">{{$sweets->Price}}฿</div>
                         </div>
 
                         <!-- Order button -->
@@ -434,7 +434,7 @@
                         <div class="title">{{$drinks->Name}}</div>
                         <div class="location">{{$drinks->Category}}</div>
                         <div class="order_info">
-                            <div class="price">{{$drinks->Price}}</div>
+                            <div class="price">{{$drinks->Price}}฿</div>
                         </div>
 
                         <!-- Order button -->

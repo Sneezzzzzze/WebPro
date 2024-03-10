@@ -10,6 +10,7 @@ body {
   font-style: normal;
   margin: 0;
   padding: 0;
+  background-color: #faf1e7;
 }
 
 ul {
@@ -185,7 +186,7 @@ a:hover {
   padding: 20px;
 }
 
-.toDoList > div {
+.toDoList>div {
   margin-top: 20px;
 }
 
@@ -195,7 +196,7 @@ span {
   align-items: center;
 }
 
-.done > button {
+.done>button {
   border-radius: 0 10px 10px 0;
 }
 
