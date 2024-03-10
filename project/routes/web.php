@@ -60,3 +60,7 @@ Route::get('/food-available-manager', function () {
 Route::any('/food-available-chef', function () {
     return view('chef.openAndCloseChef');
 });
+
+Route::any('/', function () {
+    return view('food_page.welcome');
+});
