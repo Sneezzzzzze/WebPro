@@ -96,7 +96,6 @@
     <?php
     if ($allDone) {
         echo '<script>all();</script>';
-        // unset($_SESSION['count']);
     }
     ?>
 </body>

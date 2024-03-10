@@ -19,7 +19,14 @@
     use Illuminate\Support\Facades\DB;
 
     session_start();
-    $table = $_SESSION['table'];
+    function getLastSegment($url) {
+        // Remove trailing slashes
+        $url = rtrim($url, '/');
+        // Split the URL by slashes and return the last segment
+        $segments = explode('/', $url);
+        return end($segments);
+    }
+    $table = getLastSegment(url()->previous());
     ?>
     <div class="nav-bar">
         <div class="logo">
@@ -49,6 +56,7 @@
     </div>
     <?php
     $order = DB::table('Order')
+        ->where('TableName', $table)
         ->where('status', 'เสร็จแล้ว')
         ->orderBy('time', 'ASC')
         ->get()
