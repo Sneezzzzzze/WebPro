@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+* {
+  text-decoration: none !important;
+}
+
+body {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  background-color: #faf1e7;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+li {
+  float: right;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+h2 {
+  font-size: 60px;
+}
+
+h3 {
+  font-size: 45px
+}
+
+h4 {
+  font-size: 30px
+}
+
+p {
+  font-size: 30px;
+}
+
+.logo {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.logo>span {
+  padding-left: 20px;
+}
+
+.logo>span {
+  padding-right: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: black !important;
+  opacity: 0.7;
+}
+
+.menu-bar {
+  display: flex;
+  justify-content: right;
+  margin-right: 50px;
+}
+
+.menu-bar span {
+  margin-right: 20px;
+}
+
+.menu-bar span a {
+  font-weight: 400;
+}
+
+.pan {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4CAF50;
+}
+
+.pan:hover {
+  background-color: #79e67c;
+  color: black;
+}
+
+.active {
+  background-color: #870000;
+}
+
+.center-point {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+}
+
+.backbutton {
+  background-color: brown;
+  width: 200px;
+  height: 75px;
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-bar {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #C97926;
+  width: 100vw;
+  height: 50px;
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 20px;
+  background-color: #FFB27A;
+}
+
+.orderNum {
+  display: flex;
+  border-radius: 10px 0 0 10px;
+  width: 50px;
+  height: 100%;
+  padding: 50px;
+  background-color: #a40000;
+  vertical-align: center;
+  justify-content: center;
+}
+
+.menu-list {
+  display: grid;
+  grid-template-columns: 10fr 2fr;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 10px 10px 0;
+  background-color: #8f5845;
+  width: 100%
+}
+
+.done {
+  place-items: center;
+  place-self: right;
+}
+
+.toDoList {
+  padding: 20px;
+}
+
+.toDoList>div {
+  margin-top: 20px;
+}
+
+span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.done>button {
+  border-radius: 0 10px 10px 0;
+}
+
+img {
+  border: 10px solid #BFBFBF;
+  border-radius: 10px;
+  width: 270px;
+  height: 270px;
+}

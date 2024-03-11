@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+* {
+    font-family: "Bai Jamjuree", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #faf1e7;
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: auto auto;
+    /* Adjusted grid-template-columns */
+    background-color: #C97926;
+    width: 100%;
+    /* Full width of the screen */
+    padding: 10px;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: right;
+}
+
+.logo,
+.menu-bar {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.menu-bar>span {
+    padding-right: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+.header-title {
+    display: grid;
+    place-items: center;
+    margin: 30px;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: repeat(2, 6fr);
+    margin: 20px
+}
+
+.grid-left {
+    display: flex;
+    margin-left: 50px;
+}
+
+.grid-right {
+    display: flex;
+    justify-content: right;
+}
+
+.grid-left {
+    display: flex;
+    margin-left: 55px
+}
+
+.choose-category {
+    display: flex;
+    margin-left: 10px;
+}
+
+.choose-category>form {
+    display: flex;
+}
+
+.choose-category>form>select {
+    border-radius: 5px 0 0 5px;
+    width: 150px;
+}
+
+.choose-category>form>input {
+    border-radius: 0 5px 5px 0;
+    margin-left: -1px;
+}
+
+#addCate {
+    margin-left: 10px;
+}
+
+.btn-success {
+    background-color: #BFEA7C;
+    color: black;
+}
+
+#delete-outline {
+    border: none;
+    background-color: transparent;
+}
+
+#delete-outline:focus {
+    border: none;
+    outline: none;
+}
+
+.input-group {
+    width: 350px;
+    margin-right: 50px;
+}
+
+.food-table {
+    display: flex;
+    justify-content: center;
+}
+
+.food-table table {
+    border-collapse: collapse;
+    width: 90vw;
+}
+
+.food-table th,
+.food-table td {
+    border: 1px solid #ddd;
+    /* Add borders for better visibility */
+    padding: 8px;
+    /* Add padding for better spacing */
+}
+
+.food-table th {
+    background-color: #acacac;
+    /* Add a light gray background color for the table header */
+}

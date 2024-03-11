@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+* {
+    font-family: "Bai Jamjuree", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: auto auto; /* Adjusted grid-template-columns */
+    background-color: #C97926;
+    width: 100%; /* Full width of the screen */
+    padding: 10px;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: right;
+}
+
+.logo,
+.menu-bar {
+    padding-left: 120px;
+}
+
+.menu-bar>span {
+    padding-right: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+.history-container {
+    display: grid;
+    grid-template-columns: repeat(3, 4fr);
+    gap: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.history-container > div {
+    background-color: gainsboro !important;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px;
+}
+
+h2, h6 { /* order space and food and amount space*/
+    margin-bottom: 20px;
+}
+
+.btn-warning {
+    position: absolute;
+    top: 75px;
+    left: 100px;
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+    border-radius: 50%;
+}

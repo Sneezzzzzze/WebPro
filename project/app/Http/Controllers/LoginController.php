@@ -1,24 +1,38 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $email = $request->input('username');
-        $password = $request->input('password');
-
-        $user = DB::table('user')->where('username', $email)->first();
-        $password = DB::table('user')->where('password', $password)->first();
         
-        if ($user && $password) {
-            return "Login success";
-        } else {
-            return "Login failed";
+        $user = $request->input('user');
+        $pass = $request->input('password');
+        $dbUser =  DB::table('user')
+            ->select('username', 'password')
+            ->where('username', $user)
+            ->first();
+        if ($dbUser) {
+            if ($pass === $dbUser->password) {
+                if ($user === 'manager') {
+                    return redirect('/management');
+                } else if ($user === 'staff') {
+                    return redirect('/staff');
+                } else if ($user === 'chef') {
+                    return redirect('/chef');
+                } else {
+                    return redirect('/login')->with('error', 'User not found');
+                }
+            } else {
+                return redirect('/login')->with('error', 'Incorrect password');
+            }
+        }
+        else {
+            return redirect('/login')->with('error', 'User not found');
         }
     }
 }
