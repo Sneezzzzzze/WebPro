@@ -16,6 +16,9 @@ use App\Http\Controllers\MenuController;
 |
 */
 
+Route::any('/', function () {
+    return view('food_page.welcome');
+});
 
 Route::get('/login', function () {
     return view('authen/login');

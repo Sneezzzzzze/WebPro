@@ -21,6 +21,10 @@
     $categ = DB::table('Category')
         ->select('categoryNameTH')
         ->get();
+    $categwithoutAll = DB::table('Category')
+        ->select('categoryNameTH')
+        ->where('categoryNameTH', '!=', 'ทั้งหมด')
+        ->get();
     ?>
     <div class="nav-bar">
         <div class="logo">
@@ -86,11 +90,11 @@
                                 <div class="mb-3">
                                     <select class="form-select header-from" aria-label="Default select example" name="category">
                                         <option selected>หมวดหมู่</option>
-                                        @foreach($categ as $cate)
+                                        @foreach($categwithoutAll as $withoutAll)
                                         <?php
-                                        $check = $cate->categoryNameTH;
-                                        $cate->categoryNameTH;
-                                        echo '<option value="' . $cate->categoryNameTH . '">' . $cate->categoryNameTH . '</option>';
+                                        $check = $withoutAll->categoryNameTH;
+                                        $withoutAll->categoryNameTH;
+                                        echo '<option value="' . $withoutAll->categoryNameTH . '">' . $withoutAll->categoryNameTH . '</option>';
                                         ?>
                                         @endforeach
                                     </select>
@@ -198,7 +202,7 @@
     </div>
 
     <div class="food-table">
-        <table class="table table-hover">
+        <table class="table table-striped">
             <tr>
                 <th>รูปอาหาร</th>
                 <th>ชื่ออาหาร</th>

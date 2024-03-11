@@ -71,7 +71,7 @@
     </div>
 
     <div class="food-table">
-        <table class="table table-hover">
+        <table class="table table-striped">
             <tr>
                 <th>รูปอาหาร</th>
                 <th>ชื่ออาหาร</th>

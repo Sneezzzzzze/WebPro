@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/food_page/food_page.css'); }}">
     <link rel="icon" href="{{ URL::asset('image/DimsumLogo.png')}}" type="image/x-icon">
-
     <title>menu</title>
     <script>
         window.history.pushState(null, "", window.location.href);
@@ -37,24 +36,6 @@
     if (isset($_GET['refreshed'])) {
         $_SESSION['table'] = $table;
     }
-    $dimsum = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image', 'available')
-        ->where('Category', 'ติ่มซำ')
-        ->get();
-    $fried = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image', 'available')
-        ->where('Category', 'ของทอด')
-        ->get();
-
-    $sweet = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image', 'available')
-        ->where('Category', 'ของหวาน')
-        ->get();
-
-    $drink = DB::table('Food')
-        ->select('Name', 'Category', 'Price', 'Image', 'available')
-        ->where('Category', 'เครื่องดื่ม')
-        ->get();
 
     $rec = DB::table('Food')
         ->select('Image')
@@ -87,7 +68,7 @@
 
             <div class="shop-cart">
                 <span>
-                    <a href="/history">ประวัติการสั่งอาหาร</a>
+                    <a href="/history" onclick="refreshAndGoToHistory()">ประวัติการสั่งอาหาร</a>
                 </span>
 
                 <a data-bs-toggle="offcanvas" href="#shopping-cart" role="button" aria-controls="shopping-cart">
@@ -161,10 +142,6 @@
                             }
 
                             if (isset($_GET['confirmOrder'])) {
-                                // if (isset($_GET['amountOfFood'])) {
-                                //     $amount = $_GET['amountOfFood'];
-                                // }
-
                                 if (isset($_GET['PriceToPay'])) {
                                     $final = $_GET['PriceToPay'];
                                 }
@@ -248,274 +225,156 @@
 
         </div>
 
+        <?php
+        $categoryFood = DB::table('Category')
+            ->select('categoryNameTH')
+            ->where('categoryNameTH', '!=', 'ทั้งหมด')
+            ->orderByRaw("
+            CASE 
+                WHEN categoryNameTH = 'ติ่มซำนึ่ง' THEN 1
+                WHEN categoryNameTH = 'ของทอด' THEN 2
+                WHEN categoryNameTH = 'เครื่องดื่ม' THEN 4
+                WHEN categoryNameTH = 'ของหวาน' THEN 5
+                ELSE 3
+            END,
+            categoryNameTH ASC
+        ")
+            ->get();
+
+        ?>
         <div class="menu-btns">
-            <button type="button" class="menu-btn" id="stream" onclick="location.href='#section1'">ติ่มซำนึ่ง</button>
-            <button type="button" class="menu-btn" id="fry" onclick="location.href='#section2'">ติ่มซำทอด</button>
-            <button type="button" class="menu-btn" id="dessert" onclick="location.href='#section3'">ของหวาน</button>
-            <button type="button" class="menu-btn" id="drink" onclick="location.href='#section4'">เครื่องดื่ม</button>
+            @foreach($categoryFood as $categories)
+            <button type="button" class="menu-btn" id="stream" onclick="location.href='#{{$categories->categoryNameTH}}'">{{$categories->categoryNameTH}}</button>
+            @endforeach
         </div>
 
-
+        @foreach($categoryFood as $categories)
         <!-- Category Line -->
-        <div class="catagory_text" id="section1">
+        <div class="catagory_text" id="{{$categories->categoryNameTH}}">
             <h4>
-                <span class="horizontal">อาหารประเภทติ่มซำนึ่ง</span>
+                <span class="horizontal">อาหารประเภท {{$categories->categoryNameTH}}</span>
             </h4>
         </div>
 
         <!-- dimsum -->
         <div class="menu_container">
             <div class="restaurant_menu">
-                @foreach($dimsum as $dimsums)
+                <?php
+                $foods = DB::table('Food')
+                    ->select('Name', 'Category', 'Price', 'Image', 'available')
+                    ->where('Category', $categories->categoryNameTH)
+                    ->get();
+                ?>
+                @foreach($foods as $food)
                 <div class="menu_item">
                     <form action="" method="GET">
-                        <input type="hidden" name="fname" id="fname" value="{{$dimsums->Name}}">
-                        <input type="hidden" name="fprice" id="fprice" value="{{$dimsums->Price}}">
-                        <input type="hidden" name="fimg" id="fimg" value="{{$dimsums->Image}}">
+                        <input type="hidden" name="fname" id="fname" value="{{$food->Name}}">
+                        <input type="hidden" name="fprice" id="fprice" value="{{$food->Price}}">
+                        <input type="hidden" name="fimg" id="fimg" value="{{$food->Image}}">
 
-                        <?php if ($dimsums->available == 'ปิด') : ?>
+                        <?php if ($food->available == 'ปิด') : ?>
                             <div class="blur-container">
-                                <img src="{{$dimsums->Image}}" class="blurred-image" />
+                                <img src="{{$food->Image}}" class="blurred-image" />
                                 <div class="middle-text">สินค้าหมด</div>
                             </div>
                             <?php
                             $isInCart = false;
                             ?>
                         <?php else : ?>
-                            <img src="{{$dimsums->Image}}" />
+                            <img src="{{$food->Image}}" />
                             <?php
-                            $isInCart = $cart->contains('FoodName', $dimsums->Name);
+                            $isInCart = $cart->contains('FoodName', $food->Name);
                             ?>
                         <?php endif; ?>
 
                         <!-- Title, location, and price -->
-                        <div class="title">{{$dimsums->Name}}</div>
-                        <div class="location">{{$dimsums->Category}}</div>
+                        <div class="title">{{$food->Name}}</div>
+                        <div class="location">{{$food->Category}}</div>
                         <div class="order_info">
-                            <div class="price">{{$dimsums->Price}}</div>
+                            <div class="price">{{$food->Price}}฿</div>
                         </div>
 
                         <!-- Order button -->
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $dimsums->available == 'ปิด' ? 'disabled' : '' }}>
-                            {{ $dimsums->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
+                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $food->available == 'ปิด' ? 'disabled' : '' }}>
+                            {{ $food->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
                         </button>
                     </form>
                 </div>
                 @endforeach
             </div>
         </div>
+        @endforeach
+        <?php
+        if (isset($_GET['orderBtn'])) {
+            $fname = $_GET['fname'];
+            $fprice = $_GET['fprice'];
+            $fimg = $_GET['fimg'];
 
-        <!-- fried dimsum -->
-        <div class="catagory_text" id="section2">
-            <h4>
-                <span class="horizontal">อาหารประเภทติ่มซำทอด</span>
-            </h4>
-        </div>
-
-        <div class="menu_container">
-            <div class="restaurant_menu">
-                @foreach($fried as $frieds)
-                <div class="menu_item">
-                    <form action="" method="GET">
-                        <input type="hidden" name="fname" id="fname" value="{{$frieds->Name}}">
-                        <input type="hidden" name="fprice" id="fprice" value="{{$frieds->Price}}">
-                        <input type="hidden" name="fimg" id="fimg" value="{{$frieds->Image}}">
-                        
-                        <?php if ($frieds->available == 'ปิด') : ?>
-                            <div class="blur-container">
-                                <img src="{{$frieds->Image}}" class="blurred-image" />
-                                <div class="middle-text">สินค้าหมด</div>
-                            </div>
-                            <?php
-                            $isInCart = false;
-                            ?>
-                        <?php else : ?>
-                            <img src="{{$frieds->Image}}" />
-                            <?php
-                            $isInCart = $cart->contains('FoodName', $frieds->Name);
-                            ?>
-                        <?php endif; ?>
-
-                        <!-- Title, location, and price -->
-                        <div class="title">{{$frieds->Name}}</div>
-                        <div class="location">{{$frieds->Category}}</div>
-                        <div class="order_info">
-                            <div class="price">{{$frieds->Price}}</div>
-                        </div>
-
-                        <!-- Order button -->
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $frieds->available == 'ปิด' ? 'disabled' : '' }}>
-                            {{ $frieds->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
-                        </button>
-                    </form>
-                </div>
-                @endforeach
-            </div>
-        </div>
-
-
-        <!-- Category Line -->
-        <div class="catagory_text" id="section3">
-            <h4>
-                <span class="horizontal">ประเภทขนมหวาน</span>
-            </h4>
-        </div>
-        <div class="menu_container">
-            <div class="restaurant_menu">
-                @foreach($sweet as $sweets)
-                <div class="menu_item">
-                    <form action="" method="GET">
-                        <input type="hidden" name="fname" id="fname" value="{{$sweets->Name}}">
-                        <input type="hidden" name="fprice" id="fprice" value="{{$sweets->Price}}">
-                        <input type="hidden" name="fimg" id="fimg" value="{{$sweets->Image}}">
-
-                        <?php if ($sweets->available == 'ปิด') : ?>
-                            <div class="blur-container">
-                                <img src="{{$sweets->Image}}" class="blurred-image" />
-                                <div class="middle-text">สินค้าหมด</div>
-                            </div>
-                            <?php
-                            $isInCart = false;
-                            ?>
-                        <?php else : ?>
-                            <img src="{{$sweets->Image}}" />
-                            <?php
-                            $isInCart = $cart->contains('FoodName', $sweets->Name);
-                            ?>
-                        <?php endif; ?>
-
-                        <!-- Title, location, and price -->
-                        <div class="title">{{$sweets->Name}}</div>
-                        <div class="location">{{$sweets->Category}}</div>
-                        <div class="order_info">
-                            <div class="price">{{$sweets->Price}}</div>
-                        </div>
-
-                        <!-- Order button -->
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $sweets->available == 'ปิด' ? 'disabled' : '' }}>
-                            {{ $sweets->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
-                        </button>
-                    </form>
-                </div>
-                @endforeach
-            </div>
-        </div>
-        <!-- Category Line -->
-        <div class="catagory_text" id="section4">
-            <h4>
-                <span class="horizontal">เครื่องดื่ม</span>
-            </h4>
-        </div>
-        <div class="menu_container">
-            <div class="restaurant_menu">
-                @foreach($drink as $drinks)
-                <div class="menu_item">
-                    <form action="" method="GET">
-                        <input type="hidden" name="fname" id="fname" value="{{$drinks->Name}}">
-                        <input type="hidden" name="fprice" id="fprice" value="{{$drinks->Price}}">
-                        <input type="hidden" name="fimg" id="fimg" value="{{$drinks->Image}}">
-
-                        <?php if ($drinks->available == 'ปิด') : ?>
-                            <div class="blur-container">
-                                <img src="{{$drinks->Image}}" class="blurred-image" />
-                                <div class="middle-text">สินค้าหมด</div>
-                            </div>
-                            <?php
-                            $isInCart = false;
-                            ?>
-                        <?php else : ?>
-                            <img src="{{$drinks->Image}}" />
-                            <?php
-                            $isInCart = $cart->contains('FoodName', $drinks->Name);
-                            ?>
-                        <?php endif; ?>
-
-                        <!-- Title, location, and price -->
-                        <div class="title">{{$drinks->Name}}</div>
-                        <div class="location">{{$drinks->Category}}</div>
-                        <div class="order_info">
-                            <div class="price">{{$drinks->Price}}</div>
-                        </div>
-
-                        <!-- Order button -->
-                        <button type="submit" class="btn btn_menu" name="orderBtn" id="orderBtn" {{ $isInCart || $drinks->available == 'ปิด' ? 'disabled' : '' }}>
-                            {{ $drinks->available == 'ปิด' ? 'สินค้าหมด' : ($isInCart ? 'อยู่ในตะกร้าเรียบร้อย' : 'สั่งเลย') }}
-                        </button>
-                    </form>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    <?php
-    if (isset($_GET['orderBtn'])) {
-        $fname = $_GET['fname'];
-        $fprice = $_GET['fprice'];
-        $fimg = $_GET['fimg'];
-
-        DB::table('Cart')->insert([
-            'TableName' => $lastSegment,
-            'FoodImage' => $fimg,
-            'FoodName' => $fname,
-            'FoodPrice' => $fprice
-        ]);
-        echo "<script>window.location.href = '/Table/{$table}';</script>";
-    }
-    ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const minusBtns = document.querySelectorAll('.minus-btn');
-            const plusBtns = document.querySelectorAll('.plus-btn');
-            const amountFields = document.querySelectorAll('.amount-field');
-            const priceToPay = document.querySelector('[name="PriceToPay"]');
-
-            minusBtns.forEach((minusBtn) => {
-                minusBtn.addEventListener('click', () => {
-                    const cartId = minusBtn.getAttribute('data-cartid');
-                    const amountField = document.getElementById('amount_' + cartId);
-                    const currentValue = parseInt(amountField.value);
-                    if (currentValue > 1) {
-                        amountField.value = currentValue - 1;
-                        updateTotalPrice();
-                    }
-                });
-            });
-
-            plusBtns.forEach((plusBtn) => {
-                plusBtn.addEventListener('click', () => {
-                    const cartId = plusBtn.getAttribute('data-cartid');
-                    const amountField = document.getElementById('amount_' + cartId);
-                    const currentValue = parseInt(amountField.value);
-                    amountField.value = currentValue + 1;
-                    updateTotalPrice();
-                });
-            });
-
-            amountFields.forEach((amountField) => {
-                amountField.addEventListener('change', () => {
-                    updateTotalPrice();
-                });
-            });
-
-            function updateTotalPrice() {
-                let totalPrice = 0;
-                amountFields.forEach((amountField) => {
-                    const cartId = amountField.getAttribute('data-cartid');
-                    const price = parseFloat(amountField.getAttribute('data-price'));
-                    const quantity = parseInt(amountField.value);
-                    totalPrice += price * quantity;
-                });
-                document.getElementById('totalNumPrice').textContent = totalPrice.toFixed(2);
-                priceToPay.value = totalPrice.toFixed(2);
-            }
-            updateTotalPrice();
-        });
-
-        function blur() {
-
-
+            DB::table('Cart')->insert([
+                'TableName' => $lastSegment,
+                'FoodImage' => $fimg,
+                'FoodName' => $fname,
+                'FoodPrice' => $fprice
+            ]);
+            echo "<script>window.location.href = '/Table/{$table}';</script>";
         }
-    </script>
+        ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const minusBtns = document.querySelectorAll('.minus-btn');
+                const plusBtns = document.querySelectorAll('.plus-btn');
+                const amountFields = document.querySelectorAll('.amount-field');
+                const priceToPay = document.querySelector('[name="PriceToPay"]');
+
+                minusBtns.forEach((minusBtn) => {
+                    minusBtn.addEventListener('click', () => {
+                        const cartId = minusBtn.getAttribute('data-cartid');
+                        const amountField = document.getElementById('amount_' + cartId);
+                        const currentValue = parseInt(amountField.value);
+                        if (currentValue > 1) {
+                            amountField.value = currentValue - 1;
+                            updateTotalPrice();
+                        }
+                    });
+                });
+
+                plusBtns.forEach((plusBtn) => {
+                    plusBtn.addEventListener('click', () => {
+                        const cartId = plusBtn.getAttribute('data-cartid');
+                        const amountField = document.getElementById('amount_' + cartId);
+                        const currentValue = parseInt(amountField.value);
+                        amountField.value = currentValue + 1;
+                        updateTotalPrice();
+                    });
+                });
+
+                amountFields.forEach((amountField) => {
+                    amountField.addEventListener('change', () => {
+                        updateTotalPrice();
+                    });
+                });
+
+                function updateTotalPrice() {
+                    let totalPrice = 0;
+                    amountFields.forEach((amountField) => {
+                        const cartId = amountField.getAttribute('data-cartid');
+                        const price = parseFloat(amountField.getAttribute('data-price'));
+                        const quantity = parseInt(amountField.value);
+                        totalPrice += price * quantity;
+                    });
+                    document.getElementById('totalNumPrice').textContent = totalPrice.toFixed(2);
+                    priceToPay.value = totalPrice.toFixed(2);
+                }
+                updateTotalPrice();
+            });
+
+            function refreshAndGoToHistory() {
+                window.location.reload();
+                setTimeout(function() {
+                    window.location.href = '/history';
+                }, 100);
+            }
+        </script>
 </body>
 
 </html>
