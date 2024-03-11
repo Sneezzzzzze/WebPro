@@ -30,7 +30,7 @@
     ?>
     <div class="nav-bar">
         <div class="logo">
-            <span>
+            <!-- <span>
                 <a href="/history">
                     <svg width="100" height="35" viewBox="0 0 188 145" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <ellipse cx="94" cy="42" rx="94" ry="25" fill="#C97026" />
@@ -42,7 +42,7 @@
                         <ellipse cx="121.114" cy="17.3154" rx="4.5" ry="28.3343" transform="rotate(-61.9 121.114 17.3154)" fill="white" />
                     </svg>
                 </a>
-            </span>
+            </span> -->
         </div>
     </div>
 
