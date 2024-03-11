@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -298,18 +299,26 @@
             });
         });
         document.addEventListener('DOMContentLoaded', function() {
-
             const showData = document.querySelectorAll('.btnT12');
             showData.forEach(button => {
                 button.addEventListener('click', () => {
+                    const confirmClear = confirm("คุณจะลบทั้งรายการใช่ไหม?");
+                    if (confirmClear) {
+                        const table = "<?php echo isset($_GET['tabl']) ? $_GET['tabl'] : ''; ?>";
+                        const myform = document.getElementById('myform');
+                        const clearAllInput = document.createElement('input');
+                        clearAllInput.type = 'hidden';
+                        clearAllInput.name = 'clearAll';
+                        clearAllInput.value = 'true';
+                        myform.appendChild(clearAllInput);
+                        myform.submit();
+                    }
                     <?php
-                    DB::table('Order')
-                        ->where('TableName', $table)
-                        ->where('status', 'เสร็จแล้ว')
-                        ->delete();
+                    if (isset($_GET['clearAll']) && $_GET['clearAll'] === 'true') {
+                        $table = isset($_GET['tabl']) ? $_GET['tabl'] : '';
+                        DB::table('Order')->where('TableName', $table)->delete();
+                    }
                     ?>
-                    const myform = document.getElementById('myform');
-                    myform.submit();
                 });
             });
         });
