@@ -178,8 +178,9 @@
                                 ]);
 
                                 $count = DB::table('Cart')
-                                    ->where('TableName', $lastSegment)
-                                    ->count();
+                                    ->select('TableName', DB::raw('COUNT(*) as count'))
+                                    ->groupBy('TableName')
+                                    ->get();
 
                                 $_SESSION['count'] = $count;
 

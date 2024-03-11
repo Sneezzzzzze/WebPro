@@ -1,3 +1,13 @@
+<?php
+
+use Illuminate\Support\Facades\DB;
+
+session_start();
+
+// Get the previous URL to use for redirection
+$previousUrl = $_SERVER['HTTP_REFERER'] ?? '';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,17 +27,6 @@
 </head>
 
 <body background="https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif" link="#0000BB">
-    <?php
-
-    use Illuminate\Support\Facades\DB;
-
-    session_start();
-    if (isset($_SESSION['count'])) {
-        $count = $_SESSION['count'];
-    } else {
-        $count = 0;
-    }
-    ?>
     <h1 id="text">พวกเราได้รับออเดอร์ของคุณแล้ว</h1>
     <h2 id="subtext">กรุณารอสักครู่</h2>
     <img src="https://media.giphy.com/media/kYqVAj5QNOXug/giphy.gif" id="image1" width="450" />
@@ -37,22 +36,14 @@
     <?php
     if (isset($_SESSION['table'])) {
         $table = $_SESSION['table'];
-    }
-    if ($count === 0) {
-        echo "";
-    }
-    $leastValues = DB::table('Order')
-        ->where('TableName', $table)
-        ->where('status', 'กำลังทำ')
-        ->orderBy('time', 'asc')
-        ->limit($count)
-        ->get();
-    $allDone = true;
-    foreach ($leastValues as $value) {
-        if ($value->status !== 'เสร็จแล้ว') {
-            $allDone = false;
-            break;
-        }
+
+        // Count all orders that are not finished for this table
+        $orderCount = DB::table('Order')
+            ->where('TableName', $table)
+            ->where('status', 'กำลังทำ')
+            ->count();
+
+        echo "<p>รายการที่ยังไม่เสร็จ $table: $orderCount</p>";
     }
     ?>
     <script>
@@ -74,7 +65,7 @@
                 button.classList.add("mainmenu_btn");
                 button.id = "mainMenuButton";
                 button.addEventListener("click", function() {
-                    window.location.href = "/Table/{{$table}}";
+                    window.location.href = "<?php echo $table; ?>";
                 });
                 document.body.appendChild(button);
             }
@@ -88,9 +79,9 @@
         }, 10000);
     </script>
     <?php
-    if ($allDone) {
+    if ($orderCount === 0) {
         echo '<script>all();</script>';
-        unset($_SESSION['count']);
+        // unset($_SESSION['count']);
     }
     ?>
 </body>
