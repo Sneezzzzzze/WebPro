@@ -16,6 +16,9 @@ use App\Http\Controllers\MenuController;
 |
 */
 
+Route::any('/', function () {
+    return view('food_page.welcome');
+});
 
 Route::get('/login', function () {
     return view('authen/login');
@@ -59,8 +62,4 @@ Route::get('/food-available-manager', function () {
 
 Route::any('/food-available-chef', function () {
     return view('chef.openAndCloseChef');
-});
-
-Route::any('/', function () {
-    return view('food_page.welcome');
 });
