@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="{{ URL::asset('css/chef/styles.css'); }}">
     <link rel="icon" href="{{ URL::asset('image/DimsumLogo.png')}}" type="image/x-icon">
 
+    <script>
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
     <meta http-equiv="refresh" content="5">
 </head>
 
